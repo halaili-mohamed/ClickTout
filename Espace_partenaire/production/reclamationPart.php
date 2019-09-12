@@ -105,10 +105,10 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.html"> Mon compte</a></li>
+                    <li><a href="profilepart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
