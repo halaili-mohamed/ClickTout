@@ -1,4 +1,5 @@
-<?php require_once 'db_connect.php'; ?>
+<?php require_once 'db_connect.php';
+$id_partenaire=1; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,18 +89,24 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">User name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profilepart.php"> Mon compte</a></li>
+                    <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -136,29 +143,26 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-				  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+				  <form action="AjoutReclamationPart.php" method="post" class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="NumCMD">N° commande <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="n_cmd">N° commande <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="NumCMD" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="n_cmd" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+					  
+					  
                    
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Message <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-							<div id="editor-one" class="editor-wrapper"></div>
-
-								<textarea name="descr" id="descr" style="display:none;"></textarea>                     
-				 
-				  
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Message">Message <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<textarea class="form-control" name="Message" rows="3"></textarea>
 						</div>
-                      </div>
+					  </div>
 					 
-                      <div class="ln_solid"></div>
+                      
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 						<button type="submit" class="btn btn-success">Envoyer</button>

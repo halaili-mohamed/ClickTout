@@ -1,4 +1,6 @@
-<?php require_once 'db_connect.php'; ?>
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +78,7 @@
 
               <ul class="nav navbar-nav navbar-right">
 			  <?php 
-					$sql = "SELECT * FROM partenaire";
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
 					$result = $connect->query($sql);
 					$row = $result->fetch_assoc();
 					echo'
@@ -124,9 +126,7 @@
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
 					<?php 
-					$sql = "SELECT * FROM partenaire";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
+					
                       echo'<div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
