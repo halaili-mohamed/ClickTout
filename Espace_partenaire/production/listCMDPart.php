@@ -28,7 +28,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="formCmdPart.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,19 +47,11 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="profilePart.html"><i class="fa fa-user"></i> Mon compte </a>
-                    
-                 
-                       <li><a href="formCmdPart.html"> <i class="fa fa-edit"></i>Réservation</a></li>
-                      <li><a href="listCMDPart.html"><i class="fa fa-list"></i>Liste en attente</a></li>
-					  <li><a href="historiquePart.html"><i class="fa fa-clock-o"></i>Historique</a></li>
-                    
-                  
-				  <li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a>
-                    
-                  </li>
-                    
-                 
+					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a>
+                    <li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
+                    <li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
+					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li> 
+				    <li><a href="reclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation </a></li>             
                 </ul>
               </div>
               
