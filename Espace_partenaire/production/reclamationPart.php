@@ -1,3 +1,25 @@
+<?php 
+
+$localhost = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "click_tout";
+
+// create connection
+$connect = new mysqli($localhost, $username, $password, $dbname);
+
+// check connection
+if($connect->connect_error) {
+	die("connection failed : " . $connect->connect_error);
+} else {
+ echo'<script language="javascript"> 
+		alert("Successfully Connected");
+		
+		</script>';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,20 +94,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+           
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -173,7 +182,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 						<button type="submit" class="btn btn-success">Envoyer</button>
-                          <button class="btn btn-warning" type="button">Réinitialiser</button>
+                          
 						  <button class="btn btn-danger" type="reset">Annuler</button>
                           
                         </div>

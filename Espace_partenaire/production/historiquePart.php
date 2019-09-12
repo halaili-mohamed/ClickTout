@@ -1,3 +1,26 @@
+<?php 
+
+$localhost = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "click_tout";
+
+// create connection
+$connect = new mysqli($localhost, $username, $password, $dbname);
+
+// check connection
+if($connect->connect_error) {
+	die("connection failed : " . $connect->connect_error);
+} else {
+ echo'<script language="javascript"> 
+		alert("Successfully Connected");
+		
+		</script>';
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -157,9 +180,12 @@
 
 						  <td>24 mai </td>
                           
-                          <td>
-                            <button type="button" class="btn btn-success btn-xs">Success</button>
-                          </td>
+                          <td> 
+						  <span class="label label-default">Chargée</span>
+						  <span class="label label-info">Montée à bord</span>
+						  <span class="label label-success">Déchargée</span>
+						  <span class="label label-danger">Annulée</span>
+						  </td>
                           <td>
                              <!-- Small modal -->
 								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
@@ -213,7 +239,7 @@
                   </div>
                   <!-- /modals -->
                             
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Supprimer </a>
+                            
                           </td>
                         </tr>
                        
