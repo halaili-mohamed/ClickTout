@@ -1,4 +1,6 @@
-<?php require_once 'db_connect.php'; ?>
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,17 +76,24 @@
 
 			  
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">yser name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="profilePart.php"> Mon compte</a></li>
-                   
+                    
+                    
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -98,9 +107,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-			  <div class="col-md-5" align="center">
-                              <img src="images/logo_ctt_final1.jpg" alt="" class="img-circle img-responsive">
-                            </div> 
+				<h3> Liste en attente </h3>
                 
               </div>
 
@@ -122,10 +129,8 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-				  <div class="col-md-5" align="center">
-                              <img src="images/logo.png" alt="" class="img-circle img-responsive">
-                            </div> 
-                    					<h2>Liste en attente </h2>
+				  
+                    					
                     <ul class="nav navbar-right panel_toolbox">
 
                 <li class="dropdown">
@@ -175,23 +180,32 @@
                       </div>
 
                       <div class="clearfix"></div>
+					  <?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire}";
+						$result1 = $connect->query($sql1);
 
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) { 
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
+
+                      echo '<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                         <div class="well profile_view">
                           <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: 231</i></h4>
+                            <h4 class="brief"><i>N° commande: '.$data['n_cmd'].'</i></h4>
                             <div class="left col-xs-7">
                             
                               <ul class="list-unstyled">
                                 <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
+							    <i class="fa fa-calendar "></i>  Date:  '.$data['Date'].'  </li> 
+							    <li><i class="fa fa-clock-o "></i>  Horraire:  '.$data['Heure'].'  </li>
 								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco </li>
+								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </li>
 								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco</li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone "></i> Téléphone: 21331A2312 </li>
+								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
+								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
                               </ul>
                             </div>
                             
@@ -203,145 +217,11 @@
                               <button type="button" class="btn btn-danger btn-xs" >
                                 <i class="fa fa-times"> </i> Annuler 
                               </button>
-							  <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
+							  
                             </div>
                           </div>
                         </div>
-                      </div>
-
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: 231</i></h4>
-                            <div class="left col-xs-7">
-                            
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco </li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco</li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312 </li>
-                              </ul>
-                            </div>
-                            
-                          </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: 231</i></h4>
-                            <div class="left col-xs-7">
-                            
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco </li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco</li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312 </li>
-                              </ul>
-                            </div>
-                            
-                          </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                     <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: 231</i></h4>
-                            <div class="left col-xs-7">
-                            
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco </li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco</li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312 </li>
-                              </ul>
-                            </div>
-                            
-                          </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: 231</i></h4>
-                            <div class="left col-xs-7">
-                            
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco </li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco</li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312 </li>
-                              </ul>
-                            </div>
-                            
-                          </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      
-
-                      
+						</div>   ';}} ?>
                     </div>
                   </div>
                 </div>
