@@ -1,3 +1,7 @@
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +34,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a  class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a  class="site_title"  href="listCMDPart.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             
@@ -48,22 +52,11 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="profilePart.html"><i class="fa fa-user"></i> Mon compte </a>
-                    
-                  </li>
-                  <li><a ><i class="fa fa-shopping-bag"></i> Commande <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                       <li><a href="formCmdPart.html"> <i class="fa fa-edit"></i>Réservation</a></li>
-                      <li><a href="listCMDPart.html"><i class="fa fa-list"></i>Liste en attente</a></li>
-					  <li><a href="historiquePart.html"><i class="fa fa-clock-o"></i>Historique</a></li>
-                    
-                    </ul>
-                  </li>
-				  <li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a>
-                    
-                  </li>
-                    
-                 
+					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a></li>                
+					<li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
+                    <li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
+					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li>
+					<li><a href="reclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation </a></li>  
                 </ul>
               </div>
               
@@ -84,18 +77,24 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+			  <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">User name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.html"> Mon compte</a></li>
+                    <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -126,73 +125,92 @@
                   </div>
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                      <div class="profile_img">
+					<?php 
+					
+                      echo'<div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
+						  
+                          <img class="img-responsive avatar-view" src="images/'.$row['logo'].'.jpg" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
-                      <h3>Samuel Doe</h3>
+                      <h3>'.$row['nom_ste'].'</h3>
 
                       <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+					  <li><i class="fa fa-user user-profile-icon"></i> '.'  '.$row['responsable'].'
                         </li>
-						<li><i class="fa fa-mobile-phone user-profile-icon"></i> 21331A2312
+                        <li><i class="fa fa-map-marker user-profile-icon"></i>'.'  '.$row['adresse'].'
                         </li>
-                     <li><i class="fa fa-envelope user-profile-icon"></i> lmkd@jak
+						
+						<li><i class="fa fa-mobile-phone user-profile-icon"></i>'.'  '.$row['tel'].'
+                        </li>
+                     <li><i class="fa fa-envelope user-profile-icon"></i>'.'  '.$row['email'].'
                         </li>
 
                         <li class="m-top-xs">
                           <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="http://www.kimlabs.com/profile/" target="_blank">www.kimlabs.com</a>
+                          <a href="'.$row['siteweb'].'" target="_blank">'.'  '.$row['siteweb'].'</a>
                         </li>
                       </ul>
 
-                      <!--<a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>-->
-                      <br />
+                      
+                      <br />';
 
                       
-
+							?>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
 
 						
-						<form class="form-horizontal form-material">
+						<form action="updateProfile.php" method="post" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom_ste" placeholder="Nom" class="form-control form-control-line" value="<?php echo $row['nom_ste'] ?>" > </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Responsable</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="responsable" placeholder="Responsable" class="form-control form-control-line" value="<?php echo $row['responsable'] ?>" > </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Adresse</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="adresse" placeholder="Adresse" class="form-control form-control-line" value="<?php echo $row['adresse'] ?>">
+                                    </div>
+                                </div>
+								  <div class="form-group">
+                                    <label class="col-md-12">Téléphone</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="tel" placeholder="Téléphone" class="form-control form-control-line" value="<?php echo $row['tel'] ?>"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="email" placeholder="Email" class="form-control form-control-line" value="<?php echo $row['email'] ?>" > </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
-                                    <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Téléphone</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Adresse</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
-                                    </div>
-                                </div>
+                                
+                              
+                                
                                 <div class="form-group">
                                     <label class="col-md-12">Site web </label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="siteweb" placeholder="" class="form-control form-control-line" value="<?php echo $row['siteweb'] ?>">
                                     </div>
                                 </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" name="pwd" value="<?php echo $row['pwd'] ?>" class="form-control form-control-line"> </div>
+										
+                                </div>
+								<div class="form-group">
+								<input type="hidden" name="id_partenaire" value="<?php echo $row['id_partenaire']?>" />
+								</div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+				
+                                        <button class="btn btn-success" type="submit">Modifer</button>
                                     </div>
                                 </div>
                             </form>

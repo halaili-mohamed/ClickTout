@@ -1,3 +1,21 @@
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+
+$limit=2;
+$page=isset($_GET['page']) ? $_GET['page'] : 1;
+$start=($page -1 ) * $limit;
+
+
+$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
+$CMDCount=$res1->fetch_assoc();
+$total=$CMDCount ['id'];
+$pages=ceil($total/$limit);
+
+$previous=$page - 1;
+$next=$page + 1;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +46,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="formCmdPart.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,22 +65,11 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="profilePart.html"><i class="fa fa-user"></i> Mon compte </a>
-                    
-                  </li>
-                  <li><a ><i class="fa fa-shopping-bag"></i> Commande <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                       <li><a href="formCmdPart.html"> <i class="fa fa-edit"></i>Réservation</a></li>
-                      <li><a href="listCMDPart.html"><i class="fa fa-list"></i>Liste en attente</a></li>
-					  <li><a href="historiquePart.html"><i class="fa fa-clock-o"></i>Historique</a></li>
-                    
-                    </ul>
-                  </li>
-				  <li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a>
-                    
-                  </li>
-                    
-                 
+					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a> </li>
+                    <li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
+                    <li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
+					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li>
+					<li><a href="reclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation </a></li>
                 </ul>
               </div>
               
@@ -83,17 +90,24 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">yser name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Mon compte</a></li>
-                   
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="profilePart.php"> Mon compte</a></li>
+                    
+                    
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -129,7 +143,7 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Historique</h2>
+                    
                     <ul class="nav navbar-right panel_toolbox">
                        <li class="dropdown">
                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
@@ -146,6 +160,27 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+				  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <nav aria-label="Page navigation">
+							  <ul class="pagination justify-content-center">
+								<li class="page-item">
+								  <a class="page-link" href="historiquePart.php?page=<?= $previous; ?>" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								  </a>
+								</li>
+								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
+									<li class="page-item"><a class="page-link" href="historiquePart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+								<?php endfor ?>
+								<li class="page-item">
+								  <a class="page-link" href="historiquePart.php?page=<?= $next; ?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								  </a>
+								</li>
+							  </ul>
+							</nav>
+                      </div>
                     <!-- start project list -->
                     <table class="table table-striped projects">
                       <thead>
@@ -159,76 +194,90 @@
                           <th style="width: 20%">Action</th>
                         </tr>
                       </thead>
+						<tbody>
+						<?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$result1 = $connect->query($sql1);
 
-
-                      <tbody>
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) {
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
+							
+							echo '
+                     
+					  
                         <tr>
-                          <td>234</td>
-                          <td>Samuel Doe</td>
+                          <td>'.$data['n_cmd'].'</td>
+                          <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
 
-						  <td>24 mai </td>
+						  <td>'.$data['Date'].' </td>
                           
-                          <td>
-                            <button type="button" class="btn btn-success btn-xs">Success</button>
-                          </td>
+                          <td>' ;
+						  if ($data['etatCmd']==1) { echo '
+						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+						  echo '<span class="label label-success">Déchargée</span> ';} else {
+						  echo '<span class="label label-danger">Annulée</span>' ;}
+						   echo '</td> 
                           <td>
                              <!-- Small modal -->
 								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
                  
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
+									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
 
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n°: 234</b></h4></h4>
-                        </div>
-                        <div class="modal-body">
-                          <ul class="messages">
-                          <li>
-                            <div class="message_wrapper">
-                            
-                            
-                              
-							  
-                              <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </br> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco, California, USA </br></li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco, California, USA </li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312
-								
-							  
-                              <br />
-                              
-                            </div>
-                          </li>
-						  
-						  
-                         
-                          
-                        </ul>
-						<div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                          
-                        </div>
-                        </div>
-                        
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
+												</div>
+												<div class="modal-body">
+													<ul class="messages">
+													<li>
+													<div class="message_wrapper">
+													<li>
+														<i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
+														<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
+														
+														<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+														
+														<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
+														<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</li>
+														<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+														echo'
+													  
+													  <br />
+													  
+													</div>
+												  </li>
+													</ul>
+													<div class="modal-footer">
+													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+													  
+													</div>
+													</div>
+													
 
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /modals -->
-                            
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Supprimer </a>
-                          </td>
-                        </tr>
-                       
-                      </tbody>
+												  </div>
+												</div>
+											  </div>
+											  <!-- /modals -->
+														
+														
+													  </td>
+													</tr> '; 
+						}}
+					  ?>
+					   </tbody>
                     </table>
                     <!-- end project list -->
 
