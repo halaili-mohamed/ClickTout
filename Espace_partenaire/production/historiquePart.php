@@ -223,10 +223,12 @@ $next=$page + 1;
 						   echo '</td> 
                           <td>
                              <!-- Small modal -->
-								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
-                 
-									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-										<div class="modal-dialog modal-sm">
+							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
+								<i class="fa fa-folder"></i> Détails
+							</button>
+														  
+							 <div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						  										<div class="modal-dialog modal-sm">
 											<div class="modal-content">
 
 												<div class="modal-header">
@@ -269,7 +271,8 @@ $next=$page + 1;
 
 												  </div>
 												</div>
-											  </div>
+</div>
+									
 											  <!-- /modals -->
 														
 														
