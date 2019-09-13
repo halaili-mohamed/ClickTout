@@ -167,12 +167,16 @@ $id_partenaire=1;
 
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) {
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
+							
 							echo '
                      
 					  
                         <tr>
                           <td>'.$data['n_cmd'].'</td>
-                          <td></td>
+                          <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
 
 						  <td>'.$data['Date'].' </td>
                           
@@ -187,66 +191,56 @@ $id_partenaire=1;
                              <!-- Small modal -->
 								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
                  
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
+									<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
 
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
-                        </div>
-                        <div class="modal-body">
-                          <ul class="messages">
-                          <li>
-                            <div class="message_wrapper">
-                            
-                            
-                              
-							  
-                              <li>
-							    <i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
-							    <li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
-								
-								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312</li>
-								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-								if ($data['etatCmd']==1) { echo '
-						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-						  echo '<span class="label label-success">Déchargée</span> ';} else {
-						  echo '<span class="label label-danger">Annulée</span>' ;}
-								echo'
-							  
-                              <br />
-                              
-                            </div>
-                          </li>
-						  
-						  
-                         
-                          
-                        </ul>
-						<div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                          
-                        </div>
-                        </div>
-                        
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
+												</div>
+												<div class="modal-body">
+													<ul class="messages">
+													<li>
+													<div class="message_wrapper">
+													<li>
+														<i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
+														<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
+														
+														<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+														
+														<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
+														<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</li>
+														<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+														echo'
+													  
+													  <br />
+													  
+													</div>
+												  </li>
+													</ul>
+													<div class="modal-footer">
+													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+													  
+													</div>
+													</div>
+													
 
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /modals -->
-                            
-                            
-                          </td>
-                        </tr>
-                       
-						'; 
+												  </div>
+												</div>
+											  </div>
+											  <!-- /modals -->
+														
+														
+													  </td>
+													</tr> '; 
 						}}
 					  ?>
 					   </tbody>

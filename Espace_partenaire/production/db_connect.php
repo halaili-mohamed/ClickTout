@@ -12,10 +12,10 @@ $connect = new mysqli($localhost, $username, $password, $dbname);
 if($connect->connect_error) {
 	die("connection failed : " . $connect->connect_error);
 } else {
-// echo'<script language="javascript"> 
-	//	alert("Successfully Connected");
+ //echo'<script language="javascript"> 
+		//alert("Successfully Connected");
 		
-	//	</script>';
+		//</script>';
 }
 
 ?>
