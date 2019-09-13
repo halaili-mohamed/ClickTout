@@ -1,4 +1,6 @@
-<?php require_once 'db_connect.php'; ?>
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+?>
 
 
 <!DOCTYPE html>
@@ -75,17 +77,24 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">yser name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="profilePart.php"> Mon compte</a></li>
-                   
+                    
+                    
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -151,21 +160,29 @@
                           <th style="width: 20%">Action</th>
                         </tr>
                       </thead>
+						<tbody>
+						<?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire}";
+						$result1 = $connect->query($sql1);
 
-
-                      <tbody>
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) {
+							echo '
+                     
+					  
                         <tr>
-                          <td>234</td>
-                          <td>Samuel Doe</td>
+                          <td>'.$data['n_cmd'].'</td>
+                          <td></td>
 
-						  <td>24 mai </td>
+						  <td>'.$data['Date'].' </td>
                           
-                          <td> 
-						  <span class="label label-default">Chargée</span>
-						  <span class="label label-info">Montée à bord</span>
-						  <span class="label label-success">Déchargée</span>
-						  <span class="label label-danger">Annulée</span>
-						  </td>
+                          <td>' ;
+						  if ($data['etatCmd']==1) { echo '
+						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+						  echo '<span class="label label-success">Déchargée</span> ';} else {
+						  echo '<span class="label label-danger">Annulée</span>' ;}
+						   echo '</td> 
                           <td>
                              <!-- Small modal -->
 								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
@@ -177,7 +194,7 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n°: 234</b></h4></h4>
+                          <h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
                         </div>
                         <div class="modal-body">
                           <ul class="messages">
@@ -188,15 +205,21 @@
                               
 							  
                               <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </br> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
+							    <i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
+							    <li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
 								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco, California, USA </br></li>
+								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
 								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco, California, USA </li>
+								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
 								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312
-								
+								<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312</li>
+								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+								if ($data['etatCmd']==1) { echo '
+						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+						  echo '<span class="label label-success">Déchargée</span> ';} else {
+						  echo '<span class="label label-danger">Annulée</span>' ;}
+								echo'
 							  
                               <br />
                               
@@ -223,7 +246,10 @@
                           </td>
                         </tr>
                        
-                      </tbody>
+						'; 
+						}}
+					  ?>
+					   </tbody>
                     </table>
                     <!-- end project list -->
 
