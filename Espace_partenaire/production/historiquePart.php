@@ -1,5 +1,18 @@
 <?php require_once 'db_connect.php'; 
 $id_partenaire=1;
+
+$limit=2;
+$page=isset($_GET['page']) ? $_GET['page'] : 1;
+$start=($page -1 ) * $limit;
+
+
+$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
+$CMDCount=$res1->fetch_assoc();
+$total=$CMDCount ['id'];
+$pages=ceil($total/$limit);
+
+$previous=$page - 1;
+$next=$page + 1;
 ?>
 
 
@@ -130,7 +143,7 @@ $id_partenaire=1;
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Historique</h2>
+                    
                     <ul class="nav navbar-right panel_toolbox">
                        <li class="dropdown">
                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
@@ -147,6 +160,27 @@ $id_partenaire=1;
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+				  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <nav aria-label="Page navigation">
+							  <ul class="pagination justify-content-center">
+								<li class="page-item">
+								  <a class="page-link" href="historiquePart.php?page=<?= $previous; ?>" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								  </a>
+								</li>
+								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
+									<li class="page-item"><a class="page-link" href="historiquePart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+								<?php endfor ?>
+								<li class="page-item">
+								  <a class="page-link" href="historiquePart.php?page=<?= $next; ?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								  </a>
+								</li>
+							  </ul>
+							</nav>
+                      </div>
                     <!-- start project list -->
                     <table class="table table-striped projects">
                       <thead>
@@ -162,7 +196,7 @@ $id_partenaire=1;
                       </thead>
 						<tbody>
 						<?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire}";
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
