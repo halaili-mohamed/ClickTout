@@ -1,5 +1,21 @@
 <?php require_once 'db_connect.php'; 
 $id_partenaire=1;
+ 
+$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+
+$limit=2;
+$page=isset($_GET['page']) ? $_GET['page'] : 1;
+$start=($page -1 ) * $limit;
+
+$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
+$CMDCount=$res1->fetch_assoc();
+$total=$CMDCount ['id'];
+$pages=ceil($total/$limit);
+
+$previous=$page - 1;
+$next=$page + 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,14 +92,11 @@ $id_partenaire=1;
 
 			  
               <ul class="nav navbar-nav navbar-right">
-                <?php 
-					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
-					echo'
+               
+					
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
+                    <img src="images/<?php echo $row['logo'] ?>.jpg" alt=""><?php echo $row['nom_ste'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -92,8 +105,8 @@ $id_partenaire=1;
                     
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>'
-				?>
+                </li>
+			
 
                
               </ul>
@@ -165,23 +178,30 @@ $id_partenaire=1;
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <ul class="pagination pagination-split">
-                          <li><a href="#">A</a></li>
-                          <li><a href="#">B</a></li>
-                          <li><a href="#">C</a></li>
-                          <li><a href="#">D</a></li>
-                          <li><a href="#">E</a></li>
-                          <li>...</li>
-                          <li><a href="#">W</a></li>
-                          <li><a href="#">X</a></li>
-                          <li><a href="#">Y</a></li>
-                          <li><a href="#">Z</a></li>
-                        </ul>
+                        <nav aria-label="Page navigation">
+							  <ul class="pagination justify-content-center">
+								<li class="page-item">
+								  <a class="page-link" href="listCMDPart.php?page=<?= $previous; ?>" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								  </a>
+								</li>
+								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
+									<li class="page-item"><a class="page-link" href="listCMDPart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+								<?php endfor ?>
+								<li class="page-item">
+								  <a class="page-link" href="listCMDPart.php?page=<?= $next; ?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								  </a>
+								</li>
+							  </ul>
+							</nav>
                       </div>
 
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire}";
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
