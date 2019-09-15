@@ -19,14 +19,7 @@ if($_POST) {
 	
 
 	$sql = "INSERT INTO client (Nom, Prenom, telClient, Email) VALUES ('$Nom', '$Prenom', '$telClient', '$Email')";
-	if($connect->query($sql) === TRUE) {
-		echo'<script language="javascript"> 
 	
-	alert("Successfully added");
-	</script>';
-	} else {
-		echo "Error " . $sql . ' ' . $connect->connect_error;
-	}
 	$sql1="SELECT id_client from client where telClient={$telClient} and Email={$Email}";
 	
 	$result=$connect->query($sql1);
@@ -43,7 +36,7 @@ $id=$lig[0];
 	$sql3 = "INSERT INTO commende (Adresse_depart,Adresse_arrive,Date,Heure,type_voiture,nb_place_dispo,nb_ouvruer,typeClient,n_cmd,prix,n_facture,client_id_client,partenaire_id_partenaire,etatCmd)
 	VALUES ('$Adresse_depart', '$Adresse_arrive', '$Date', '$Heure','$type_voiture','$nb_place_dispo','$nb_ouvruer','partenaire',13,12,'$n_facture',4,'$id_partenaire',0)";
 	if($connect->query($sql3) === TRUE) {
-		echo'<script language="javascript"> 
+		echo  '<script language="javascript"> 
 	
 	window.location="formCmdPart.php";
 	</script>';

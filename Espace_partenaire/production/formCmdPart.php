@@ -132,7 +132,7 @@ $row = $result->fetch_assoc();
                       <div align="center">
                         <h2 class="StepTitle">Choisissez la destination et la date de votre commande</h2>
 
-                        <form action="AjoutCmdPart.php/create.php" method="post" >
+                        <form action="AjoutCmdPart.php" method="post" >
 
                         <div class="form-row">
 
