@@ -59,31 +59,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-				<
-                  <li><a href="profile.html"><i class="fa fa-user"></i> Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -150,86 +149,26 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <img src="images/logo_ctt.jpg">
+          <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Mon Compte</h3>
+                <h3>profile</h3>
               </div>
-			        <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
-                  
-                    
-                    <span class="input-group-btn"> 
-                      <button type="button" class="btn btn-primary btn-ms"  data-toggle="modal" data-target=".bs-example-modal-lg" >
-                                <i class="fa fa-plus-square"> </i> Ajouter Admnistrateur 
-                              </button>
-                    </span>
-                  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
 
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Ajout Admnistrateur </h4>
-                        </div>
-                        <div class="modal-body">
-                         <div class="white-box">
-                            <form class="form-horizontal form-material">
-                                <div class="form-group">
-                                    <label class="col-md-12">Nom</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
-                                    <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Téléphone</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Adresse</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                               
-                                
-                            </form>
-                        </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                          <button type="button" class="btn btn-primary">Ajouter</button>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
+               <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <a href="gestion_partenaire.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+				 
                 </div>
               </div>
-
-              
             </div>
-            
             <div class="clearfix"></div>
 
             <div class="row">
-             <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                  
-                 
+              <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Administrateur <small></small></h2>
+                    <h2>Profile partenaire <small></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -246,24 +185,10 @@
                       </li>
                     </ul>
                     <div class="clearfix"></div>
-                
-				 
-				 </div>
-				  <div class="x_content">			                     
-                      <div class="profile_img">
-                        <div id="crop-avatar">
-                          <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
-                        </div>
-                      </div>
-					  </div>
-				  </div>
-                  
-					  </div>
-					   <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                      
-					  <div class="white-box">
-                            <form class="form-horizontal form-material">
+                  </div>
+                  <div class="x_content">
+
+<form class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
@@ -297,41 +222,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-
-                      <!-- start skills -->
-                      <!--<h4>Skills</h4>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <p>Web Applications</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Website Design</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Automation & Testing</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>UI / UX</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                      </ul>-->
-                      <!-- end of skills -->
-
-                    </div>
-                    </div>
-					</div>
+  
                   </div>
                 </div>
               </div>
@@ -359,17 +250,11 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- morris.js -->
-    <script src="../vendors/raphael/raphael.min.js"></script>
-    <script src="../vendors/morris.js/morris.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    
+    <!-- validator -->
+    <script src="../vendors/validator/validator.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
+	
   </body>
 </html>

@@ -59,30 +59,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i> Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -140,7 +140,70 @@
                   </ul>
                 </li>
 
-                
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </nav>
           </div>
@@ -157,7 +220,7 @@
 
                <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <a href="gestion_partenaire.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_transporteur.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
                 </div>
               </div>
@@ -168,7 +231,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Profile partenaire <small></small></h2>
+                    <h2>Profile transporteur 1 <small></small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -194,16 +257,22 @@
                                     <div class="col-md-12">
                                         <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
                                 </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Prenom</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Date de naissance</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
                                         <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
-                                    <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
-                                </div>
+                              
                                 <div class="form-group">
                                     <label class="col-md-12">Téléphone</label>
                                     <div class="col-md-12">
@@ -215,6 +284,36 @@
                                         <input type="text" placeholder="" class="form-control form-control-line">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Matricule</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                    </div>
+                                </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Type de voiture</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Log in</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                    </div>
+                                </div>
+							  <div class="form-group">
+                                    <label class="col-md-12">Mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Confirm mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                </div>
+                               
+                               
                                
                                 <div class="form-group">
                                     <div class="col-sm-12">
