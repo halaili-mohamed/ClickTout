@@ -20,11 +20,11 @@ if($_POST) {
 
 	$sql = "INSERT INTO client (Nom, Prenom, telClient, Email) VALUES ('$Nom', '$Prenom', '$telClient', '$Email')";
 	
-	$sql1="SELECT id_client from client where telClient={$telClient} and Email={$Email}";
+	$sql1="SELECT * from client where telClient={$telClient} and Email={$Email}";
 	
 	$result=$connect->query($sql1);
-$lig=mysqli_fetch_array($result);
-$id=$lig[0];
+	$lig=mysqli_fetch_array($result);
+	$id=$lig['id_client'];
 	
 	
 	//$sql2= "select max(n_cmd) from commende";
@@ -34,7 +34,7 @@ $id=$lig[0];
 	
 	
 	$sql3 = "INSERT INTO commende (Adresse_depart,Adresse_arrive,Date,Heure,type_voiture,nb_place_dispo,nb_ouvruer,typeClient,n_cmd,prix,n_facture,client_id_client,partenaire_id_partenaire,etatCmd)
-	VALUES ('$Adresse_depart', '$Adresse_arrive', '$Date', '$Heure','$type_voiture','$nb_place_dispo','$nb_ouvruer','partenaire',13,12,'$n_facture',4,'$id_partenaire',0)";
+	VALUES ('$Adresse_depart', '$Adresse_arrive', '$Date', '$Heure','$type_voiture','$nb_place_dispo','$nb_ouvruer','partenaire',13,12,'$n_facture','$id','$id_partenaire',0)";
 	if($connect->query($sql3) === TRUE) {
 		echo  '<script language="javascript"> 
 	
