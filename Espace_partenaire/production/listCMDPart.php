@@ -226,6 +226,13 @@ $next=$page + 1;
 								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
 								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
+								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+							echo '
                               </ul>
                             </div>
                             
@@ -234,7 +241,7 @@ $next=$page + 1;
 						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
                             <div class="col-xs-12 col-sm-6 emphasis" >
                              
-                              <a href="annuleCMD.php?id='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
+                              <a href="annuleCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
                                 <i class="fa fa-times"> </i> Annuler 
                               </button>
 							  

@@ -1,7 +1,7 @@
 <?php require_once 'db_connect.php'; 
 $id_partenaire=1;
 
-$limit=2;
+$limit=15;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
 
@@ -196,7 +196,7 @@ $next=$page + 1;
                       </thead>
 						<tbody>
 						<?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (3,4)LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
