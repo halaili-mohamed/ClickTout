@@ -201,7 +201,7 @@ $next=$page + 1;
 
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (0,1,2) LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
@@ -234,7 +234,7 @@ $next=$page + 1;
 						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
                             <div class="col-xs-12 col-sm-6 emphasis" >
                              
-                              <button type="button" class="btn btn-danger btn-xs" >
+                              <a href="annuleCMD.php?id='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
                                 <i class="fa fa-times"> </i> Annuler 
                               </button>
 							  
