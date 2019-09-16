@@ -5,7 +5,7 @@ $sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 
-$limit=2;
+$limit=9;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
 
