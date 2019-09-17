@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -59,30 +59,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i>Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -258,7 +258,7 @@
                   </div>
                   <div class="x_content">
 
-                    <form class="form-horizontal form-label-left" novalidate>
+                    <form class="form-horizontal form-label-left" action="ajout_transporteur_action.php" method="post" novalidate>
 
                     
                       <span class="section">Personal Info</span>
@@ -267,21 +267,21 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nom <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                          <input id="name" class="form-control col-md-7 col-xs-12"  name="nom"  required="required" type="text">
                         </div>
                       </div>
 					  <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Prenom <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                          <input id="name" class="form-control col-md-7 col-xs-12" name="Prenom" required="required" type="text">
                         </div>
                       </div>
 					  <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Date de naissance <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                          <input id="name" class="form-control col-md-7 col-xs-12"  name="Date_naiss" placeholder="AAAA-MM-JJ" required="required" type="text">
                         </div>
                       </div>
 					  
@@ -289,50 +289,44 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="email" id="email" name="Email"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Adresse <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="email2" name="Adresse" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 					  <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Matricule <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
+                          <input id="name" class="form-control col-md-7 col-xs-12"  name="Matricule" required="required" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Type de voiture <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="name" name="Type_Voiture" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-					   <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
+					
 					  
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Login in  <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="url" id="website" name="website" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="name" name="psudo" required="required"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       
                       <div class="item form-group">
                         <label for="password" class="control-label col-md-3">Mot de passe</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
+                          <input id="password" type="password" name="PWD"  class="form-control col-md-7 col-xs-12" required="required">
                         </div>
                       </div>
                   
@@ -345,7 +339,7 @@
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button id="send" type="submit" class="btn btn-success">Ajouter</button>
                         </div>
                       </div>
                     </form>

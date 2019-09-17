@@ -1,3 +1,21 @@
+<?php require_once 'db_connect.php'; 
+
+	$Id_Transporteur=$_GET['Id_Transporteur'];
+	$nom = $_GET['nom'];
+	$Prenom = $_GET['Prenom'];
+	$Date_naiss = $_GET['Date_naiss'];
+	$Email = $_GET['Email'];
+	$Adresse = $_GET['Adresse'];
+	$Matricule = $_GET['Matricule'];
+	$Type_Voiture = $_GET['Type_Voiture'];
+	$psudo = $_GET['psudo'];
+	$PWD = $_GET['PWD'];
+	
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -129,81 +147,12 @@
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
+                  
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
+                
               </ul>
             </nav>
           </div>
@@ -251,66 +200,63 @@
                   </div>
                   <div class="x_content">
 
-<form class="form-horizontal form-material">
+<form class="form-horizontal form-material" method="post" action="modif_trasporteur_action.php" >
                                 <div class="form-group">
+								<input type="hidden" name="Id_Transporteur"  value="<?=$Id_Transporteur?>" />
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom" placeholder="<?=$nom?>" class="form-control form-control-line"> </div>
                                 </div>
 								 <div class="form-group">
                                     <label class="col-md-12">Prenom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="Prenom" placeholder="<?=$Prenom?>" class="form-control form-control-line"> </div>
                                 </div>
 								 <div class="form-group">
                                     <label class="col-md-12">Date de naissance</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="Date_naiss" placeholder="<?=$Date_naiss?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="Email" placeholder="<?=$Email?>" class="form-control form-control-line" name="example-email" id="example-email"> </div>
                                 </div>
                               
-                                <div class="form-group">
-                                    <label class="col-md-12">Téléphone</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                </div>
+                               
                                 <div class="form-group">
                                     <label class="col-md-12">Adresse</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="Adresse" placeholder="<?=$Adresse?>" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Matricule</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="Matricule" placeholder="<?=$Matricule?>" class="form-control form-control-line">
                                     </div>
                                 </div>
 								 <div class="form-group">
                                     <label class="col-md-12">Type de voiture</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="Type_Voiture" placeholder="<?=$Type_Voiture?>" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Log in</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="psudo" placeholder="<?=$psudo?>" class="form-control form-control-line">
                                     </div>
                                 </div>
 							  <div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password"  class="form-control form-control-line"> </div>
                                 </div>
 								 <div class="form-group">
                                     <label class="col-md-12">Confirm mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="PWD" class="form-control form-control-line"> </div>
                                 </div>
                                
                                

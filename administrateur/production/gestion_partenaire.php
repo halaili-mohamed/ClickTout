@@ -59,30 +59,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i> Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -159,7 +159,7 @@
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
                   
                     
-                    <span class="input-group-btn"> <a href="ajout_partenaire.html">
+                    <span class="input-group-btn"> <a href="ajout_partenaire.php">
                       <button type="button" class="btn btn-primary btn-ms" >
                                 <i class="fa fa-plus-square"> </i> Ajouter partenaire
                               </button></a>
@@ -209,9 +209,9 @@
                           <div class="col-xs-12 bottom text-center">
                        
                             <div class="col-xs-12 col-sm-6 emphasis">
-                              <a href="profile_partenaire.html"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
+                              <a href="profile_partenaire.php"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres_partenaire.html">  <button type="button" class="btn btn-primary btn-xs">
+                             <a href="offres_partenaire.php">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
