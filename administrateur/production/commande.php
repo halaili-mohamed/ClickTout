@@ -1,3 +1,10 @@
+<?php require_once 'db_connect.php'; 
+$id_admin=2;
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,8 +54,8 @@
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -124,18 +131,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
+                   
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -207,12 +208,14 @@
                           <tr class="headings">
                             
                             <th class="column-title">Numero de commande  </th>
-                            <th class="column-title">Date commande </th>
-							<th class="column-title">heure </th>
+                           
                             <th class="column-title">Adresse départ  </th>
                             <th class="column-title">Adresse destination </th>
+							 <th class="column-title">Date commande </th>
+							<th class="column-title">heure </th>
+							 <th class="column-title">Type de voiture</th>
 							 <th class="column-title">Nombre  d'ouvrier </th>
-							 <th class="column-title">Numero de livrer</th>
+							
 							 <th class="column-title">Nom livrer </th>
 							 
 							 
@@ -224,36 +227,24 @@
                         </thead>
 
                         <tbody>
-                         
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 23, 2014 11:47:56 PM </td>
-                            <td class=" ">May 23, 2014 11:47:56 PM <i class="success fa fa-long-arrow-up"></i></td>
-                            <td class=" ">rue 1235, paris </td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">en cours </td>
+                           <?php 
+						$sql="select * from commende";
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+						while($data=$result->fetch_assoc())
+						{echo'
+						<tr>
+                            <td class=" "> '.$data['id_commende'].'</td>
+                            <td class=" "> '.$data['Adresse_depart'].' </td>
+                            <td class=" "> '.$data['Adresse_arrive'].' </td>
+                            <td class=" "> '.$data['Date'].' </td>
+                            <td class=" "> '.$data['Heure'].'</td>
+                            <td class=""> '.$data['type_voiture'].' </td>
+							 <td class=""> '.$data['prix'].' </td>
                            
                           </tr>
-                       
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 23, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                           
-                          </tr>
-                          <tr class="even pointer">
-                        
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 24, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                           
-                          </tr>
+                       ';}}?>
+                            
                          
                         </tbody>
                       </table>

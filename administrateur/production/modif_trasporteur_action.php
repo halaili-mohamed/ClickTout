@@ -1,6 +1,5 @@
 
 <?php
-   
 require_once 'db_connect.php';
 if($_POST) {
 	$Id_Transporteur=$_POST['Id_Transporteur'];
