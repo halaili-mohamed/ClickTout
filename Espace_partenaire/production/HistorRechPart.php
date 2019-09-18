@@ -14,14 +14,10 @@ $pages=ceil($total/$limit);
 $previous=$page - 1;
 $next=$page + 1;
 
-if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
-	$q=htmlspecialchars($_GET['recherche']);
-	$rech=$connect->query('select * from commende where partenaire_id_partenaire='.$id_partenaire.'
-							and n_cmd like "%'.$q.'%" '); 
-	$resRech=$rech->fetch_assoc();
+
 	
 	
-}
+
 ?>
 
 
@@ -136,7 +132,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <form method="GET" action="HistorRechPart.php">
+                  <form method="GET">
 				  <div class="input-group">
 				  
                     <input type="search" class="form-control" name="recherche" placeholder="Rechercher...">
@@ -209,8 +205,13 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                       </thead>
 						<tbody>
 						<?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (3,4)LIMIT $start, $limit";
-						$result1 = $connect->query($sql1);
+						if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
+	$q=htmlspecialchars($_GET['recherche']);
+	$result1=$connect->query('select * from commende where etatCMD in (3,4) and partenaire_id_partenaire='.$id_partenaire.'
+							and n_cmd like "%'.$q.'%" '); 
+	
+	
+						}
 
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) {

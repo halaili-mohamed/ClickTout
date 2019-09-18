@@ -5,7 +5,7 @@ $sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 
-$limit=2;
+$limit=9;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
 
@@ -201,7 +201,7 @@ $next=$page + 1;
 
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (0,1,2) LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
@@ -226,6 +226,13 @@ $next=$page + 1;
 								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
 								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
+								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+							echo '
                               </ul>
                             </div>
                             
@@ -234,7 +241,7 @@ $next=$page + 1;
 						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
                             <div class="col-xs-12 col-sm-6 emphasis" >
                              
-                              <button type="button" class="btn btn-danger btn-xs" >
+                              <a href="annuleCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
                                 <i class="fa fa-times"> </i> Annuler 
                               </button>
 							  
