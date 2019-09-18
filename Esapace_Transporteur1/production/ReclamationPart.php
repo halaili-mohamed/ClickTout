@@ -1,3 +1,6 @@
+<?php require_once 'db_connect.php';
+$id_Transporteur=1; ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +9,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Espace transporteur </title>
+			<link rel="icon" href="images/icon.png" type="image/ico" />
+
+	  
+    <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,7 +20,19 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -25,19 +43,28 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_dispo2.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a  class="site_title" href="formCmdPart.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
+
             <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              
+             
+            </div>
+            <!-- /menu profile quick info -->
+
             <br />
 
             <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
 				  <li><a href="offre_dispo2.html"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
 				  <li><a href="offre_accepte2.html"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="reclamation.html"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
                   <li><a href="historique.html"><i class="fa fa-clock-o"></i>Historiques</a></li>
                 </ul>   
               </div>
@@ -45,20 +72,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+           
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -72,18 +86,21 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">User name
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                  
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.html"> Mon compte</a></li>
+                    <li><a href="profile.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -93,7 +110,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-       <div class="right_col" role="main">
+        <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -109,7 +126,10 @@
 
             <div class="row">
               
-       <div class="col-md-12 col-sm-12 col-xs-12">
+                
+                  
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Votre réclamation</h2>
@@ -117,35 +137,32 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-				  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+				  <form action="AjoutReclamationPart.php" method="post" class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="NumCMD">N° commande <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="n_cmd">N° commande <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="NumCMD" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="n_cmd" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+					  
+					  
                    
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Message <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-							<div id="editor-one" class="editor-wrapper"></div>
-
-								<textarea name="descr" id="descr" style="display:none;"></textarea>                     
-				 
-				  
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Message">Message <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<textarea class="form-control" name="Message" rows="3"></textarea>
 						</div>
-                      </div>
+					  </div>
 					 
-                      <div class="ln_solid"></div>
+                      
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-						
-                          <button type="submit" class="btn btn-success">Envoyer</button>
-                          <button class="btn btn-danger" type="button">Annuler</button>
-						  
+						<button type="submit" class="btn btn-success">Envoyer</button>
+                          
+						  <button class="btn btn-danger" type="reset">Annuler</button>
+                          
                         </div>
                       </div>
 
@@ -158,15 +175,13 @@
 
             
               </div>
-          </div>
+            
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
+          
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
@@ -181,9 +196,31 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
-
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="../vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="../vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="../vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Autosize -->
+    <script src="../vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="../vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 	
