@@ -209,7 +209,7 @@ $id_Transporteur=1;
                     <div class="col-md-9 col-sm-9 col-xs-12">
 
 						
-						<form class="form-horizontal form-material">
+						<form action="updateProfile.php" method="post" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
