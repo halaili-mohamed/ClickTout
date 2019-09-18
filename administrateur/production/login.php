@@ -30,16 +30,16 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form name="form" method="post" action="verifier_login.php">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" class="form-control" name="email" placeholder="Username" required="required" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" class="form-control" name="pwd" placeholder="Password" required="required" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
+               <button id="send" type="submit" class="btn btn-success">Login</button>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
@@ -54,8 +54,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-box"></i> Click Tout  </h1>
+                  <p>©2019</p>
                 </div>
               </div>
             </form>
@@ -76,7 +76,7 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <a class="btn btn-default submit" href="profile.php">Submit</a>
               </div>
 
               <div class="clearfix"></div>
@@ -90,8 +90,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <h1><i class="fa fa-paw"></i> Platform "Click Tout" </h1>
+                 
                 </div>
               </div>
             </form>

@@ -1,3 +1,13 @@
+<?php require_once 'db_connect.php'; 
+$id_admin=2;
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+$Id_Transporteur=$_GET['Id_Transporteur'];
+$nom = $_GET['nom'];
+$Prenom = $_GET['Prenom'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +46,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,8 +57,8 @@
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -59,30 +69,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i>Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -124,7 +134,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -140,7 +150,7 @@
                   </ul>
                 </li>
 
-             
+                
               </ul>
             </nav>
           </div>
@@ -152,30 +162,33 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Ajouter Partenaire</h3>
+                <h3> <small></small></h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                   
-                   <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <a href="gestion_transporteur.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+					
+                <a href="gestion_transporteur.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
-                </div>
-              </div>
+             
                   </div>
                 </div>
               </div>
             </div>
-            <div class="clearfix"></div>
+
+            
 
             <div class="row">
+   
+
+              <div class="clearfix"></div>
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2> <small></small></h2>
+                    <h2>les offres  <small> transporteur <?php echo $nom ?>  </small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -193,89 +206,59 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="x_content">
 
-                    <form class="form-horizontal form-label-left" novalidate>
+                  <!--  <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
 
-                    
-                      <span class="section">Partenaire</span>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="headings">
+                            
+                       <th class="column-title">Numero de commande  </th>
+                           
+                            <th class="column-title">Adresse départ  </th>
+                            <th class="column-title">Adresse destination </th>
+							 <th class="column-title">Date commande </th>
+							<th class="column-title">heure </th>
+							 <th class="column-title">Type de voiture</th>
+							 <th class="column-title">Nombre  d'ouvrier </th>		 
+							 
+                            <th class="column-title">Etat </th>
+                            <th class="column-title"> Prix</th>
+                           
+                           
+                       
+                          </tr>
+                        </thead>
 
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Confirm Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Number <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Website URL <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="url" id="website" name="website" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Occupation <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="occupation" type="text" name="occupation" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label for="password" class="control-label col-md-3">Password</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Textarea <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12"></textarea>
-                        </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                      </div>
-                    </form>
+                        <tbody>
+                         
+                               <?php 
+						$sql="select * from commende where transporteur_Id_transporteur=$Id_Transporteur";
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+						while($data=$result->fetch_assoc())
+						{echo'
+						<tr>
+                            <td class=" "> '.$data['id_commende'].'</td>
+                            <td class=" "> '.$data['Adresse_depart'].' </td>
+                            <td class=" "> '.$data['Adresse_arrive'].' </td>
+                            <td class=" "> '.$data['Date'].' </td>
+                            <td class=" "> '.$data['Heure'].'</td>
+                            <td class=""> '.$data['type_voiture'].' </td>
+							 <td class=""> '.$data['prix'].' </td>
+                           
+                          </tr>
+                       ';}}?>
+                           
+                         
+                        </tbody>
+                      </table>
+                    </div>
+							
+						
                   </div>
                 </div>
               </div>
@@ -303,11 +286,10 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
   </body>
 </html>

@@ -1,3 +1,10 @@
+<?php require_once 'db_connect.php'; 
+$id_admin=2;
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,8 +54,8 @@
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -59,30 +66,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i> Mon compte</a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte</a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -124,19 +131,13 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                   
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -201,57 +202,53 @@
                   </div>
                   <div class="x_content">
 
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Numero commande</th>
-                          <th>Date départ & heure</th>
-                          <th>Date arrivée & heure</th>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="headings">
+                            
+                            <th class="column-title">Numero de commande  </th>
+                           
+                            <th class="column-title">Adresse départ  </th>
+                            <th class="column-title">Adresse destination </th>
+							 <th class="column-title">Date commande </th>
+							<th class="column-title">heure </th>
+							 <th class="column-title">Type de voiture</th>
+							 <th class="column-title">Nombre  d'ouvrier </th>
+							
+							 <th class="column-title">Nom livrer </th>
+							 
+							 
+                            <th class="column-title">Etat </th>
+                            <th class="column-title"> Prix</th>
+                           
+                       
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                           <?php 
+						$sql="select * from commende";
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+						while($data=$result->fetch_assoc())
+						{echo'
+						<tr>
+                            <td class=" "> '.$data['id_commende'].'</td>
+                            <td class=" "> '.$data['Adresse_depart'].' </td>
+                            <td class=" "> '.$data['Adresse_arrive'].' </td>
+                            <td class=" "> '.$data['Date'].' </td>
+                            <td class=" "> '.$data['Heure'].'</td>
+                            <td class=""> '.$data['type_voiture'].' </td>
+							 <td class=""> '.$data['prix'].' </td>
+                           
+                          </tr>
+                       ';}}?>
+                            
                          
-						  <th>Adresse</th>
-						   <th>Livrer</th>
-						   <th>Nom client</th>
-						    <th>Etat</th>
-							 <th>Action</th>
-						  
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">689956</th>
-                          <td>5/09/2019 : 5pm </td>
-                         <td>5/09/2019 : 6pm </td>
-                          <td>rue 15674 paris </td>
-						  <td>transporteur 1 </td>
-						  <td>med</td>
-						  <td>en attends </td>
-						   
-						   <th><button type="button" class="btn btn-danger">Annuler </button></th>
-                        </tr>
-                          <tr>
-                          <th scope="row">5655</th>
-                          <td>5/09/2019 : 5pm </td>
-                         <td>5/09/2019 : 6pm </td>
-                          <td>rue 15674 paris </td>
-						  <td>transporteur 1 </td>
-						  <td>med</td>
-						  <td>en attends </td>
-						  
-						   <th><button type="button" class="btn btn-danger">Annuler </button></th>
-                        </tr>
-                          <tr>
-                          <th scope="row">65988</th>
-                          <td>5/09/2019 : 5pm </td>
-                         <td>5/09/2019 : 6pm </td>
-                          <td>rue 15674 paris </td>
-						  <td>transporteur 1 </td>
-						  <td>med</td>
-						  <td>en attends </td>
-						   
-						   <th><button type="button" class="btn btn-danger">Annuler </button></th>
-                        </tr>
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table>
+                    </div>
 
                   </div>
                 </div>

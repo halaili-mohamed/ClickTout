@@ -59,30 +59,30 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i> Mon compte </a>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
 				  </li>
 				  </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.html"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
 				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.html"><i class="fa fa-users"></i> Gestion des partenaires </a>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.html"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.html"><i class="fa fa-frown-o"></i> Reclamation </a>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.html"><i class="fa fa-bar-chart"></i> Dashboard </a>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
 				  </li>
 				  </ul>
 				  
@@ -152,16 +152,16 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>TRANSPORTEUR</h3>
+                <h3>Partenaire</h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
                   
                     
-                    <span class="input-group-btn"> <a href="ajout_transporteur.html">
+                    <span class="input-group-btn"> <a href="ajout_partenaire.php">
                       <button type="button" class="btn btn-primary btn-ms" >
-                                <i class="fa fa-plus-square"> </i> Ajouter transporteur 
+                                <i class="fa fa-plus-square"> </i> Ajouter partenaire
                               </button></a>
                     </span>
                   
@@ -193,7 +193,37 @@
                       <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                         <div class="well profile_view">
                           <div class="col-sm-12">
-                            <h4 class="brief"><i>transporteur</i></h4>
+                            <h4 class="brief"><i>partenaire</i></h4>
+                            <div class="left col-xs-7">
+                              <h2>Nicole Pearson</h2>
+                              <p><strong> </strong>  </p>
+                              <ul class="list-unstyled">
+                                <li><i class="fa fa-building"></i> Address: </li>
+                                <li><i class="fa fa-phone"></i> Phone: </li>
+                              </ul>
+                            </div>
+                            <div class="right col-xs-5 text-center">
+                              <img src="images/img.jpg" alt="" class="img-circle img-responsive">
+                            </div>
+                          </div>
+                          <div class="col-xs-12 bottom text-center">
+                       
+                            <div class="col-xs-12 col-sm-6 emphasis">
+                              <a href="profile_partenaire.php"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
+                                </i> </button></a>
+                             <a href="offres_partenaire.php">  <button type="button" class="btn btn-primary btn-xs">
+                                <i class="fa fa-table"> </i> Offres
+                              </button>
+							  </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <h4 class="brief"><i>partenaire</i></h4>
                             <div class="left col-xs-7">
                               <h2>Nicole Pearson</h2>
                               <p><strong> </strong>  </p>
@@ -211,7 +241,7 @@
                             <div class="col-xs-12 col-sm-6 emphasis">
                               <a href="profile_transporteur.html"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres_transporteur.html">  <button type="button" class="btn btn-primary btn-xs">
+                             <a href="offres_partenaire.html">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
@@ -241,37 +271,7 @@
                             <div class="col-xs-12 col-sm-6 emphasis">
                               <a href="profile_transporteur.html"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres.html">  <button type="button" class="btn btn-primary btn-xs">
-                                <i class="fa fa-table"> </i> Offres
-                              </button>
-							  </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>transporteur</i></h4>
-                            <div class="left col-xs-7">
-                              <h2>Nicole Pearson</h2>
-                              <p><strong> </strong>  </p>
-                              <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i> Address: </li>
-                                <li><i class="fa fa-phone"></i> Phone: </li>
-                              </ul>
-                            </div>
-                            <div class="right col-xs-5 text-center">
-                              <img src="images/img.jpg" alt="" class="img-circle img-responsive">
-                            </div>
-                          </div>
-                          <div class="col-xs-12 bottom text-center">
-                       
-                            <div class="col-xs-12 col-sm-6 emphasis">
-                              <a href="profile_transporteur.html"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
-                                </i> </button></a>
-                             <a href="offres.html">  <button type="button" class="btn btn-primary btn-xs">
+                             <a href="offres_partenaire.html">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
