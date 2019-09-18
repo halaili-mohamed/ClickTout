@@ -1,3 +1,6 @@
+<?php require_once 'db_connect.php';
+$id_partenaire=1; ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +43,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a  class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a  class="site_title" href="formCmdPart.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -59,22 +62,11 @@
               <div class="menu_section">
                
                 <ul class="nav side-menu">
-                  <li><a href="profilePart.html"><i class="fa fa-user"></i> Mon compte </a>
-                    
-                  </li>
-                  <li><a ><i class="fa fa-shopping-bag"></i> Commande <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                       <li><a href="formCmdPart.html"> <i class="fa fa-edit"></i>Réservation</a></li>
-                      <li><a href="listCMDPart.html"><i class="fa fa-list"></i>Liste en attente</a></li>
-					  <li><a href="historiquePart.html"><i class="fa fa-clock-o"></i>Historique</a></li>
-                    
-                    </ul>
-                  </li>
-				  <li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a>
-                    
-                  </li>
-                    
-                 
+					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a></li>
+					<li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
+					<li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
+					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li>
+					<li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a></li>
                 </ul>
               </div>
 
@@ -83,20 +75,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+           
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -110,18 +89,24 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+                <?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">User name
+                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.html"> Mon compte</a></li>
+                    <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -158,33 +143,30 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-				  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+				  <form action="AjoutReclamationPart.php" method="post" class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="NumCMD">N° commande <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="n_cmd">N° commande <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="NumCMD" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="n_cmd" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+					  
+					  
                    
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Message <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-							<div id="editor-one" class="editor-wrapper"></div>
-
-								<textarea name="descr" id="descr" style="display:none;"></textarea>                     
-				 
-				  
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Message">Message <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<textarea class="form-control" name="Message" rows="3"></textarea>
 						</div>
-                      </div>
+					  </div>
 					 
-                      <div class="ln_solid"></div>
+                      
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 						<button type="submit" class="btn btn-success">Envoyer</button>
-                          <button class="btn btn-warning" type="button">Réinitialiser</button>
+                          
 						  <button class="btn btn-danger" type="reset">Annuler</button>
                           
                         </div>

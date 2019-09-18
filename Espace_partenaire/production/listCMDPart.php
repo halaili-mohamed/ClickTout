@@ -1,3 +1,22 @@
+<?php require_once 'db_connect.php'; 
+$id_partenaire=1;
+ 
+$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+
+$limit=2;
+$page=isset($_GET['page']) ? $_GET['page'] : 1;
+$start=($page -1 ) * $limit;
+
+$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
+$CMDCount=$res1->fetch_assoc();
+$total=$CMDCount ['id'];
+$pages=ceil($total/$limit);
+
+$previous=$page - 1;
+$next=$page + 1;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +47,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="formCmdPart.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -47,22 +66,11 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <li><a href="profilePart.html"><i class="fa fa-user"></i> Mon compte </a>
-                    
-                  </li>
-                  <li><a ><i class="fa fa-shopping-bag"></i> Commande <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                       <li><a href="formCmdPart.html"> <i class="fa fa-edit"></i>Réservation</a></li>
-                      <li><a href="listCMDPart.html"><i class="fa fa-list"></i>Liste en attente</a></li>
-					  <li><a href="historiquePart.html"><i class="fa fa-clock-o"></i>Historique</a></li>
-                    
-                    </ul>
-                  </li>
-				  <li><a href="reclamationPart.html"><i class="fa fa-comments-o"></i> Réclamation </a>
-                    
-                  </li>
-                    
-                 
+					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a>
+                    <li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
+                    <li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
+					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li> 
+				    <li><a href="reclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation </a></li>             
                 </ul>
               </div>
               
@@ -82,18 +90,23 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
+			  
               <ul class="nav navbar-nav navbar-right">
+               
+					
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">yser name
+                    <img src="images/<?php echo $row['logo'] ?>.jpg" alt=""><?php echo $row['nom_ste'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Mon compte</a></li>
-                   
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="profilePart.php"> Mon compte</a></li>
+                    
+                    
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
+			
 
                
               </ul>
@@ -103,12 +116,12 @@
         <!-- /top navigation -->
 
         <!-- page content -->
-         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Historique</h3>
+				<h3> Liste en attente </h3>
+                
               </div>
 
               <div class="title_right">
@@ -129,9 +142,11 @@
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Historique</h2>
+				  
+                    					
                     <ul class="nav navbar-right panel_toolbox">
-                       <li class="dropdown">
+
+                <li class="dropdown">
                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
                         <ul class="dropdown-menu" role="menu">
                           <li><a href="#"><i class="fa fa-sort-amount-desc"></i> La plus récente </a>
@@ -140,104 +155,110 @@
                           </li>
                         </ul>
                       </li>
-                      
+
+               
+             
                       
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+
                   <div class="x_content">
-                    <!-- start project list -->
-                    <table class="table table-striped projects">
-                      <thead>
-                        <tr>
-                          <th style="width: 10%">N° commande</th>
-                          <th>Nom client</th>
-                         
-						  <th>Date</th>
-                          <th>Etat</th>
-						  
-                          <th style="width: 20%">Action</th>
-                        </tr>
-                      </thead>
 
+                   
 
-                      <tbody>
-                        <tr>
-                          <td>234</td>
-                          <td>Samuel Doe</td>
+                      
+                      <br />
 
-						  <td>24 mai </td>
-                          
-                          <td>
-                            <button type="button" class="btn btn-success btn-xs">Success</button>
-                          </td>
-                          <td>
-                             <!-- Small modal -->
-								  <a type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
-                 
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
+                      <!-- here -->
 
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n°: 234</b></h4></h4>
-                        </div>
-                        <div class="modal-body">
-                          <ul class="messages">
-                          <li>
-                            <div class="message_wrapper">
-                            
-                            
-                              
-							  
-                              <li>
-							    <i class="fa fa-calendar "></i>  Date:  24 mai  </br> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  10H  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: San Francisco, California, USA </br></li>
-								
-								<li><i class="fa fa-flag"></i> Destination: San Francisco, California, USA </li>
-								<li><i class="fa fa-user"></i> Client: Samuel Doe </br></li>
-								<i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: 21331A2312
-								
-							  
-                              <br />
-                              
-                            </div>
-                          </li>
-						  
-						  
-                         
-                          
-                        </ul>
-						<div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                          
-                        </div>
-                        </div>
-                        
-
+                      <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <nav aria-label="Page navigation">
+							  <ul class="pagination justify-content-center">
+								<li class="page-item">
+								  <a class="page-link" href="listCMDPart.php?page=<?= $previous; ?>" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+									<span class="sr-only">Previous</span>
+								  </a>
+								</li>
+								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
+									<li class="page-item"><a class="page-link" href="listCMDPart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+								<?php endfor ?>
+								<li class="page-item">
+								  <a class="page-link" href="listCMDPart.php?page=<?= $next; ?>" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+									<span class="sr-only">Next</span>
+								  </a>
+								</li>
+							  </ul>
+							</nav>
                       </div>
+
+                      <div class="clearfix"></div>
+					  <?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$result1 = $connect->query($sql1);
+
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) { 
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
+
+                      echo '<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                        <div class="well profile_view">
+                          <div class="col-sm-12">
+                            <h4 class="brief"><i>N° commande: '.$data['n_cmd'].'</i></h4>
+                            <div class="left col-xs-7">
+                            
+                              <ul class="list-unstyled">
+                                <li>
+							    <i class="fa fa-calendar "></i>  Date:  '.$data['Date'].'  </li> 
+							    <li><i class="fa fa-clock-o "></i>  Horraire:  '.$data['Heure'].'  </li>
+								
+								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </li>
+								
+								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
+								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
+                              </ul>
+                            </div>
+                            
+                          </div>
+                          <div class="col-xs-12 bottom text-center" >
+						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
+                            <div class="col-xs-12 col-sm-6 emphasis" >
+                             
+                              <button type="button" class="btn btn-danger btn-xs" >
+                                <i class="fa fa-times"> </i> Annuler 
+                              </button>
+							  
+                            </div>
+                          </div>
+                        </div>
+						</div>   ';}} ?>
                     </div>
                   </div>
-                  <!-- /modals -->
-                            
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Supprimer </a>
-                          </td>
-                        </tr>
-                       
-                      </tbody>
-                    </table>
-                    <!-- end project list -->
+                </div>
+              </div>
+            </div>
+
+
+                    </div>
+
+                    
 
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        
         <!-- /page content -->
 
         <!-- footer content -->
