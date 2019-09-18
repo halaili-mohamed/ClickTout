@@ -31,17 +31,17 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form method="post" action="veriflogin.php">
               <h1><i class="fa fa-lock"></i>  Connexion</h1>
               <div>
 			  
-                <input type="text" class="form-control" placeholder="Utilisateur" required="" />
+                <input type="text" class="form-control" name="psudo" placeholder="Utilisateur" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Mot de passe" required="" />
+                <input type="password" class="form-control" name="pwd" placeholder="Mot de passe" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Se connecter</a>
+                <a class="btn btn-default submit" type="submit">Se connecter</a>
                 <a class="reset_pass" href="#">Mot de passe oublié?</a>
               </div>
 
