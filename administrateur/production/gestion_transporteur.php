@@ -63,7 +63,7 @@ $next=$page + 1;
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenue,</span>
                 <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
@@ -235,12 +235,18 @@ $next=$page + 1;
                           <div class="col-xs-12 bottom text-center">
                        
                             <div class="col-xs-12 col-sm-6 emphasis">
+							<div class="btn-group">
                               <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].' "><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-primary btn-xs">
+                             <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &nom='.$data['nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
+							   <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-danger btn-xs">
+                                <i class="fa fa-"> </i> Supprimer
+                              </button>
+							  </a>
+							  </div>
                             </div>
                           </div>
                         </div>

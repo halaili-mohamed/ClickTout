@@ -54,7 +54,7 @@ $row = $result->fetch_assoc();
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenue,</span>
                 <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
@@ -162,7 +162,7 @@ $row = $result->fetch_assoc();
                   
                    <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <a href="gestion_transporteur.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_transporteur.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
                 </div>
               </div>

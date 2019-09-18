@@ -225,7 +225,7 @@ $row = $result->fetch_assoc();
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" name="Email" placeholder="<?=$Email?>" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="Email" placeholder="<?=$Email?>" class="form-control form-control-line"> </div>
                                 </div>
                               
                                
@@ -268,7 +268,7 @@ $row = $result->fetch_assoc();
                                
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+                                        <button class="btn btn-success" type="submit" >Modifer</button>
                                     </div>
                                 </div>
                             </form>
@@ -284,7 +284,7 @@ $row = $result->fetch_assoc();
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          
           </div>
           <div class="clearfix"></div>
         </footer>

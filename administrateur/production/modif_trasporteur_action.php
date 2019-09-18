@@ -31,5 +31,6 @@ else
 	window.location="gestion_transporteur.php";
 	</script>';
 }
+$connect->close();
 }
 ?>

@@ -1,3 +1,11 @@
+
+<?php require_once 'db_connect.php'; 
+$id_admin=2;
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,8 +55,8 @@
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -125,18 +133,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""> <?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
+                   
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -175,41 +177,46 @@
                         </div>
                         <div class="modal-body">
                          <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" name="form1" action="ajout_admin_action.php" method="post">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="email" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="pwd" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Téléphone</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        <input type="text" name="telephone" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Adresse</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="adresse" class="form-control form-control-line">
                                     </div>
                                 </div>
                                
-                                
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+									<button id="send" type="submit" class="btn btn-success">Ajouter</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                          
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                          <button type="button" class="btn btn-primary">Ajouter</button>
+                         
                         </div>
 
                       </div>
@@ -263,72 +270,49 @@
 					   <div class="col-md-6 col-sm-12 col-xs-12 form-group">
                       
 					  <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            
+							<form class="form-horizontal form-material" name="form" action="modif_admin_action.php" method="post">
                                 <div class="form-group">
+								 <input type="hidden" name="id_admin" value="<?=$id_admin?>"/>
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom" placeholder="<?php echo $row['nom'] ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="email" placeholder="<?php echo $row['email'] ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="pwd" value="<?php echo $row['pwd'] ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Téléphone</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        <input type="text" name="telephone" placeholder="<?php echo $row['telephone'] ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Adresse</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="adresse" placeholder="<?php echo $row['adresse'] ?>" class="form-control form-control-line">
                                     </div>
                                 </div>
+                                 <div class="form-group">
                                
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+                                    <div class="col-md-12">
+									
+									
+                                        <button type="submit" class="btn btn-primary"  >Modifier </button>
                                     </div>
                                 </div>
+							  
+                                
                             </form>
                         </div>
 
-                      <!-- start skills -->
-                      <!--<h4>Skills</h4>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <p>Web Applications</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Website Design</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Automation & Testing</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>UI / UX</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                      </ul>-->
-                      <!-- end of skills -->
-
+                  
                     </div>
                     </div>
 					</div>
