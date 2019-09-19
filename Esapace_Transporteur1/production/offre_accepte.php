@@ -22,7 +22,7 @@ $next=$page + 1;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="images/icon.png" type="image/ico" />
+	  <link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace partenaire </title>
 
     <!-- Bootstrap -->
@@ -111,7 +111,7 @@ $next=$page + 1;
           <div class="">
             <div class="page-title">
               <div class="title_left">
-				<h3>Liste des offres Acceptés</h3>
+				<h3>Offres Acceptés</h3>
                 
               </div>
 
@@ -133,7 +133,7 @@ $next=$page + 1;
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-				  
+				   <h2>Liste des offres Acceptés</h2> 
                     					
                     <ul class="nav navbar-right panel_toolbox">
 
@@ -149,10 +149,10 @@ $next=$page + 1;
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">    
+            <div class="x_content">    
                       <br />
                      <!-- here -->
-                      <div class="row">
+                <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
@@ -178,10 +178,9 @@ $next=$page + 1;
 							  </ul>
 							</nav>
                       </div>
-
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD in (1,2,3) LIMIT $start, $limit";
+						$sql1="select * from commende where transporteur_Id_Transporteur={$id_Transporteur} and etatCMD in (-1,1,2,3) LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) { 
@@ -203,32 +202,73 @@ $next=$page + 1;
 								
 								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
 								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
-								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-														if ($data['etatCmd']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-												  echo '<span class="label label-success">Déchargée</span> ';} else {
+								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['TelClient'].' </li>
+								<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCMD']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
+												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
+												  echo '<span class="label label-warning">Déchargée</span> ';} else {
 												  echo '<span class="label label-danger">Annulée</span>' ;}
-							echo '
-                              </ul>
+							echo '</li>
+							  </ul>
                             </div>
+                          </div>	
+							 <div class="col-xs-12 bottom text-center">
+                            <div class="col-xs-12 col-sm-12 emphasis">';
+							
+							if($data['etatCMD']== -1)
+							{
+							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-default btn-xs" >
+								Charger</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
+								Monter à bord</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
+								Décharger</a>';
+							}
+							elseif($data['etatCMD']== 1)
+							{
+							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
+								Charger</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  class="btn btn-info btn-xs" >
+								Monter à bord</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
+								Décharger</a>';
+							}
+							elseif($data['etatCMD']== 2)
+							{
+							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
+								Charger</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
+								Monter à bord</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"   class="btn btn-success btn-xs" >
+								Décharger</a>';
+							}
+							
+							else
+							{
+							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
+								Charger</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
+								Monter à bord</a>
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
+								Décharger</a>';
+							}
+							;
+                          echo  '</div>
+                            </div>
+                          
                             
                           </div>
                           
                         </div>
 						</div>   ';}} ?>
-                    </div>
+ </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
                     </div>
-
-                    
-
                   </div>
                 </div>
               </div>
@@ -238,10 +278,8 @@ $next=$page + 1;
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-         
-          <div class="clearfix"></div>
-        </footer>
+
+
         <!-- /footer content -->
       </div>
     </div>

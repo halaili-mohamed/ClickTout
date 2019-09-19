@@ -3,7 +3,7 @@ $id_Transporteur=1;
 $limit=15;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
-$res1 = $connect->query("select count(id_commende) AS id from commende where Tansporteur_id_Transporteur={$id_Transporteur} ");
+$res1 = $connect->query("select count(id_commende) AS id from commende where transporteur_id_Transporteur={$id_Transporteur} ");
 $CMDCount=$res1->fetch_assoc();
 $total=$CMDCount ['id'];
 $pages=ceil($total/$limit);
@@ -26,7 +26,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.png" type="image/ico" />
+      <link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -61,7 +61,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
-                  <li><a href="historique.html"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                  <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
                 </ul>   
               </div>
             </div>
@@ -101,14 +101,10 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 					$row = $result->fetch_assoc();
 					echo'
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profilePart.php"> Mon compte</a></li>
-                    
-                    
+                    <li><a href="profile.php"> Mon compte</a></li>
+     
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>'
@@ -124,13 +120,12 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
         <!-- page content -->
           <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
+			  <div class="page-title">
               <div class="title_left">
                 <h3>Historique</h3>
               </div>
 
-              
-            <div class="title_right">
+              <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <form method="GET" action="HistorRechPart.php">
 				  <div class="input-group">
@@ -143,12 +138,13 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 				   </form>
                   
                 </div>
+              </div>
             </div>
+ 
             <div class="clearfix"></div>
-             <div class="clearfix"></div>
-
+            <div class="clearfix"></div>
             <div class="row">
-              <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
                     
@@ -161,13 +157,11 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                           <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
                           </li>
                         </ul>
-                      </li>
-                      
-                      
+                      </li> 
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+				  <div class="x_content">
 				  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                         <nav aria-label="Page navigation">
 							  <ul class="pagination justify-content-center">
@@ -188,13 +182,13 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 								</li>
 							  </ul>
 							</nav>
-                      </div>
+                   </div>
 
-            <div class="row">
+				  <div class="row">
               
-       <div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
-                <div class="x_title">
+                  <div class="x_title">
                   <h2>Consulter historique</h2>
                  
                   <div class="clearfix"></div>
@@ -232,12 +226,13 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 						  <td>'.$data['Date'].' </td>
                           
                           <td>' ;
-						  if ($data['etatCmd']==1) { echo '
-						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-						  echo '<span class="label label-success">Déchargée</span> ';} else {
-						  echo '<span class="label label-danger">Annulée</span>' ;}
-						   echo '</td> 
+						 														if ($data['etatCMD']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
+												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
+												  echo '<span class="label label-warning">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+							echo '</td> 
                           <td>
                              <!-- Small modal -->
 							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
@@ -264,15 +259,15 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 														
 														<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
 														<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</li>
-														<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-														if ($data['etatCmd']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-												  echo '<span class="label label-success">Déchargée</span> ';} else {
+														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</li>
+														<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCMD']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
+												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
+												  echo '<span class="label label-warning">Déchargée</span> ';} else {
 												  echo '<span class="label label-danger">Annulée</span>' ;}
-														echo'
-													  
+							echo '</li>
 													  <br />
 													  
 													</div>
@@ -301,21 +296,17 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                     <!-- end project list -->
 
                   </div>
-                </div>
-				 </div>
               </div>
+			</div>
             </div>
-          </div>
-        </div>
+				</div>
+				</div>
+				</div>
+			</div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+
         <!-- /footer content -->
       </div>
     </div>

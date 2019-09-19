@@ -9,7 +9,8 @@ $id_Transporteur=1; ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-			<link rel="icon" href="images/icon.png" type="image/ico" />
+	  <link rel="icon" href="images/favicon.png" type="image/ico" />
+	<link rel="icon" href="images/icon.png" type="image/ico" />
 
 	  
     <title>Espace transporteur</title>
@@ -157,6 +158,9 @@ $id_Transporteur=1; ?>
         </div>     
         </div>
         <!-- /page content -->
+		 <!-- footer content -->
+     
+        <!-- /footer content -->
       </div>
     </div>
 

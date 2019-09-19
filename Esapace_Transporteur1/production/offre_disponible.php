@@ -22,7 +22,7 @@ $next=$page + 1;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="images/icon.png" type="image/ico" />
+      <link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -133,8 +133,7 @@ $next=$page + 1;
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-				  
-                    					
+				  <h2>Liste des offres disponibles</h2> 		
                     <ul class="nav navbar-right panel_toolbox">
 
                 <li class="dropdown">
@@ -180,7 +179,7 @@ $next=$page + 1;
                       </div>
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD==0 LIMIT $start, $limit";
+						$sql1="select * from commende c , transporteur t where transporteur_id_Transporteur={$id_Transporteur} and c.etatCMD= 0 and c.type_voiture=t.Type_Voiture LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) { 
@@ -199,7 +198,7 @@ $next=$page + 1;
 								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </li>	
 								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
 								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
+								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['TelClient'].' </li>
                               </ul>
                             </div>
                           </div>
@@ -227,10 +226,7 @@ $next=$page + 1;
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-         
-          <div class="clearfix"></div>
-        </footer>
+       
         <!-- /footer content -->
       </div>
     </div>

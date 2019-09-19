@@ -9,7 +9,7 @@ $id_Transporteur=1;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -125,15 +125,16 @@ $id_Transporteur=1;
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
 					<?php 
-					
+					// pour photo de profil :                       
+					//<img class="img-responsive avatar-view" src="images/'.$row['photo'].'.jpg" alt="Avatar" title="Change the avatar">
                       echo'<div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
 						  
-                          <img class="img-responsive avatar-view" src="images/'.$row['photo'].'.jpg" alt="Avatar" title="Change the avatar">
+
                         </div>
                       </div>
-                      <h3>'.$row['Nom'].'</h3>
+                      <h3>'.$row['Nom'].' '.$row['Prenom'].'</h3>
 
                       <ul class="list-unstyled user_data">
 					    <li><i class="fa fa-birthday-cake user-profile-icon"></i> '.'  '.$row['Date_naiss'].'
