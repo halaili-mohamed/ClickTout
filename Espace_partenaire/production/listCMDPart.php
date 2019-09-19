@@ -27,6 +27,7 @@ $next=$page + 1;
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -46,6 +47,17 @@ $next=$page + 1;
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script >
+		$(document).ready(function() {
+    $('#example').DataTable();
+} );
+	
+	</script>
   </head>
 
   <body class="nav-md">
@@ -131,16 +143,7 @@ $next=$page + 1;
                 
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+             
             </div>
             
             <div class="clearfix"></div>
@@ -151,22 +154,7 @@ $next=$page + 1;
                   <div class="x_title">
 				  
                     					
-                    <ul class="nav navbar-right panel_toolbox">
-
-                <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"><i class="fa fa-sort-amount-desc"></i> La plus récente </a>
-                          </li>
-                          <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
-                          </li>
-                        </ul>
-                      </li>
-
-               
-             
-                      
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
 
@@ -183,80 +171,57 @@ $next=$page + 1;
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <nav aria-label="Page navigation">
-							  <ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="listCMDPart.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								  </a>
-								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="listCMDPart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="listCMDPart.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								  </a>
-								</li>
-							  </ul>
-							</nav>
-                      </div>
+                   
+                      
 
                       <div class="clearfix"></div>
-					  <?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (0,1,2) LIMIT $start, $limit";
-						$result1 = $connect->query($sql1);
-
-						if($result1->num_rows > 0) {
-						while($data = $result1->fetch_assoc()) { 
-							$sql2="select * from client where id_client={$data['client_id_client']}";
-							$res=$connect->query($sql2);
-							$r=$res->fetch_assoc();
-
-                      echo '<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: '.$data['n_cmd'].'</i></h4>
-                            <div class="left col-xs-7">
-                            
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  '.$data['Date'].'  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  '.$data['Heure'].'  </li>
-								
-								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </li>
-								
-								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
-								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
-								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-														if ($data['etatCmd']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-												  echo '<span class="label label-success">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
-							echo '
-                              </ul>
-                            </div>
-                            
-                          </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <a href="annuleCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
-							  
-                            </div>
-                          </div>
-                        </div>
-						</div>   ';}} ?>
-                    </div>
+					 <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+						  <thead>
+							<tr>
+							  <th class="th-sm">Name
+							  </th>
+							  <th class="th-sm">Position
+							  </th>
+							  <th class="th-sm">Office
+							  </th>
+							  <th class="th-sm">Age
+							  </th>
+							  <th class="th-sm">Start date
+							  </th>
+							  <th class="th-sm">Salary
+							  </th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <td>Tiger Nixon</td>
+							  <td>System Architect</td>
+							  <td>Edinburgh</td>
+							  <td>61</td>
+							  <td>2011/04/25</td>
+							  <td>$320,800</td>
+							</tr>
+							
+						    <tr>
+      <td>Garrett Winters</td>
+      <td>Accountant</td>
+      <td>Tokyo</td>
+      <td>63</td>
+      <td>2011/07/25</td>
+      <td>$170,750</td>
+    </tr>
+    <tr>
+      <td>Ashton Cox</td>
+      <td>Junior Technical Author</td>
+      <td>San Francisco</td>
+      <td>66</td>
+      <td>2009/01/12</td>
+      <td>$86,000</td>
+    </tr>
+						  </tbody>
+						 
+						</table>
+                    
                   </div>
                 </div>
               </div>
@@ -284,8 +249,10 @@ $next=$page + 1;
       </div>
     </div>
 
+    
+
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+   
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -297,6 +264,10 @@ $next=$page + 1;
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+	
+	
+	
 
   </body>
+  
 </html>
