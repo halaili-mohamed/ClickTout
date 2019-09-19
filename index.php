@@ -1,6 +1,7 @@
 <?php
 
  require_once 'connect.php';
+ include ("paypal.php") ;
 
 ?> 
 
@@ -10,6 +11,11 @@
 <html lang="en">
   <head>
     <title>Autoroad - Free Bootstrap 4 Template by Colorlib</title>
+
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -113,14 +119,14 @@
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html"><img src="images/logo_ctt_final.png"></a>
+	      <a class="navbar-brand" href="index.php"><img src="images/logo_ctt_final.png"></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">HOME</a></li>
+	          <li class="nav-item active"><a href="index.php" class="nav-link">HOME</a></li>
 	          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
 	          <li class="nav-item"><a href="#part" class="nav-link">NOS PARTENAIRES</a></li>
 	          <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
@@ -139,10 +145,10 @@
           	<div class="text">
 	            <h1 class="mb-4"><span>ClickTOUT</span> <span>Je transport pour vous</span></h1>
 	            <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
-	            <a href="#reserver" class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
-	            	
-						<button  id="res" value="following" class="btn btn-primary btn-lg btn-block">Réserver</button>
-	            	
+	            <a href="#reserver" >
+	            	<CENTER>
+					<div class="col-lg-6"><button  id="res" value="following" class="btn btn-primary btn-lg btn-block"><B style="font-size: 20px;">RESERVER</B></button></div>
+	            	</CENTER>
 	            </a>
             </div>
 			
@@ -435,6 +441,35 @@
 					<div id="flip3">4eme etape</div>
 				<div id="panel3">
 					
+					  <div  id="paypal-button-container">
+  	
+
+  
+    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script> 
+    <script>
+		paypal.Buttons({
+    		createOrder: function(data, actions) {
+      			return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '150',
+            
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Capture the funds from the transaction
+      return actions.order.capture().then(function(details) {
+        // Show a success message to your buyer
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+    </script>
+  		</div>
+		
+		
 					<div>
 					<button  id="b7"  class="btn btn-primary custom-next">retour</button>
 					
@@ -589,7 +624,7 @@
 
 		<div class="form-group">
             <label for="PWD" class="col-form-label">Password:</label>
-            <input type="text" class="form-control" id="PWD1" name="PWD1">
+            <input type="Password" class="form-control" id="PWD1" name="PWD1">
         </div>
 
       </div>
@@ -628,7 +663,7 @@
 
 		<div class="form-group">
             <label for="PWD" class="col-form-label">Password:</label>
-            <input type="text" class="form-control" id="PWD" name="PWD">
+            <input type="Password" class="form-control" id="PWD" name="PWD">
         </div>
        
 		

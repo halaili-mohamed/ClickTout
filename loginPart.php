@@ -20,7 +20,7 @@
 	    }else
 	    {
 	    	
-	    	echo "<script type='text/javascript'>alert('hhh');</script>";
+	    	header("location:index.php");
 	    }
 
 $connect->close();

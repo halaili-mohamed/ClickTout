@@ -19,7 +19,7 @@ if ($_POST) {
 	    	header("location:conPar1.php");
 	    }else
 	    {
-	    	echo "Error " . $query1 . ' ' . $connect->connect_error;
+	    	header("location:index.php");
 
 	    }
 
