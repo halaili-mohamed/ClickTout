@@ -1,7 +1,14 @@
 <?php require_once 'db_connect.php'; 
-$id_partenaire=1;
+session_start();
+
+if (isset($_SESSION["id_partenaire"])){
+$id_partenaire=$_SESSION["id_partenaire"];}
+else{
+	
+header("location:login.php");	
+}
  
-$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+$sql = "SELECT * FROM partenaire where id_partenaire='$id_partenaire'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 
@@ -103,7 +110,7 @@ $next=$page + 1;
                     <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 			

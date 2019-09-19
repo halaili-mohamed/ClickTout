@@ -31,7 +31,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" action="veriflogin.php">
+            <form action="veriflogin.php" method="post">
               <h1><i class="fa fa-lock"></i>  Connexion</h1>
               <div>
 			  
@@ -41,8 +41,8 @@
                 <input type="password" class="form-control" name="pwd" placeholder="Mot de passe" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" type="submit">Se connecter</a>
-                <a class="reset_pass" href="#">Mot de passe oubliÃ©?</a>
+                <button class="btn btn-default submit"  type="submit">Se connecter</button>
+                <a class="reset_pass" href="#">Mot de passe oublié</a>
               </div>
 
               <div class="clearfix"></div>
