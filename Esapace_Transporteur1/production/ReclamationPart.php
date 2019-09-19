@@ -62,10 +62,10 @@ $id_Transporteur=1; ?>
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_dispo2.html"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte2.html"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
+				  <li><a href="ooffre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
-                  <li><a href="historique.html"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                  <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
                 </ul>   
               </div>
             </div>
@@ -116,24 +116,15 @@ $id_Transporteur=1; ?>
               <div class="title_left">
                 <h3>Réclamation</h3>
               </div>
-
-              <div class="title_right">
-                
+              <div class="title_right">           
               </div>
             </div>
             <div class="clearfix"></div>
-            
-
             <div class="row">
-              
-                
-                  
-
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Votre réclamation</h2>
-                 
+                  <h2>Votre réclamation</h2> 
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -146,45 +137,26 @@ $id_Transporteur=1; ?>
                           <input type="text" name="n_cmd" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-					  
-					  
-                   
+					       
                       <div class="form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="Message">Message <span class="required">*</span></label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<textarea class="form-control" name="Message" rows="3"></textarea>
 						</div>
 					  </div>
-					 
-                      
+					  
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-						<button type="submit" class="btn btn-success">Envoyer</button>
-                          
-						  <button class="btn btn-danger" type="reset">Annuler</button>
-                          
+						<button type="submit" class="btn btn-success">Envoyer</button>              
+						  <button class="btn btn-danger" type="reset">Annuler</button>   
                         </div>
                       </div>
-
-                    </form>
+                  </form>
               </div>
             </div>
-
-           
-
-
-            
-              </div>
-            
+        </div>     
         </div>
         <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
 

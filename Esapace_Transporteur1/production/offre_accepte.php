@@ -1,19 +1,16 @@
 <?php require_once 'db_connect.php'; 
-$id_partenaire=1;
+$id_Transporteur=1;
  
-$sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
+$sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
-
-$limit=2;
+$limit=9;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
-
-$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
+$res1 = $connect->query("select count(id_commende) AS id from commende where transporteur_id_Transporteur={$id_Transporteur} ");
 $CMDCount=$res1->fetch_assoc();
 $total=$CMDCount ['id'];
 $pages=ceil($total/$limit);
-
 $previous=$page - 1;
 $next=$page + 1;
 ?>
@@ -62,19 +59,16 @@ $next=$page + 1;
             <br />
 
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                
                 <ul class="nav side-menu">
-					<li><a href="profilePart.php"><i class="fa fa-user"></i> Mon compte </a>
-                    <li><a href="formCmdPart.php"> <i class="fa fa-edit"></i>Réservation</a></li>
-                    <li><a href="listCMDPart.php"><i class="fa fa-list"></i>Liste en attente</a></li>
-					<li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historique</a></li> 
-				    <li><a href="reclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation </a></li>             
-                </ul>
+                  <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
+				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+                  <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                </ul>   
               </div>
-              
-
             </div>
             <!-- /sidebar menu -->
 
@@ -95,10 +89,7 @@ $next=$page + 1;
                
 					
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/<?php echo $row['logo'] ?>.jpg" alt=""><?php echo $row['nom_ste'] ?>
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                  
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="profilePart.php"> Mon compte</a></li>
                     
@@ -120,7 +111,7 @@ $next=$page + 1;
           <div class="">
             <div class="page-title">
               <div class="title_left">
-				<h3> Liste en attente </h3>
+				<h3>Liste des offres Acceptés</h3>
                 
               </div>
 
@@ -154,24 +145,13 @@ $next=$page + 1;
                           <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
                           </li>
                         </ul>
-                      </li>
-
-               
-             
-                      
+                      </li>      
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-
-                  <div class="x_content">
-
-                   
-
-                      
+                  <div class="x_content">    
                       <br />
-
-                      <!-- here -->
-
+                     <!-- here -->
                       <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
@@ -201,15 +181,13 @@ $next=$page + 1;
 
                       <div class="clearfix"></div>
 					  <?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} LIMIT $start, $limit";
+						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD in (1,2,3) LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
-
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) { 
 							$sql2="select * from client where id_client={$data['client_id_client']}";
 							$res=$connect->query($sql2);
 							$r=$res->fetch_assoc();
-
                       echo '<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                         <div class="well profile_view">
                           <div class="col-sm-12">
@@ -226,20 +204,18 @@ $next=$page + 1;
 								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
 								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['telClient'].' </li>
+								<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+							echo '
                               </ul>
                             </div>
                             
                           </div>
-                          <div class="col-xs-12 bottom text-center" >
-						  <div class="col-xs-12 col-sm-6 emphasis"></div>    
-                            <div class="col-xs-12 col-sm-6 emphasis" >
-                             
-                              <button type="button" class="btn btn-danger btn-xs" >
-                                <i class="fa fa-times"> </i> Annuler 
-                              </button>
-							  
-                            </div>
-                          </div>
+                          
                         </div>
 						</div>   ';}} ?>
                     </div>
