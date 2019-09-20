@@ -1,7 +1,21 @@
+<?php
+
+ require_once 'connect.php';
+ include ("paypal.php") ;
+
+?> 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Autoroad - Free Bootstrap 4 Template by Colorlib</title>
+
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -10,8 +24,7 @@
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    
     <link rel="stylesheet" href="css/magnific-popup.css">
 
     <link rel="stylesheet" href="css/aos.css">
@@ -33,6 +46,11 @@
 	 <link rel="stylesheet" href="css/style1.css">
 	   <script src="js/jquery.min.js"></script>
 	 
+	 <style type="text/css">
+	 	.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+	 </style>
 
 		
 	<script> 
@@ -51,6 +69,21 @@
     $("#panel3").slideDown("slow");
     $("#panel2").slideUp("slow");
   });
+
+  
+    $("#b5").click(function(){
+    $("#panel").slideDown("slow");
+    $("#panel1").slideUp("slow");
+  });
+  $("#b6").click(function(){
+    $("#panel1").slideDown("slow");
+    $("#panel2").slideUp("slow");
+  });
+   $("#b7").click(function(){
+    $("#panel2").slideDown("slow");
+	 $("#panel3").slideUp("slow");
+  });
+  
 });
 	</script>
 	<style> 
@@ -65,7 +98,7 @@
   padding: 5px;
   text-align: center;
   font-size: larger;
-  background-color: #9e2020;
+  background-color: #fc983c ;
   border: solid 1px #c3c3c3;
 }
 
@@ -73,25 +106,31 @@
 	  background-color: white;
 	  display: none;
 	}
+
+	.sizeimage{
+		width: 200px;
+		height: 100px;
+	}
 	</style>
+
+<style type="text/css"></style>
   </head>
   <body>
     
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html"><img src="images/logo_ctt_2.png"></a>
+	      <a class="navbar-brand" href="index.php"><img src="images/logo_ctt_final.png"></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-	          <li class="nav-item"><a href="car.html" class="nav-link">Our Car</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	          <li class="nav-item active"><a href="index.php" class="nav-link">HOME</a></li>
+	          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
+	          <li class="nav-item"><a href="#part" class="nav-link">NOS PARTENAIRES</a></li>
+	          <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+		
 	        </ul>
 	      </div>
 	    </div>
@@ -106,27 +145,22 @@
           	<div class="text">
 	            <h1 class="mb-4"><span>ClickTOUT</span> <span>Je transport pour vous</span></h1>
 	            <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
-	            <a href="https://vimeo.com/45830194" class="icon-wrap popup-vimeo d-flex align-items-center mt-4">
-	            	<div class="icon d-flex align-items-center justify-content-center">
-	            		<span class="ion-ios-play"></span>
-	            	</div>
-	            	<div class="heading-title ml-5">
-		            	<span>Réserver</span>
-	            	</div>
+	            <a href="#reserver" >
+	            	<CENTER>
+					<div class="col-lg-6"><button  id="res" value="following" class="btn btn-primary btn-lg btn-block"><B style="font-size: 20px;">RESERVER</B></button></div>
+	            	</CENTER>
 	            </a>
             </div>
+			
           </div>
-          <div class="col-lg-2 col"></div>
-          <div class="col-lg-4 col-md-6 mt-0 mt-md-5 d-flex">
           
-          		
-          </div>
+         
         </div>
       </div>
     </div>
 
 	 <!--Our Services  --> <br> 
-    <section class="ftco-section services-section ftco-no-pt ftco-no-pb">
+    <section class="ftco-section services-section ftco-no-pt ftco-no-pb" id="about">
       <div class="container">
       	<div class="row justify-content-center">
           <div class="col-md-12 heading-section text-center ftco-animate mb-5">
@@ -235,7 +269,7 @@
     </section>
 
 	 <!--Réservation  --> <br> 
-    <section class="ftco-section ftco-no-pb ftco-no-pt">
+    <section class="ftco-section ftco-no-pb ftco-no-pt" id="reserver">
     	<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-12 heading-section text-center ftco-animate mb-5">
@@ -243,198 +277,224 @@
 					<h2 class="mb-2">Reservation</h2>
 				</div>
 			</div>
-			 <form id="f">
-<div id="flip">1er étape</div>
-<div id="panel">
-	    	<div class="row">
-					<div class="col-md-12">
-						<div class="search-wrap-1 ftco-animate mb-5">
-							<form action="#" class="search-property-1">
-		        		<div class="row">
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Adresse Départ</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                      
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Your Source">
+			 <form id="f" method="GET" action="index.php">
+			 
+			 
+				<div id="flip">1er étape</div>
+				<div id="panel">
 
-										</div>
-									</div>
-									</div>
-			              </div>
-		        			</div>
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Adresse Destination</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Your Destination">
-										</div>
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-							
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Date</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-							 
-							 <div class="form-group row">
-								<div class="col-10">
-									<input class="form-control" type="date" value="2019-08-19" id="example-date-input">
-								</div>
-							</div>
-
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-		        			
-							
-							<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Time</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-							 
-							 <div class="form-group row">
-								<div class="col-10">
-								  <input class="form-control" type="time" value="13:45:00" id="example-time-input">
-								</div>
-							</div>
-
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-							
-							
-							
-							
-		        			<div class="col-lg-3 align-self-end">
-		        				<div class="form-group" >
-		        					<div class="form-field" >
-				                <button  id="b1" value="following" class="btn btn-primary custom-next">next</button>
-								
-				              </div>
-			              </div>
-		        			</div>
-		        		</div>
-		        	</form>
-		        </div>
+					<div class="form-row ">
+					<div class="col-md-2"></div>
+					<div class="form-group col-md-4">
+					  <label for="Adresse_depart">Adresse Départ</label>
+					  <input type="text" class="form-control"  name="depart" id="Adresse_depart" placeholder="Adresse Départ" >
 					</div>
-	    	</div></div>
-			
+					<div class="form-group col-md-4">
+					  <label for="Adresse_arrive">Adresse Destination</label>
+					  <input type="text" class="form-control" name="arrive" id="Adresse_arrive" placeholder="Adresse Destination">
+					</div>
+				  </div>
+				  
+				  
+				  <div class="form-row ">
+					<div class="col-md-2"></div>
+					<div class="form-group col-md-4">
+					  <label for="Date">Date</label>
+					  <input type="date" class="form-control" id="Date" >
+					</div>
+					<div class="form-group col-md-4">
+					  <label for="Heure">Time</label>
+					  <input type="time" class="form-control" id="Heure" >
+					</div>
+					<div class="col-md-1"></div>
+					<div>
+					 <button  id="b1" value="following" class="btn btn-primary custom-next">Next</button>
+					</div>
+				  </div>
+					
+					
+							</div>
+							
+						
+				<div id="flip1">2éme Etape</div>
+				<div id="panel1">
+
+				<div class="form-row ">
+					<div class="col-md-2"></div>
+					<div class="form-group col-md-4">
+					  <label for="Nom">First Name</label>
+					  <input type="text" class="form-control" id="Nom" placeholder="Your First Name">
+					</div>
+					<div class="form-group col-md-4">
+					  <label for="Prenom">Last Name</label>
+					  <input type="text" class="form-control" id="Prenom" placeholder="Your Last Name">
+					</div>
+				  </div>
+				  
+				  
+				  <div class="form-row ">
+					<div class="col-md-2"></div>
+					<div class="form-group col-md-4">
+					  <label for="example-date-input">Phone</label>
+					  <input type="tel" class="form-control" id="Phone" placeholder="Your Phone" >
+					</div>
+					<div class="form-group col-md-4">
+					  <label for="Email">Email</label>
+					  <input type="email" class="form-control" id="Email" placeholder="name@example.com">
+					</div>
+					</div>
+					 <div class="form-row ">
+					 <div class="col-md-5"></div>
+					 <button  id="b5"  class="btn btn-primary custom-next">retour</button> <div class="col-md-1"></div>
+					 <button  id="b2"  class="btn btn-primary custom-next">Next</button>
+					
+				  </div>
+				  
+							</div>
+							
+									
+				<div id="flip2">3eme etape</div>
+				<div id="panel2">
+						
+											<div><label>De quelle taille de véhicule aurez-vous besoin ?</label></div>
+										<div class="form-row ">
+									<div class="col-lg align-items-end">
+												<div class="form-group">
+													<img src="images/13.png">
+													<div class="custom-control custom-radio">
+														  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="defaultExampleRadios" checked>
+														  <label class="custom-control-label" for="defaultGroupExample1"></label>
+													</div>
+													
+													
+												</div>
+									</div>
+									
+									<div class="col-lg align-items-end">
+												<div class="form-group">
+													<img src="images/11.png">
+													<div class="custom-control custom-radio">
+													  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="defaultExampleRadios">
+													  <label class="custom-control-label" for="defaultGroupExample2"></label>
+													</div>
+												</div>
+									</div>
+									
+									<div class="col-lg align-items-end">
+												<div class="form-group">
+													<img src="images/12.png">
+													<div class="custom-control custom-radio">
+													  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="defaultExampleRadios" >
+													  <label class="custom-control-label" for="defaultGroupExample3"></label>
+													</div>
+
+												</div>
+									</div>
+
+						</div>	
+
+							<div><label>Avez-vous un besoin supplémentaire ?     <label></div>
+							
+							
+							
+						<div class="form-row ">
+								<div class="col-lg align-items-end">
+												<div class="form-group">
+											<img src="images/1.png">
+													<div class="custom-control custom-radio">
+													  <input type="radio" class="custom-control-input" id="choix"  name="defaultExampleRadios">
+													 <label class="custom-control-label" for="choix"></label>
+													</div>
+													
+
+									</div></div>
+
+							</div>	
+
+										
+					
+					
+										<div>	<label>Voudrez-vous un coup de main pour monter votre chargement chez vous ?   <label></div>
+								<div class="form-row ">
+					
+									<div class="col-lg align-items-end">
+												<div class="form-group">
+											<img src="images/2.png">
+													<div class="custom-control custom-radio">
+													  <input type="radio" class="custom-control-input" id="choix1"  name="defaultExampleRadios">
+													 <label class="custom-control-label" for="choix1"></label>
+													</div>
+													
+									</div></div>
+
+							</div>
+							<div>
+										<button  id="b6"  class="btn btn-primary custom-next">retour</button>
+										 <button  id="b3"  class="btn btn-primary custom-next">next</button>
+					</div>
+				</div>
+					
+					
+					
+					
+					
+					<div id="flip3">4eme etape</div>
+				<div id="panel3">
+					
+					  <div  id="paypal-button-container">
+  	
+
+  
+    <script src="https://www.paypal.com/sdk/js?client-id=sb"></script> 
+    <script>
+		paypal.Buttons({
+    		createOrder: function(data, actions) {
+      			return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '150',
+            
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Capture the funds from the transaction
+      return actions.order.capture().then(function(details) {
+        // Show a success message to your buyer
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+    </script>
+  		</div>
 		
-<div id="flip1">2éme Etape</div>
-<div id="panel1">
-	    	<div class="row">
-					<div class="col-md-12">
-						<div class="search-wrap-1 ftco-animate mb-5">
-							<form action="#" class="search-property-1">
-		        		<div class="row">
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">First Name</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                      
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Your FirstName">
-										</div>
-									</div>
-									</div>
-			              </div>
-		        			</div>
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">LastName</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Your LastName">
-										</div>
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-							
-		        			<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Phone</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-										<div class="form-group">
-											 <div class='input-group date' id="datetimepicker2">
-												<input type="tel" class="form-control" placeholder="phone" />
-												<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-											</div>
-										</div>
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-							
-							<div class="col-lg align-items-end">
-		        				<div class="form-group">
-		        					<label for="#">Email</label>
-		        					<div class="form-field">
-		          					<div class="select-wrap">
-		                     
-										<div class="form-group">
-											 <div class='input-group date' id="datetimepicker2">
-												 <input type="email" class="form-control" placeholder="name@example.com">
-												<span class="input-group-addon">
-												<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-											</div>
-										</div>
-		                    </div>
-				              </div>
-			              </div>
-		        			</div>
-		        			
-		        			<div class="col-lg-3 align-self-end">
-		        				<div class="form-group" >
-		        					<div class="form-field" >
-				             <button  id="b2" value="following" class="btn btn-primary custom-next">next</button>
-				              </div>
-			              </div>
-		        			</div>
-		        		</div>
-		        	</form>
-		        </div>
+		
+					<div>
+					<button  id="b7"  class="btn btn-primary custom-next">retour</button>
+					
 					</div>
-	    	</div></div>
+					
+					</div>
+					</form>
 			
-	<div id="flip2">3eme etape</div>
-<div id="panel2">
+			<div id="flip4">Prix :
+				
+				<?php
 
+				echo "$('input').val()";
+				echo "Adresse Départ: $arrive";
+				?>
 
+			</div>
+					
+				
 
-
-<button id="b3">next</button>
-</div>
-			
-</form>
-
-	    </div>
+						</div>
     </section>
 
 	
-    <section class="ftco-section testimony-section">
+    <section class="ftco-section testimony-section" id="part">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
@@ -443,100 +503,50 @@
           </div>
         </div>
        
-	 
+	  
+	 <?php 
+	 $query= "select distinct image,nom_ste from partenaire   ";
+	 $result= mysqli_query($connect,$query);
+	 if (mysqli_num_rows($result)>0 ) {
+	 	
+	 	
+	 	while ($row=mysqli_fetch_array($result)) {
+	 		
+	 		?>
+	 <div>
+	       <div class="owl-carousel nonloop-block-13 ">   
 
-           <div class="col-lg">
+	<form method="POST" action="index.php">
+            <div class="owl-carousel nonloop-block-13 ">   
+              <div class="card ">
+              	
+                <img  src="<?php echo $row["image"]; ?>" alt="Image"  />
 
-            <div class="nonloop-block-13 owl-carousel">
-              <div class="item-1">
-                <a href="#"><img src="images/images.jpg" alt="Image" class="img-fluid"></a>
-                <div class="item-1-contents">
-                  <div class="text-center">
-                  <h3><a href="#">Meublatex</a></h3>
-                  <div class="rating">
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
+                <div class="card-body">
+                  <div class="card-title">
+                  <h3><a href="#"><?php echo $row["nom_ste"]; ?></a></h3>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  
                   </div>
-                  <div class="rent-price"><span>$250/</span>day</div>
-                  </div>
-                  <ul class="specs">
-                    <li>
-                      <span>Doors</span>
-                      <span class="spec">4</span>
-                    </li>
-                    <li>
-                      <span>Seats</span>
-                      <span class="spec">5</span>
-                    </li>
-                    <li>
-                      <span>Transmission</span>
-                      <span class="spec">Automatic</span>
-                    </li>
-                    <li>
-                      <span>Minium age</span>
-                      <span class="spec">18 years</span>
-                    </li>
-                  </ul>
-                  <div class="d-flex action">
-                    <a href="contact.html" class="btn btn-primary">Rent Now</a>
-                  </div>
-                </div>
+               
               </div>
+</div></div>
 
-
-              <div class="item-1">
-                <a href="#"><img src="images/img_2.jpg" alt="Image" class="img-fluid"></a>
-                <div class="item-1-contents">
-                  <div class="text-center">
-                  <h3><a href="#">Range Rover S64 Coupe</a></h3>
-                  <div class="rating">
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                    <span class="icon-star text-warning"></span>
-                  </div>
-                  <div class="rent-price"><span>$250/</span>day</div>
-                  </div>
-                  <ul class="specs">
-                    <li>
-                      <span>Doors</span>
-                      <span class="spec">4</span>
-                    </li>
-                    <li>
-                      <span>Seats</span>
-                      <span class="spec">5</span>
-                    </li>
-                    <li>
-                      <span>Transmission</span>
-                      <span class="spec">Automatic</span>
-                    </li>
-                    <li>
-                      <span>Minium age</span>
-                      <span class="spec">18 years</span>
-                    </li>
-                  </ul>
-                  <div class="d-flex action">
-                    <a href="contact.html" class="btn btn-primary">Rent Now</a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+              
             
-          </div>
-        
-     </div>
+         
+        </form> <?php } }?> 
+     </div> </div></div>
     </section>
 
-		<section class="ftco-section contact-section">
+		<section class="ftco-section contact-section" id ="contact">
       <div class="container">
-	   <div class="heading-section mb-5 pl-md-5">
-	  	<span class="subheading">Contact us</span>
-	   </div>
+	   <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+          <span class="subheading">Contact Us</span>
+            <h2 class="mb-3">Contact Us</h2>
+          </div>
+        </div>
         <div class="row d-flex mb-5 contact-info justify-content-center">
         	<div class="col-md-8">
         		<div class="row mb-5">
@@ -563,22 +573,18 @@
         </div>
         <div class="row block-9 justify-content-center mb-5">
           <div class="col-md-8 mb-md-5">
-          	<h2 class="text-center">If you got any questions <br>please do not hesitate to send us a message</h2>
-            <form action="#" class="bg-light p-5 contact-form">
+          	<h2 class="text-center">If you got any problems <br>please do not hesitate to send us a reclamation</h2>
+            <form action="ajouterReclamation.php" method="POST" class="bg-light p-5 contact-form">
+              
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" class="form-control" id="commende_id_commende" name="idCommande" placeholder="NumeroCommande">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <textarea  id="Message" cols="30" rows="7" name="msg" class="form-control" placeholder="Your Reclamation"></textarea>
               </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+			
+              <div class="form-group ">
+                <input type="submit" value="Send Reclamation" class="btn btn-primary py-3 px-5" id="bRec">
               </div>
             </form>
           
@@ -589,12 +595,103 @@
     </section>
 
 	
+	
+	
+	
+	
+	
+	  <!--ESPACE transporteur  -->
+	
+	<div class="modal" tabindex="-1" role="dialog" id="espaceTras">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Accès Transporteur</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+	   <form id="f_t" action="loginTransp.php" method="POST">
+      <div class="modal-body">
+       
+	   
+		<div class="form-group">
+            <label for="psudo" class="col-form-label">Login:</label>
+            <input type="text" class="form-control" id="psudo1" name="psudo1">
+        </div>
+
+
+		<div class="form-group">
+            <label for="PWD" class="col-form-label">Password:</label>
+            <input type="Password" class="form-control" id="PWD1" name="PWD1">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+      <!--ESPACE PARTENAIRE   -->
+	<div class="modal" tabindex="-1" role="dialog" id="espacePar">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Accès Partenaire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+	   <form id="f_p" action="loginPart.php" method="POST">
+      <div class="modal-body">
+       
+	   
+	 		
+
+		<div class="form-group">
+            <label for="psudo" class="col-form-label">Login:</label>
+            <input type="text" class="form-control" id="psudo" name="psudo">
+        </div>
+
+
+		<div class="form-group">
+            <label for="PWD" class="col-form-label">Password:</label>
+            <input type="Password" class="form-control" id="PWD" name="PWD">
+        </div>
+       
+		
+		
+
+		
+      </div>
+      <div class="modal-footer">
+        <button type="submit" name="submit" class="btn btn-primary">Log In</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+	
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About Autoroad</h2>
+              <h2 class="ftco-heading-2">About ClickTOUT</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
@@ -605,25 +702,22 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Information</h2>
+              <h2 class="ftco-heading-2">ESPACES</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Services</a></li>
-                <li><a href="#" class="py-2 d-block">Term and Conditions</a></li>
-                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                <li><a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
+                <li><a href="#espacePar" data-target="#espacePar"  data-toggle="modal" class="py-2 d-block">ESPACE PARTENAIRE</a></li>
+                <li><a href="#espaceTras" data-target="#espaceTras"  data-toggle="modal" class="py-2 d-block">ESPACE TRANSPORTEUR</a></li>
+                
               </ul>
             </div>
           </div>
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Customer Support</h2>
+              <h2 class="ftco-heading-2">Customer </h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+          
+                <li><a href="#about" class="py-2 d-block">About</a></li>
                 <li><a href="#" class="py-2 d-block">How it works</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="#contact" class="py-2 d-block">Contact Us</a></li>
               </ul>
             </div>
           </div>
@@ -643,8 +737,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
 
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <p><script>document.write(new Date().getFullYear());</script>  <i class="icon-heart color-danger" aria-hidden="true"></i> 
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
@@ -671,16 +764,34 @@
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
   
   <script src="js/jquery-3.3.1.min.js"></script>
    <script src="js/owl.carousel1.min.js"></script>
     <script src="js/aos1.js"></script>
+
  
-  
+ 
      <script src="js/main1.js"></script>
+
+	 <script>
+		function activatePlacesSearch(){
+			var input = document.getElementById('Adresse_depart');
+						var input2 = document.getElementById('Adresse_arrive');
+
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			var autocomplete2 = new google.maps.places.Autocomplete(input2);
+
+		}
+	 </script>
+	 
+		
+	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWB7FS-Rj2l62b6zkfhEKa1SMOu0q6-mk&libraries=places&callback=activatePlacesSearch">
+</script>
+
+
+
 
   </body>
 </html>
