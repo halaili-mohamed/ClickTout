@@ -41,7 +41,27 @@ $row = $result->fetch_assoc();
 			columnDefs: [{
 			orderable: false,
 			targets: 5
-			}]
+			}],
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
 		});
 		} );
 	

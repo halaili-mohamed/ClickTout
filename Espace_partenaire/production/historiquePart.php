@@ -34,13 +34,34 @@ require_once 'sessionPart.php';
 	<script >
 		$(document).ready(function() {
 		$('#example').DataTable({
+			
 			"order": [[ 3, "desc" ]],
 			columnDefs: [{
 			orderable: false,
             targets: 5
-			}] 
-			
-			
+			}] ,
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+				
+				
 });
 		
 		} );
@@ -134,18 +155,7 @@ require_once 'sessionPart.php';
               </div>
 
               <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <form method="GET" action="HistorRechPart.php">
-				  <div class="input-group">
-				  
-                    <input type="search" class="form-control" name="recherche" placeholder="Rechercher...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                    </span>
-					</div>
-				   </form>
-                  
-                </div>
+               
               </div>
             </div>
             
@@ -155,20 +165,7 @@ require_once 'sessionPart.php';
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    
-                    <ul class="nav navbar-right panel_toolbox">
-                       <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"><i class="fa fa-sort-amount-desc"></i> La plus récente </a>
-                          </li>
-                          <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
-                          </li>
-                        </ul>
-                      </li>
-                      
-                      
-                    </ul>
+                  
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
