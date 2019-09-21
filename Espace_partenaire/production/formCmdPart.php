@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_partenaire=1;
+require_once 'sessionPart.php';
 
 $sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
 $result = $connect->query($sql);
@@ -92,7 +92,7 @@ $row = $result->fetch_assoc();
                     <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 

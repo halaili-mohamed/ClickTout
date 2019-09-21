@@ -1,6 +1,6 @@
 <?php require_once 'db_connect.php'; 
 
-require_once 'session.php';
+require_once 'sessionPart.php';
 ?>
 
 
@@ -34,10 +34,11 @@ require_once 'session.php';
 	<script >
 		$(document).ready(function() {
 		$('#example').DataTable({
-columnDefs: [{
-orderable: false,
-targets: 5
-}]
+			columnDefs: [{
+			orderable: false,
+            targets: 5
+			}]
+			"order": [[ 3, "asc" ]]
 });
 		} );
 	
@@ -108,7 +109,7 @@ targets: 5
                     <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>'
 				?>
