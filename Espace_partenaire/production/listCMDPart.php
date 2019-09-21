@@ -37,11 +37,12 @@ $row = $result->fetch_assoc();
 	<script >
 		$(document).ready(function() {
 		$('#example').DataTable({
-columnDefs: [{
-orderable: false,
-targets: 5
-}]
-});
+			"order": [[ 3, "asc" ]],
+			columnDefs: [{
+			orderable: false,
+			targets: 5
+			}]
+		});
 		} );
 	
 	</script>

@@ -34,12 +34,15 @@ require_once 'sessionPart.php';
 	<script >
 		$(document).ready(function() {
 		$('#example').DataTable({
+			"order": [[ 3, "desc" ]],
 			columnDefs: [{
 			orderable: false,
             targets: 5
-			}]
-			"order": [[ 3, "asc" ]]
+			}] 
+			
+			
 });
+		
 		} );
 	
 	</script>
