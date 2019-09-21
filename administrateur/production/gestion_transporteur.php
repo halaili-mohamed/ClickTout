@@ -1,7 +1,8 @@
-<?php require_once 'db_connect.php'; 
-$id_admin=2;
+<?php 
  
-$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+require_once 'session.php'; 
+
+$sql = "SELECT * FROM administrateur where id_admin='$id_admin'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 $limit=2;
@@ -44,7 +45,26 @@ $next=$page + 1;
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+<style id="__web-inspector-hide-shortcut-style__" type="text/css">
+.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
+{
+    visibility: hidden !important;
+}
+</style>
   </head>
+
+  
+
 
   <body class="nav-md">
     <div class="container body">
@@ -145,7 +165,7 @@ $next=$page + 1;
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li> 
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -208,56 +228,62 @@ $next=$page + 1;
                       </div>
 
                       <div class="clearfix"></div>
+ <div id="example_wrapper" class="dataTables_wrapper">
+ <div class="dataTables_length" id="example_length">
+ <label>Show <select name="example_length" aria-controls="example" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
+ </div>
+ <div id="example_filter" class="dataTables_filter">
+ <label>Search:<input type="search" class="" placeholder="" aria-controls="example"></label>
+ </div>
+ 
+ <table id="example" class="display dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                <thead>
+                    <tr role="row">
+<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">Name</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Position</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Office</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Age</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Start date</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Salary</th>
+<th> ACTION </th></tr>
+                </thead>
+			
+  <tbody>
   <?php 
 						$sql="select * from transporteur";
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
 						while($data=$result->fetch_assoc())
 						{echo'
-						
-						
-                      <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i> N° Transporteur :  '.$data['Id_Transporteur'].'</i></h4>
-                            <div class="left col-xs-7">
-                              <h2>'.$data['nom'].' '.$data['Prenom'].'</h2>
-                              <p><strong> </strong>  </p>
-                              <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i> Email: '.$data['Email'].' </li>
-                                <li><i class="fa fa-phone"></i> Type de voiture : '.$data['Type_Voiture'].' </li>
-                              </ul>
-                            </div>
-                            <div class="right col-xs-5 text-center">
-                              <img src="images/img.jpg" alt="" class="img-circle img-responsive">
-                            </div>
-                          </div>
-                          <div class="col-xs-12 bottom text-center">
-                       
-                            <div class="col-xs-12 col-sm-6 emphasis">
-							<div class="btn-group">
-                              <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].' "><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
+<tr role="row">
+		<td >'.$data['Id_Transporteur'].'</td>
+      <td>'.$data['nom'].' '.$data['Prenom'].' </td>
+      <td>  '.$data['Email'].'</td>
+      <td>  '.$data['Adresse'].'</td>
+      <td>  '.$data['Matricule'].'</td>
+      <td>  '.$data['Type_Voiture'].'</td>
+	  <td> <div class="btn-group">
+      <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].' "><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &nom='.$data['nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
+      <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &nom='.$data['nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
-							   <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-danger btn-xs">
+	 <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-danger btn-xs">
                                 <i class="fa fa-"> </i> Supprimer
                               </button>
 							  </a>
 							  </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-					  
+</td>
+						
 					  ';}}?>
 					  
 					  
-					  
-					  
-					  
+		 
+		 </tbody>
+
+		</table>			  
+				<div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>	  
+				<div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a><span><a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">5</a><a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a></div>	  
 					  
 			        </div>
                   </div>
