@@ -1,27 +1,6 @@
 <?php require_once 'db_connect.php'; 
-$id_partenaire=1;
 
-$limit=15;
-$page=isset($_GET['page']) ? $_GET['page'] : 1;
-$start=($page -1 ) * $limit;
-
-
-$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
-$CMDCount=$res1->fetch_assoc();
-$total=$CMDCount ['id'];
-$pages=ceil($total/$limit);
-
-$previous=$page - 1;
-$next=$page + 1;
-
-if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
-	$q=htmlspecialchars($_GET['recherche']);
-	$rech=$connect->query('select * from commende where partenaire_id_partenaire='.$id_partenaire.'
-							and n_cmd like "%'.$q.'%" '); 
-	$resRech=$rech->fetch_assoc();
-	
-	
-}
+require_once 'session.php';
 ?>
 
 
@@ -47,6 +26,22 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script >
+		$(document).ready(function() {
+		$('#example').DataTable({
+columnDefs: [{
+orderable: false,
+targets: 5
+}]
+});
+		} );
+	
+	</script>
   </head>
 
   <body class="nav-md">
@@ -173,74 +168,54 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-				  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <nav aria-label="Page navigation">
-							  <ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="historiquePart.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								  </a>
-								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="historiquePart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="historiquePart.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								  </a>
-								</li>
-							  </ul>
-							</nav>
-                      </div>
+				 
                     <!-- start project list -->
-                    <table class="table table-striped projects">
-                      <thead>
-                        <tr>
-                          <th style="width: 10%">N° commande</th>
-                          <th>Nom client</th>
-                         
-						  <th>Date</th>
-                          <th>Etat</th>
-						  
-                          <th style="width: 20%">Action</th>
-                        </tr>
-                      </thead>
-						<tbody>
-						<?php 
-						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (3,4)LIMIT $start, $limit";
+                    <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+						  <thead>
+							<tr>
+							  <th class="th-sm">N° commande
+							  </th>
+							  <th class="th-sm">N° facture
+							  </th>
+							  <th class="th-sm">Client
+							  </th>
+							  <th class="th-sm">Date
+							  </th>
+							  <th class="th-sm">Etat
+							  </th>
+							  <th class="th-sm">Action
+							  </th>
+							</tr>
+						  </thead>
+						  <tbody>
+						  <?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (3,4) ";
 						$result1 = $connect->query($sql1);
 
 						if($result1->num_rows > 0) {
-						while($data = $result1->fetch_assoc()) {
+						while($data = $result1->fetch_assoc()) { 
 							$sql2="select * from client where id_client={$data['client_id_client']}";
 							$res=$connect->query($sql2);
 							$r=$res->fetch_assoc();
-							
-							echo '
-                     
-					  
-                        <tr>
-                          <td>'.$data['n_cmd'].'</td>
-                          <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
 
-						  <td>'.$data['Date'].' </td>
-                          
-                          <td>' ;
+						echo '
+							<tr>
+							  <td> '.$data['n_cmd'].'</td>
+							  <td>'.$data['n_facture'].'</td>
+							  <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
+							  <td>'.$data['Date'].'</td>
+							  <td> ' ;
 						  if ($data['etatCmd']==1) { echo '
 						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
 						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-						  echo '<span class="label label-success">Déchargée</span> ';} else {
+						  echo '<span class="label label-success">Déchargée</span> ';}elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-success">Acceptée </span> ';} else {
 						  echo '<span class="label label-danger">Annulée</span>' ;}
-						   echo '</td> 
-                          <td>
-                             <!-- Small modal -->
-							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
+						   echo '</td>
+							  <td> <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
 								<i class="fa fa-folder"></i> Détails
-							</button>
-														  
-							 <div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+							</button> 
+							<div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 						  										<div class="modal-dialog modal-sm">
 											<div class="modal-content">
 
@@ -266,7 +241,8 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 														if ($data['etatCmd']==1) { echo '
 												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
 												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-												  echo '<span class="label label-success">Déchargée</span> ';} else {
+												  echo '<span class="label label-success">Déchargée</span> ';} elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-success">Acceptée </span> ';}else {
 												  echo '<span class="label label-danger">Annulée</span>' ;}
 														echo'
 													  
@@ -284,17 +260,15 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 
 												  </div>
 												</div>
-</div>
-									
-											  <!-- /modals -->
-														
-														
-													  </td>
-													</tr> '; 
-						}}
-					  ?>
-					   </tbody>
-                    </table>
+                                       </div>
+									   
+							
+						</tr> ';}} ?>
+
+						   
+						  </tbody>
+						 
+						</table>
                     <!-- end project list -->
 
                   </div>
@@ -314,8 +288,8 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery 
+    <script src="../vendors/jquery/dist/jquery.min.js"></script> -->
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

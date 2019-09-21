@@ -1,28 +1,10 @@
 <?php require_once 'db_connect.php'; 
-session_start();
-
-if (isset($_SESSION["id_partenaire"])){
-$id_partenaire=$_SESSION["id_partenaire"];}
-else{
-	
-header("location:login.php");	
-}
+require_once 'sessionPart.php';
  
 $sql = "SELECT * FROM partenaire where id_partenaire='$id_partenaire'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 
-$limit=9;
-$page=isset($_GET['page']) ? $_GET['page'] : 1;
-$start=($page -1 ) * $limit;
-
-$res1 = $connect->query("select count(id_commende) AS id from commende where partenaire_id_partenaire={$id_partenaire} ");
-$CMDCount=$res1->fetch_assoc();
-$total=$CMDCount ['id'];
-$pages=ceil($total/$limit);
-
-$previous=$page - 1;
-$next=$page + 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,13 +31,18 @@ $next=$page + 1;
     <link href="../build/css/custom.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 	<script >
 		$(document).ready(function() {
-    $('#example').DataTable();
-} );
+		$('#example').DataTable({
+columnDefs: [{
+orderable: false,
+targets: 5
+}]
+});
+		} );
 	
 	</script>
   </head>
@@ -178,46 +165,101 @@ $next=$page + 1;
 					 <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 						  <thead>
 							<tr>
-							  <th class="th-sm">Name
+							  <th class="th-sm">N° commande
 							  </th>
-							  <th class="th-sm">Position
+							  <th class="th-sm">N° facture
 							  </th>
-							  <th class="th-sm">Office
+							  <th class="th-sm">Client
 							  </th>
-							  <th class="th-sm">Age
+							  <th class="th-sm">Date
 							  </th>
-							  <th class="th-sm">Start date
+							  <th class="th-sm">Etat
 							  </th>
-							  <th class="th-sm">Salary
+							  <th class="th-sm">Action
 							  </th>
 							</tr>
 						  </thead>
 						  <tbody>
+						  <?php 
+						$sql1="select * from commende where partenaire_id_partenaire={$id_partenaire} and etatCMD in (0,1,2,-1) ";
+						$result1 = $connect->query($sql1);
+
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) { 
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
+
+						echo '
 							<tr>
-							  <td>Tiger Nixon</td>
-							  <td>System Architect</td>
-							  <td>Edinburgh</td>
-							  <td>61</td>
-							  <td>2011/04/25</td>
-							  <td>$320,800</td>
-							</tr>
-							
-						    <tr>
-      <td>Garrett Winters</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>63</td>
-      <td>2011/07/25</td>
-      <td>$170,750</td>
-    </tr>
-    <tr>
-      <td>Ashton Cox</td>
-      <td>Junior Technical Author</td>
-      <td>San Francisco</td>
-      <td>66</td>
-      <td>2009/01/12</td>
-      <td>$86,000</td>
-    </tr>
+							  <td> '.$data['n_cmd'].'</td>
+							  <td>'.$data['n_facture'].'</td>
+							  <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
+							  <td>'.$data['Date'].'</td>
+							  <td> ' ;
+						  if ($data['etatCmd']==1) { echo '
+						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+						  echo '<span class="label label-success">Déchargée</span> ';}elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-success">Acceptée </span> ';} else {
+						  echo '<span class="label label-danger">Annulée</span>' ;}
+						   echo '</td>
+							  <td> <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
+								<i class="fa fa-folder"></i> Détails
+							</button> 
+							<div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						  										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
+												</div>
+												<div class="modal-body">
+													<ul class="messages">
+													<li>
+													<div class="message_wrapper">
+													<li>
+														<i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
+														<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
+														
+														<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+														
+														<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
+														<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</li>
+														<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+														if ($data['etatCmd']==1) { echo '
+												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-success">Déchargée</span> ';} elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-success">Acceptée </span> ';}else {
+												  echo '<span class="label label-danger">Annulée</span>' ;}
+														echo'
+													  
+													  <br />
+													  
+													</div>
+												  </li>
+													</ul>
+													<div class="modal-footer">
+													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+													  
+													</div>
+													</div>
+													
+
+												  </div>
+												</div>
+                                       </div>
+									   
+							<a href="annuleCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-danger btn-xs" >
+                                <i class="fa fa-times"> </i> Annuler 
+                              </button></td>
+						</tr> ';}} ?>
+
+						   
 						  </tbody>
 						 
 						</table>
