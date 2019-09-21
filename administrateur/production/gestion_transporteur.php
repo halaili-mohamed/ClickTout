@@ -45,9 +45,11 @@ $next=$page + 1;
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-
-
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 
 <script>
 
@@ -72,16 +74,14 @@ $(document).ready(function() {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
-            </div>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>            </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
+                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">              </div>
               <div class="profile_info">
                 <span>Bienvenue,</span>
                 <h2><?php echo $row['nom'] ?></h2>
@@ -95,31 +95,25 @@ $(document).ready(function() {
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>
-				  </li>
-				  </ul>
+                  <li><a href="profile.php"><i class="fa fa-user"></i> Mon compte </a>				  </li>
+			    </ul>
                
                    
                   </li>
 				   <ul class="nav side-menu">
-                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>
-				  </li>
+                  <li><a href="gestion_transporteur.php"><i class="fa fa-truck"></i> Gestion des transporteurs  </a>				  </li>
 				  </ul>
                      <ul class="nav side-menu">
-                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>
-				  </li>
+                  <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
-				  </li>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>
-				  </li>
+                  <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
-                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>
-				  </li>
+                  <li><a a href="index.php"><i class="fa fa-bar-chart"></i> Dashboard </a>				  </li>
 				  </ul>
 				  
                   
@@ -133,18 +127,13 @@ $(document).ready(function() {
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>              </a>
               <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>              </a>
               <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>              </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>              </a>            </div>
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -154,22 +143,18 @@ $(document).ready(function() {
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>              </div>
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="images/img.jpg" alt=""> <?php echo $row['nom'] ?>
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                    <span class=" fa fa-angle-down"></span>                  </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li> 
                     <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-
-                
               </ul>
             </nav>
           </div>
@@ -190,11 +175,7 @@ $(document).ready(function() {
                     
                     <span class="input-group-btn"> <a href="ajout_transporteur.php">
                       <button type="button" class="btn btn-primary btn-ms" >
-                                <i class="fa fa-plus-square"> </i> Ajouter transporteur 
-                              </button></a>
-                    </span>
-                  
-                </div>
+                                <i class="fa fa-plus-square"> </i> Ajouter transporteur                              </button></a>                    </span>                </div>
               </div>
             </div>
 
@@ -211,30 +192,21 @@ $(document).ready(function() {
 								<li class="page-item">
 								  <a class="page-link" href="gestion_transporteur.php?page=<?= $previous; ?>" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								  </a>
-								</li>
+									<span class="sr-only">Previous</span>								  </a>								</li>
 								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
 									<li class="page-item"><a class="page-link" href="gestion_transporteur.php?page=<?= $i; ?>"><?= $i; ?></a></li>
 								<?php endfor ?>
 								<li class="page-item">
 								  <a class="page-link" href="gestion_transporteur.php?page=<?= $next; ?>" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								  </a>
-								</li>
+									<span class="sr-only">Next</span>								  </a>								</li>
 							  </ul>
-							</nav>
+						</nav>
                       </div>
 
                       <div class="clearfix"></div>
  <div id="example_wrapper" class="dataTables_wrapper">
- <div class="dataTables_length" id="example_length">
- <label>Show <select name="example_length" aria-controls="example" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
- </div>
- <div id="example_filter" class="dataTables_filter">
- <label>Search:<input type="search" class="" placeholder="" aria-controls="example"></label>
- </div>
+
  
  <table id="example" class="display dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
                 <thead>
@@ -276,15 +248,9 @@ $(document).ready(function() {
 </td>
 						
 					  ';}}?>
-					  
-					  
-		 
 		 </tbody>
-
 		</table>			  
-				<div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>	  
-				<div class="dataTables_paginate paging_simple_numbers" id="example_paginate"><a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="0" id="example_previous">Previous</a><span><a class="paginate_button current" aria-controls="example" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="example" data-dt-idx="2" tabindex="0">2</a><a class="paginate_button " aria-controls="example" data-dt-idx="3" tabindex="0">3</a><a class="paginate_button " aria-controls="example" data-dt-idx="4" tabindex="0">4</a><a class="paginate_button " aria-controls="example" data-dt-idx="5" tabindex="0">5</a><a class="paginate_button " aria-controls="example" data-dt-idx="6" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="example" data-dt-idx="7" tabindex="0" id="example_next">Next</a></div>	  
-					  
+			  
 			        </div>
                   </div>
                 </div>
@@ -306,7 +272,7 @@ $(document).ready(function() {
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+ 
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
