@@ -1,6 +1,10 @@
 <?php require_once 'db_connect.php'; 
 $id_Transporteur=1;
-$limit=15;
+ 
+$sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+$limit=9;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
 $res1 = $connect->query("select count(id_commende) AS id from commende where transporteur_id_Transporteur={$id_Transporteur} ");
@@ -9,14 +13,6 @@ $total=$CMDCount ['id'];
 $pages=ceil($total/$limit);
 $previous=$page - 1;
 $next=$page + 1;
-if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
-	$q=htmlspecialchars($_GET['recherche']);
-	$rech=$connect->query('select * from commende where Tansporteur_id_Transporteur='.$id_Transporteur.'
-							and n_cmd like "%'.$q.'%" '); 
-	$resRech=$rech->fetch_assoc();
-	
-	
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +23,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" href="images/favicon.png" type="image/ico" />
-	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
@@ -35,7 +31,8 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
-	  
+
+
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -52,16 +49,26 @@ $(document).ready(function() {
   </head>
 
   <body class="nav-md">
+  
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_dispo2.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="formCmdPart.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              
+             
+            </div>
+            <!-- /menu profile quick info -->
+
             <br />
+
             <!-- sidebar menu -->
            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -76,48 +83,32 @@ $(document).ready(function() {
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+            
           </div>
         </div>
 
         <!-- top navigation -->
-          <div class="top_nav">
+        <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
+			  
               <ul class="nav navbar-nav navbar-right">
-                <?php 
-					$sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
-					echo'
+               
+					
                 <li class="">
-                
+                  
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-     
+                    <li><a href="profilePart.php"> Mon compte</a></li>
+                    
+                    
                     <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>'
-				?>
+                </li>
+			
 
                
               </ul>
@@ -127,83 +118,64 @@ $(document).ready(function() {
         <!-- /top navigation -->
 
         <!-- page content -->
-          <div class="right_col" role="main">
+        <div class="right_col" role="main">
           <div class="">
-			  <div class="page-title">
+            <div class="page-title">
               <div class="title_left">
-                <h3>Historique</h3>
+				<h3>Offre disponible</h3>
+                
               </div>
 
               <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <form method="GET" action="HistorRechPart.php">
-				  <div class="input-group">
-				  
-                    <input type="search" class="form-control" name="recherche" placeholder="Rechercher...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                    </span>
-					</div>
-				   </form>
-                  
-                </div>
+               
               </div>
             </div>
- 
+            
             <div class="clearfix"></div>
-            <div class="clearfix"></div>
+
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
+				  <h2>Liste des offres disponibles</h2> 		
+                   
                     <div class="clearfix"></div>
                   </div>
-				  <div class="x_content">
-				  <div class="row"> 
-			<div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                  <div class="x_title">
-                  <h2>Consulter historique</h2>
-                 
-                  <div class="clearfix"></div>
-                </div>
+                  <div class="x_content">    
+                      <br />
+                     <!-- here -->
+                      <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
                   <div class="x_content">
-                    <!-- start project list -->
-                    <table id="example" class="display" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>N° commande</th>
-                          <th>Nom client</th>  
-						  <th>Date</th>
-						  <th>Etat</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-						<?php 
-						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD in (3,4)LIMIT $start, $limit";
+				  <div class="row">			
+					  <table id="example" class="display" style="width:100%">
+
+				    <thead>
+    <tr>
+      <th>N° Commande</th>
+      <th>Nom client</th>
+      <th>Date</th>
+      <th>Détails</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+				  <?php 
+						$sql1="select * from commende c , transporteur t where transporteur_id_Transporteur={$id_Transporteur} and c.etatCMD= 0 and c.type_voiture=t.Type_Voiture order by c.Date DESC LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) {
 							$sql2="select * from client where id_client={$data['client_id_client']}";
 							$res=$connect->query($sql2);
-							$r=$res->fetch_assoc();					
+							$r=$res->fetch_assoc();
+							
 							echo '
-                        <tr>
-                          <td>'.$data['n_cmd'].'</td>
-                          <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
-						  <td>'.$data['Date'].' </td>
-                          
-                          <td>' ;
-						 														if ($data['etatCMD']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
-							echo '</td> 
-                          <td>
-                             <!-- Small modal -->
+    <tr>
+      <td>'.$data['n_cmd'].'</td>
+      <td> '.$r['Nom'].'</td>
+      <td>'.$data['Date'].'</td>
+      <td> <!-- Small modal -->
 							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
 								<i class="fa fa-folder"></i> Détails
 							</button>
@@ -227,13 +199,9 @@ $(document).ready(function() {
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-													if ($data['etatCMD']==1) {
-												  echo '<span class="label label-Primary">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
-							                      echo '</li>						  
+													if ($data['etatCMD']==0) {
+													echo '<span class="label label-default">En attente</span> ';} 
+												  echo'</li>						  
 												   </div>
 												   </li>
 												   </ul>
@@ -246,52 +214,57 @@ $(document).ready(function() {
 												</div>
 </div>
 									
-											  <!-- /modals -->
-														
-														
-													  </td>
-													</tr> '; 
-						}}
-					  ?>
-					 </tbody>
+											  <!-- /modals --></td>
+      <td> 
+	  <a href="accepterCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-success btn-xs" >
+	  <i class="fa fa-check"></i> Accépter</a>
+	  </td>
+    </tr>
+  
+  '; }}?>
+  </tbody>
   <tfoot>
     <tr>
-      <th>N° commande</th>
-      <th>Nom client</th>  
-	  <th>Date</th>
-	  <th>Etat</th>
+      <th>N° Commande</th>
+      <th>Nom client</th>
+      <th>Date</th>
+      <th>Détails</th>
       <th>Action</th>
     </tr>
   </tfoot>
 </table>
-                    <!-- end project list -->
-
-                  </div>
+						</div>
+                 
+                </div>
               </div>
-			</div>
             </div>
-				</div>
-				</div>
-				</div>
-			</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
         <!-- /page content -->
 
         <!-- footer content -->
-
+       
         <!-- /footer content -->
       </div>
     </div>
-
+    
+    <!-- jQuery -->
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    
+    <!-- ECharts -->
+    <script src="../vendors/echarts/dist/echarts.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
   </body>
 </html>

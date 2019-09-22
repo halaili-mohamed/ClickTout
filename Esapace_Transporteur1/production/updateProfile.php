@@ -12,13 +12,15 @@ if($_POST) {
 	$Type_Voiture = $_POST['Type_Voiture'];
 	$Matricule = $_POST['Matricule'];
 	$Pseudo = $_POST['Pseudo'];
-	$Password = $_POST['Password'];
-	
-
 	$id_Transporteur = $_POST['id_Transporteur'];
+	$Pass1 = $_POST['Password'];
+	$Pass2=$_POST['Password2'];
 
+	
+if($Pass1 == $Pass2)
+{
 	$sql  = "UPDATE transporteur SET Nom = '$Nom', Prenom = '$Prenom', Date_naiss = '$Date_naiss', Email = '$Email', Telephone = '$Telephone' ,
-	Adresse = '$Adresse', Type_Voiture = '$Type_Voiture', Matricule = '$Matricule' , Pseudo = '$Pseudo', Password = '$Password' 
+	Adresse = '$Adresse', Type_Voiture = '$Type_Voiture' , Matricule = '$Matricule' , Pseudo = '$Pseudo', Password = '$Pass1' 
 	WHERE id_Transporteur = {$id_Transporteur}";
 
 	if($connect->query($sql) === TRUE) {
@@ -33,6 +35,12 @@ if($_POST) {
 	}
 
 	$connect->close();
+}
+else
+{
+	echo' <div class="alert alert-danger" role="alert">  Les mots de passe ne correspondent pas </div>';
+
+};
 
 }
 
