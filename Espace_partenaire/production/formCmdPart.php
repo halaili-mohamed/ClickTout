@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_partenaire=1;
+require_once 'sessionPart.php';
 
 $sql = "SELECT * FROM partenaire where id_partenaire={$id_partenaire}";
 $result = $connect->query($sql);
@@ -92,7 +92,7 @@ $row = $result->fetch_assoc();
                     <li><a href="profilePart.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
@@ -140,7 +140,7 @@ $row = $result->fetch_assoc();
                             
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 							 
-							<input type="text" class="form-control has-feedback-left" name="Adresse_depart" placeholder="Départ" value="<?php echo $row['adresse'] ?>">
+							<input type="text" class="form-control has-feedback-left" id="Adresse_depart" name="Adresse_depart" placeholder="Départ" >
 							<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 							</div>
 
@@ -163,7 +163,7 @@ $row = $result->fetch_assoc();
 						</div>
 						  
 						 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-							<input type="text" class="form-control has-feedback-left" name="Adresse_arrive" placeholder="Destination">
+							<input type="text" class="form-control has-feedback-left" name="Adresse_arrive" id="Adresse_arrive" placeholder="Destination">
 							<span class="fa fa-flag form-control-feedback left" aria-hidden="true"></span>
 						</div>
 						  
@@ -295,7 +295,7 @@ $row = $result->fetch_assoc();
     <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
 <script>
-    $('#myDatepicker').datetimepicker();
+    
     
     $('#myDatepicker2').datetimepicker({
         format: 'DD.MM.YYYY'
@@ -305,24 +305,20 @@ $row = $result->fetch_assoc();
         format: 'hh:mm A'
     });
     
-    $('#myDatepicker4').datetimepicker({
-        ignoreReadonly: true,
-        allowInputToggle: true
-    });
+    
+</script>
 
-    $('#datetimepicker6').datetimepicker();
-    
-    $('#datetimepicker7').datetimepicker({
-        useCurrent: false
-    });
-    
-    $("#datetimepicker6").on("dp.change", function(e) {
-        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-    });
-    
-    $("#datetimepicker7").on("dp.change", function(e) {
-        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-    });
+<script>
+		function activatePlacesSearch(){
+			
+						var input2 = document.getElementById('Adresse_arrive');
+			
+			var autocomplete2 = new google.maps.places.Autocomplete(input2);
+		}
+	 </script>
+	 
+		
+	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWB7FS-Rj2l62b6zkfhEKa1SMOu0q6-mk&libraries=places&callback=activatePlacesSearch">
 </script>
 	
   </body>
