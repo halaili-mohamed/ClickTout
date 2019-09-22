@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_Transporteur=1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,8 +156,10 @@ $id_Transporteur=1;
                        <li><i class="fa fa-money"></i> Revenue total du mois 
 						</li> 
 						';
-						//SELECT SUM(prix) as revenue from commende c,transporteur t where c.transporteur_id_transporteur= t.id_Transporteur and t.id_Transporteur=$SESSION['id_Transporteur'] and DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d")
-						$sql2="SELECT SUM(prix) as revenue from commende c,transporteur t where c.transporteur_id_transporteur= t.id_Transporteur and t.id_Transporteur=1 ";		
+						//a verfier avec mouhamed
+						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur 
+ and t.id_Transporteur=$_SESSION['id_Transporteur'] 
+AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d") AND DATE_FORMAT( SYSDATE(), "%Y-%m-%d") ";		
 						$res=$connect->query($sql2);
 						$data = $res->fetch_assoc();
 					    echo'  <h2>  '.$data['revenue'].'</h2>
