@@ -44,7 +44,7 @@ $id_Transporteur=1; ?>
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a  class="site_title" href="formCmdPart.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a  class="site_title" href="offre_disponible2.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
