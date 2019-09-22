@@ -33,7 +33,7 @@
             <form name="form" method="post" action="verifier_login.php">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" name="email" placeholder="Username" required="required" />
+                <input type="text" class="form-control" name="login" placeholder="Username" required="required" />
               </div>
               <div>
                 <input type="password" class="form-control" name="pwd" placeholder="Password" required="required" />
@@ -46,9 +46,7 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+             
 
                 <div class="clearfix"></div>
                 <br />
