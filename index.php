@@ -109,7 +109,7 @@
 
 	.sizeimage{
 		width: 200px;
-		height: 100px;
+		height: 200px;
 	}
 	</style>
 
@@ -503,7 +503,9 @@
           </div>
         </div>
        
-	  
+	   <div>
+        <div class="owl-carousel nonloop-block-13 "> 
+
 	 <?php 
 	 $query= "select distinct image,nom_ste from partenaire   ";
 	 $result= mysqli_query($connect,$query);
@@ -513,14 +515,10 @@
 	 	while ($row=mysqli_fetch_array($result)) {
 	 		
 	 		?>
-	 <div>
-	       <div class="owl-carousel nonloop-block-13 ">   
-
-	<form method="POST" action="index.php">
-            <div class="owl-carousel nonloop-block-13 ">   
-              <div class="card ">
+	    
+              <div class="card " >
               	
-                <img  src="<?php echo $row["image"]; ?>" alt="Image"  />
+                <img  src="<?php echo $row["image"]; ?>" alt="Image" class="sizeimage" />
 
                 <div class="card-body">
                   <div class="card-title">
@@ -530,12 +528,12 @@
                   </div>
                
               </div>
-</div></div>
+</div>
 
               
             
          
-        </form> <?php } }?> 
+           <?php } }?> 
      </div> </div></div>
     </section>
 
