@@ -1,3 +1,6 @@
+<?php require_once 'db_connect.php'; 
+$id_Transporteur=1;
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -38,11 +41,11 @@
              <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="profile.html"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_dispo2.html"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte2.html"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="reclamation.html"><i class="fa fa-comments-o"></i> Réclamation</a></li>
-                  <li><a href="historique.html"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                  <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
+				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+                  <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
                 </ul>   
               </div>
             </div>
@@ -68,7 +71,7 @@
         </div>
 
         <!-- top navigation -->
-         <div class="top_nav">
+              <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
@@ -76,18 +79,21 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
+			  <?php 
+					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
+					$result = $connect->query($sql);
+					$row = $result->fetch_assoc();
+					echo'
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/.jpg" alt="">User name
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
+                  
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.html"> Mon compte</a></li>
+                    <li><a href="profile.php"> Mon compte</a></li>
                     
                     
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
-                </li>
+                </li>'
+				?>
 
                
               </ul>
@@ -118,9 +124,51 @@
                   </div>
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                      <div class="profile_img">
+					<?php 
+					// pour photo de profil :                       
+					//<img class="img-responsive avatar-view" src="images/'.$row['photo'].'.jpg" alt="Avatar" title="Change the avatar">
+                      echo'<div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
+						  
+
+                        </div>
+                      </div>
+                      <h3>'.$row['Nom'].' '.$row['Prenom'].'</h3>
+
+                      <ul class="list-unstyled user_data">
+					    <li><i class="fa fa-birthday-cake user-profile-icon"></i> '.'  '.$row['Date_naiss'].'
+                        </li>
+                        <li><i class="fa fa-envelope-o user-profile-icon"></i> '.'  '.$row['Email'].'
+                        </li>
+						
+						<li><i class="fa fa-phone user-profile-icon"></i>'.'  '.$row['Telephone'].'
+                        </li>
+						
+                        <li><i class="fa fa-map-marker user-profile-icon"></i>'.'  '.$row['Adresse'].'
+                        </li>
+
+                        <li><i class="fa fa-car user-profile-icon"></i>'.'  '.$row['Type_Voiture'].'
+                        </li>
+                       	<div class="row top_tiles" style="margin: 10px 0 ;border:1px grey ">
+						<div class="col-md-12 tile " align="center" style="margin-top: 25px">
+						<i class="fa fa-money"></i> Revenue total du mois 
+                        <h2>$ 1,231,809</h2>
+                        <span class="sparkline_two" style="height: 160px;">
+                                      <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+                                  </span>
+                       </div>
+					   </div>
+                      </ul>
+
+                      
+                      <br />';
+
+                      
+							?>
+                   <!--   <div class="profile_img">
+                        <div id="crop-avatar">
+                         
                           <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
@@ -153,73 +201,76 @@
                     
                       </ul>
 
-                      <!--<a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>-->
+             
                       <br />
 
                       
-
+-->
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
 
 						
-						<form class="form-horizontal form-material">
+						<form action="updateProfile.php" method="post" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> 
+                                        <input type="text" name="Nom" class="form-control form-control-line" value="<?php echo $row['Nom'] ?>"> 
 									</div>
                                 </div>
 								<div class="form-group">
 									<label class="col-md-12">Prenom </label>
 									<div class="col-md-12">
-										<input class="form-control form-control-line" type="text" placeholder="Doe" >
+										<input type="text" name="Prenom" class="form-control form-control-line" value="<?php echo $row['Prenom'] ?>" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12">Date de naissance</label>
 									<div class="col-md-12">
-										<input class="form-control form-control-line" type="datetime" />
+										<input type="datetime" name="Date_naiss" class="form-control form-control-line"  value="<?php echo $row['Date_naiss'] ?>" />
 									</div>
 								</div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email"name="Email"  class="form-control form-control-line" value="<?php echo $row['Email'] ?>" > </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Téléphone</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line"> </div>
+                                        <input type="text" name="Telephone"  class="form-control form-control-line" value="<?php echo $row['Telephone'] ?>"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Adresse</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="Adresse" class="form-control form-control-line" value="<?php echo $row['Adresse'] ?>">
                                     </div>
                                 </div>
 								
 								<div class="form-group">
 									<label class="col-md-12">Voiture</label>
 									<div class="col-md-12">
-										<input type="text" placeholder=""  class="form-control form-control-line"/>
+										<input type="text" placeholder=""  class="form-control form-control-line" value="<?php echo $row['Type_Voiture'] ?>"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12"> Matricule </label>
 									<div class="col-md-12">
-										<input type="text" placeholder=""  class="form-control form-control-line"/>
+										<input type="text" name="Matricule" class="form-control form-control-line" value="<?php echo $row['Matricule'] ?>"/>
 									</div>
 								</div>
 								<div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
+                                    <label class="col-md-12">Nom d'utilisateur</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="text" name="Pseudo"  class="form-control form-control-line" value="<?php echo $row['Pseudo'] ?>"> </div>
                                 </div>
 								<div class="form-group">
-                                    <label class="col-md-12">Confirmer mot de passe</label>
+                                    <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="Password"  class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> </div>
                                 </div>
+								<div class="form-group">
+								<input type="hidden" name="id_Transporteur" value="<?php echo $row['id_Transporteur']?>" />
+								</div>
 								<div class="form-group">
                                     <div class="col-sm-12">
                                         <button class="btn btn-success">Modifer</button>
