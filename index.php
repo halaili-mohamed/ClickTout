@@ -60,7 +60,14 @@
   $("#b1").click(function(){
     $("#panel1").slideDown("slow");
     $("#panel").slideUp("slow");
+ 
+      $('#li1').html( "Adresse Départ: "+$('#Adresse_depart').val()); 
+            $('#li2').html( "Adresse Destination: "+$('#Adresse_arrive').val());
+            $('#li3').html("Date: "+ $('#Date').val());
+            $('#li4').html("Heure: "+ $('#Heure').val()); 
+            $('#in_kilo').html("Distance is Kilo: "+ $('#in_kilo').val());
   });
+
   $("#b2").click(function(){
     $("#panel2").slideDown("slow");
     $("#panel1").slideUp("slow");
@@ -277,7 +284,7 @@
 					<h2 class="mb-2">Reservation</h2>
 				</div>
 			</div>
-			 <form id="f" method="GET" action="index.php">
+			 <form id="f" method="GET" id="distance_form">
 			 
 			 
 				<div id="flip">1er étape</div>
@@ -287,11 +294,13 @@
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
 					  <label for="Adresse_depart">Adresse Départ</label>
-					  <input type="text" class="form-control"  name="depart" id="Adresse_depart" placeholder="Adresse Départ" >
+					  <input type="text" class="form-control"  name="Adresse_depart" id="Adresse_depart" placeholder="Enter votre Adresse Départ" >
+   					 <input id="origin" name="origin" required="" type="hidden" />
 					</div>
 					<div class="form-group col-md-4">
 					  <label for="Adresse_arrive">Adresse Destination</label>
-					  <input type="text" class="form-control" name="arrive" id="Adresse_arrive" placeholder="Adresse Destination">
+					  <input type="text" class="form-control" name="Adresse_arrive" id="Adresse_arrive" placeholder="Enter votre Adresse Destination">
+					  <input id="destination" name="destination" required="" type="hidden" />
 					</div>
 				  </div>
 				  
@@ -308,13 +317,14 @@
 					</div>
 					<div class="col-md-1"></div>
 					<div>
-					 <button  id="b1" value="following" class="btn btn-primary custom-next">Next</button>
+					
+					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Calculate</button>
 					</div>
 				  </div>
 					
 					
 							</div>
-							
+				</form>			
 						
 				<div id="flip1">2éme Etape</div>
 				<div id="panel1">
@@ -476,15 +486,21 @@
 					</div>
 					
 					</div>
-					</form>
+					
 			
-			<div id="flip4">Prix :
+			<div id="flip4">
+				 <div class="col-md-3" ><h1>Prix : 100$</h1> </div>
+			 
+             <dv id="result" class="col-md-7" style="text-align: left;">
+                  <ul id="list" class="list-group">
+                 <li id="li1">Adresse Départ</li>
+                 <li id="li2">Adresse Destination</li>
+                 <li id="li3">Date</li>
+                 <li id="li4">Time</li>
+                 <li id="in_kilo">Distance is Kilo</li>
+                  </ul> 
+             </dv>  
 				
-				<?php
-
-				echo "$('input').val()";
-				echo "Adresse Départ: $arrive";
-				?>
 
 			</div>
 					
@@ -508,11 +524,11 @@
 
 	 <?php 
 	 $query= "select distinct image,nom_ste from partenaire   ";
-	 $result= mysqli_query($connect,$query);
-	 if (mysqli_num_rows($result)>0 ) {
+	 $r= mysqli_query($connect,$query);
+	 if (mysqli_num_rows($r)>0 ) {
 	 	
 	 	
-	 	while ($row=mysqli_fetch_array($result)) {
+	 	while ($row=mysqli_fetch_array($r)) {
 	 		
 	 		?>
 	    
@@ -773,21 +789,83 @@
  
      <script src="js/main1.js"></script>
 
-	 <script>
-		function activatePlacesSearch(){
-			var input = document.getElementById('Adresse_depart');
-						var input2 = document.getElementById('Adresse_arrive');
-
-			var autocomplete = new google.maps.places.Autocomplete(input);
-			var autocomplete2 = new google.maps.places.Autocomplete(input2);
-
-		}
-	 </script>
 	 
-		
-	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWB7FS-Rj2l62b6zkfhEKa1SMOu0q6-mk&libraries=places&callback=activatePlacesSearch">
-</script>
+	 <script>
+    $(function() {
+        // add input listeners
+        google.maps.event.addDomListener(window, 'load', function () {
+            var Adresse_depart = new google.maps.places.Autocomplete(document.getElementById('Adresse_depart'));
+            var Adresse_arrive = new google.maps.places.Autocomplete(document.getElementById('Adresse_arrive'));
 
+            google.maps.event.addListener(Adresse_depart, 'place_changed', function () {
+                var from_place = Adresse_depart.getPlace();
+                var from_address = from_place.formatted_address;
+                $('#origin').val(from_address);
+            });
+
+            google.maps.event.addListener(Adresse_arrive, 'place_changed', function () {
+                var to_place = Adresse_arrive.getPlace();
+                var to_address = to_place.formatted_address;
+                $('#destination').val(to_address);
+            });
+
+        });
+        // calculate distance
+        function calculateDistance() {
+            var origin = $('#origin').val();
+            var destination = $('#destination').val();
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                {
+                    origins: [origin],
+                    destinations: [destination],
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    unitSystem: google.maps.UnitSystem.IMPERIAL, // miles and feet.
+                    // unitSystem: google.maps.UnitSystem.metric, // kilometers and meters.
+                    avoidHighways: false,
+                    avoidTolls: false
+                }, callback);
+        }
+        // get distance results
+        function callback(response, status) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {
+                $('#result').html(err);
+            } else {
+                var origin = response.originAddresses[0];
+                var destination = response.destinationAddresses[0];
+                if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                    $('#result').html("Better get on a plane. There are no roads between "  + origin + " and " + destination);
+                } else {
+                    var distance = response.rows[0].elements[0].distance;
+                    var duration = response.rows[0].elements[0].duration;
+                    console.log(response.rows[0].elements[0].distance);
+                    var distance_in_kilo = distance.value / 1000; // the kilom
+                    var distance_in_mile = distance.value / 1609.34; // the mile
+                    var duration_text = duration.text;
+                    var duration_value = duration.value;
+                    $('#in_mile').text(distance_in_mile.toFixed(2));
+                    $('#in_kilo').text(distance_in_kilo.toFixed(2));
+                    $('#duration_text').text(duration_text);
+                    $('#duration_value').text(duration_value);
+                    $('#from').text(origin);
+                    $('#to').text(destination);
+                }
+            }
+        }
+        // print results on submit the form
+        $('#distance_form').submit(function(e){
+            e.preventDefault();
+            calculateDistance();
+        });
+
+    });
+
+</script>
+	 
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWB7FS-Rj2l62b6zkfhEKa1SMOu0q6-mk&libraries=places">
+</script>
 
 
 
