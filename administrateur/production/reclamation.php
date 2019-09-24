@@ -1,3 +1,14 @@
+<?php
+require_once 'session.php'; 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,8 +58,8 @@
                 <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -123,19 +134,13 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""> <?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -167,20 +172,45 @@
                        
 
                         <!-- end of user messages -->
+						  <?php 
+					
+						$sql="select * from reclamation order by date_reclamation ASC";
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+					
+						while($data=$result->fetch_assoc())
+						{
+					
+						
+						echo'
+						
                         <ul class="messages">
-                          <li>
+                          <li> 
                             <img src="images/img.jpg" class="avatar" alt="Avatar">
                             <div class="message_date">
-                              <h3 class="date text-info">24</h3>
-                              <p class="month">May</p>
+                              <h3 class="date text-info"> '. $data['date_reclamation'].'</h3>
+                              <p class="month"></p>
                             </div>
                             <div class="message_wrapper">
-                              <h4 class="heading">Numero commande : 1857239 </h4> 
-                              <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                              <h4 class="heading">N° Commande : '. $data['commende_id_commende'].' </h4> 
+                              <blockquote class="message"> '. $data['Message'].'</blockquote>
                               <br />
+							  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
+	
+	</ul>
+							  ';}}?>
 							  
+							  
+						<?php 
+						$sql1="select c.Date ,t.nom , cl.nom ,cl.prenom ,cl.telephone , cl.email ,r.id_reclamation
+						from reclamation r, commende c , transporteur t,client cl where c.id_commende=r.commende_id_commende and c.transporteur_Id_Transporteur and t.Id_transporteur and cl.id_client=c.client_id_client and r.id_Reclamation=".$data['id_Reclamation']." ";
+						$result1 = $connect->query($sql1);
+						if($result1->num_rows > 0) {
+						while($tab=$result1->fetch_assoc())
+						{ echo ' 
+						
                              <!-- Small modal -->
-	<a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
+	
                  
                   <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
@@ -189,26 +219,25 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel2">Numéro commande</h4>
+                          <h4 class="modal-title" id="myModalLabel2">Numéro commande :  '. $tab['n_commende'].' </h4>
 						  
                         </div>
                         <div class="modal-body">
 						<ul class="list-unstyled">
 						        
-                               <li><i class="fa fa-check-square-o"></i> livreur : transporteur / partenaire </li>
-								<li><!--<i class="fa fa-check-square-o"></i>--> Nom livreur : </li>
-								<li><i class="fa fa-calendar"></i> Date depart </li>
-								<li><i class="fa fa-flag"></i> Date arrivé : </li> 
-								<li><i class="fa fa-clock-o"></i> Heure: </li>
+                               <li><i class="fa fa-check-square-o"></i> Transporteur : '. $tab['t.nom'].' </li>
+								<li><i class="fa fa-check-square-o"></i> N° Transporteur : '. $tab['Id_Transporteur'].' </li>
+								<li><i class="fa fa-calendar"></i> Adresse depart: '. $tab['Adresse_depart'].' </li>
+								<li><i class="fa fa-flag"></i> Adresse arrivé : '. $tab['Adresse_arrive'].' </li> 
+								<li><i class="fa fa-clock-o"></i> Date: '. $tab['Date'].' </li>
+								<li><i class="fa fa-clock-o"></i> Heure: '. $tab['heure'].' </li>
 								 
-								<li><i class="fa fa-user"></i> Nom Client: </li>
-								<li><i class="fa fa-map-marker"></i> Adresse </li>
-								<li><i class="fa fa-phone"></i> Telephone  </li>
+								<li><i class="fa fa-user"></i> Nom Client: '. $tab['nom'].' '. $tab['prenom'].' </li>
+								<li><i class="fa fa-phone"></i> Telephone : '. $tab['telephone'].' </li>
+								<li><i class="fa fa-phone"></i> Email : '. $tab['Email'].' </li>
                               
 								
-								 <label for="message">Message:</label>
-                          <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
-                            data-parsley-validation-threshold="10"></textarea>
+								
                               </ul>
                         </div>
                         <div class="modal-footer">
@@ -218,85 +247,13 @@
                       </div>
                     </div>
                   </div>
+				   ';}}?>
                   <!-- /modals -->
-                            
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Supprimer </a>
-                          </td>
+              
+                         
                           
 					
-                            </div>
-                          </li>
-                          <li>
-                            <img src="images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                              <h3 class="date text-info">24</h3>
-                              <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                              <h4 class="heading">Numero commande : 1857239 </h4> 
-                              <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                              <br />
-							  
-                             <!-- Small modal -->
-								  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
-                 
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel2">Numéro commande</h4>
-						  
-                        </div>
-                        <div class="modal-body">
-						<ul class="list-unstyled">
-						        
-                               <li><i class="fa fa-check-square-o"></i> livreur : transporteur / partenaire </li>
-								<li><!--<i class="fa fa-check-square-o"></i>--> Nom livreur : </li>
-								<li><i class="fa fa-calendar"></i> Date depart </li>
-								<li><i class="fa fa-flag"></i> Date arrivé : </li> 
-								<li><i class="fa fa-clock-o"></i> Heure: </li>
-								 
-								<li><i class="fa fa-user"></i> Nom Client: </li>
-								<li><i class="fa fa-map-marker"></i> Adresse </li>
-								<li><i class="fa fa-phone"></i> Telephone  </li>
-                              
-								
-								 <label for="message">Message:</label>
-                          <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
-                            data-parsley-validation-threshold="10"></textarea>
-                              </ul>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /modals -->
-                            
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Supprimer </a>
-                          </td>
-                          
-					
-                            </div>
-                          </li>
-                          <li>
-                        <!-- end of user messages -->
-
-
-                      </div>
-
-
-                    </div>
-
-                    <!-- start project-detail sidebar -->
-                    <div class="col-md-3 col-sm-3 col-xs-12">
-
-                      
+                       
 
                     </div>
                     <!-- end project-detail sidebar -->

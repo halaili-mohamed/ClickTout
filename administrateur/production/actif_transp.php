@@ -4,7 +4,7 @@ require_once 'session.php';
 if($_POST) {
 	$Id_Transporteur=$_POST['Id_Transporteur'];
 	
-$sql="update transporteur set Etat_compte=0 where $Id_Transporteur='$Id_Transporteur and Etat_compte=0'";
+$sql="update transporteur set Etat_compte=0 where Id_Transporteur='$Id_Transporteur and Etat_compte=0'";
 
 if($connect->query($sql) === TRUE) {
 		

@@ -8,10 +8,11 @@ $nom = $_POST['nom'];
 	$telephone=$_POST['telephone'];
 	$email = $_POST['email'];
 	$adresse = $_POST['adresse'];
+		$login = $_POST['login'];
 	$pwd = $_POST['pwd'];
 
 
-$sql="update administrateur set nom='$nom',telephone='$telephone', adresse='$adresse' ,email='$email',pwd='pwd' where id_admin='$id_admin'";
+$sql="update administrateur set nom='$nom',telephone='$telephone', adresse='$adresse' ,email='$email',pwd='$pwd', login='$login' where id_admin='$id_admin'";
 
 if($connect->query($sql) === TRUE) {
 		

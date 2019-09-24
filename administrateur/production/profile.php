@@ -150,7 +150,7 @@ $row = $result->fetch_assoc();
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <img src="images/logo_ctt.jpg">
+          
             <div class="page-title">
               <div class="title_left">
                 <h3>Mon Compte</h3>
@@ -189,6 +189,11 @@ $row = $result->fetch_assoc();
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
                                         <input type="email" name="email" class="form-control form-control-line"> </div>
+                                </div>
+								 <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Login</label>
+                                    <div class="col-md-12">
+                                        <input type="email" name="login" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
@@ -277,6 +282,11 @@ $row = $result->fetch_assoc();
                                     <div class="col-md-12">
                                         <input type="email" name="email" placeholder="<?php echo $row['email'] ?>" class="form-control form-control-line"> </div>
                                 </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Login</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="adresse" placeholder="<?php echo $row['login'] ?>" class="form-control form-control-line">
+                                    </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">

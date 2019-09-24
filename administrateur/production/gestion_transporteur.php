@@ -1,7 +1,6 @@
 <?php 
  
 require_once 'session.php'; 
-
 $sql = "SELECT * FROM administrateur where id_admin='$id_admin'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
