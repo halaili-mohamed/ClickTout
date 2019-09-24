@@ -1,5 +1,5 @@
 <?php 
-require_once 'db_connect.php';
+require_once 'session.php'; 
 
 function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -22,8 +22,9 @@ if($_POST) {
 	$Type_Voiture = $_POST['Type_Voiture'];
 	$psudo = $_POST['nom'].'_'.$_POST['Prenom'].generateRandomString(5);
 	$PWD = generateRandomString();
+	$Cin = $_POST['Cin'];
 	
-	$sql = "INSERT INTO transporteur (nom, Prenom,Date_naiss,Email,Adresse,Matricule,Type_voiture,psudo,PWD) VALUES ('$nom', '$Prenom', '$Date_naiss','$Email','$Adresse','$Matricule','$Type_Voiture','$psudo','$PWD')";
+	$sql = "INSERT INTO transporteur (nom, Prenom,Date_naiss,Email,Adresse,Matricule,Type_voiture,psudo,PWD,Etat_compte,Cin) VALUES ('$nom', '$Prenom', '$Date_naiss','$Email','$Adresse','$Matricule','$Type_Voiture','$psudo','$PWD',0,'$Cin')";
 	if($connect->query($sql) === TRUE) {
 		
 		echo'<script language="javascript"> 

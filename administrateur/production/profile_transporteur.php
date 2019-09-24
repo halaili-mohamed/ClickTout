@@ -1,6 +1,4 @@
-<?php require_once 'db_connect.php'; 
-$id_admin=2;
- 
+<?php require_once 'session.php'; 
 $sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
@@ -15,6 +13,7 @@ $row = $result->fetch_assoc();
 	$Type_Voiture = $_GET['Type_Voiture'];
 	$psudo = $_GET['psudo'];
 	$PWD = $_GET['PWD'];
+	$Cin=$_GET['PWD'];
 	
 ?>
 
@@ -217,6 +216,13 @@ $row = $result->fetch_assoc();
                                     <div class="col-md-12">
                                         <input type="text" name="Prenom" placeholder="<?=$Prenom?>" class="form-control form-control-line"> </div>
                                 </div>
+								  <div class="form-group">
+                                    <label class="col-md-12">N° Cin</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="Cin" placeholder="<?=$Cin?>" class="form-control form-control-line">
+                                    </div>
+                                </div>
+								
 								 <div class="form-group">
                                     <label class="col-md-12">Date de naissance</label>
                                     <div class="col-md-12">

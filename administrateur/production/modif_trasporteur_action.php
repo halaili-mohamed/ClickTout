@@ -1,6 +1,6 @@
 
 <?php
-require_once 'db_connect.php';
+require_once 'session.php'; 
 if($_POST) {
 	$Id_Transporteur=$_POST['Id_Transporteur'];
 	$nom = $_POST['nom'];
@@ -14,20 +14,20 @@ if($_POST) {
 	$PWD = $_POST['PWD'];
 
 
-$sql="update transporteur set nom='$nom', prenom='$Prenom',Adresse='$Adresse' ,Email='$Email', Date_naiss='$Date_naiss',Matricule='$Matricule',Type_Voiture='$Type_Voiture' ,psudo='$psudo' ,PWD='$PWD' where $Id_Transporteur='$Id_Transporteur'";
+$sql="update transporteur set nom='$nom', prenom='$Prenom',Adresse='$Adresse' ,Email='$Email', Date_naiss='$Date_naiss',Matricule='$Matricule',Type_Voiture='$Type_Voiture' ,psudo='$psudo' ,PWD='$PWD' where Id_Transporteur='$Id_Transporteur'";
 
 if($connect->query($sql) === TRUE) {
 		
 
 	echo '<script language="javascript"> 
-	alert("probleme modification !");
+	alert("Modification effectuée avec succes. !");
 	window.location="gestion_transporteur.php";
 	</script>';
 }
 else
 {
 	echo '<script language="javascript"> 
-	alert("Modification effectuée avec succes.");
+	alert("Erreur.");
 	window.location="gestion_transporteur.php";
 	</script>';
 }

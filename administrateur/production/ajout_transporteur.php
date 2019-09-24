@@ -1,5 +1,4 @@
-<?php require_once 'db_connect.php'; 
-$id_admin=2;
+<?php require_once 'session.php'; 
  
 $sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
 $result = $connect->query($sql);
@@ -112,7 +111,7 @@ $row = $result->fetch_assoc();
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -137,7 +136,7 @@ $row = $result->fetch_assoc();
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
                 
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -199,7 +198,7 @@ $row = $result->fetch_assoc();
                     <form class="form-horizontal form-label-left" action="ajout_transporteur_action.php" method="post" novalidate>
 
                     
-                      <span class="section">Personal Info</span>
+                      <span class="section">Information </span>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nom <span class="required">*</span>
@@ -251,9 +250,16 @@ $row = $result->fetch_assoc();
                           <input type="text" id="name" name="Type_Voiture" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+					      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">N° Cin <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="name" name="Cin" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 					
 					  
-                      <div class="item form-group">
+                    <!--  <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Login in  <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -266,7 +272,7 @@ $row = $result->fetch_assoc();
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="password" type="password" name="PWD"  class="form-control col-md-7 col-xs-12" required="required">
                         </div>
-                      </div>
+                      </div>-->
                   
                      
 					  
@@ -276,7 +282,7 @@ $row = $result->fetch_assoc();
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
+                 
                           <button id="send" type="submit" class="btn btn-success">Ajouter</button>
                         </div>
                       </div>

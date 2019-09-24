@@ -1,6 +1,4 @@
-
-<?php require_once 'db_connect.php'; 
-$id_admin=2;
+<?php require_once 'session.php'; 
  
 $sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
 $result = $connect->query($sql);
@@ -162,15 +160,19 @@ $row = $result->fetch_assoc();
                   
                     
                     <span class="input-group-btn"> 
+					 <?php 
+	 if ($row['type_admin']==1) {echo'
                       <button type="button" class="btn btn-primary btn-ms"  data-toggle="modal" data-target=".bs-example-modal-lg" >
                                 <i class="fa fa-plus-square"> </i> Ajouter Admnistrateur 
-                              </button>
+                             
+					 </button>';} ?>
                     </span>
                   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
                         <div class="modal-header">
+						
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
                           <h4 class="modal-title" id="myModalLabel">Ajout Admnistrateur </h4>
@@ -260,16 +262,8 @@ $row = $result->fetch_assoc();
                       <div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
-                        </div>
-                      </div>
-					  </div>
-				  </div>
-                  
-					  </div>
-					   <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                      
-					  <div class="white-box">
+						  
+						  <div class="white-box">
                             
 							<form class="form-horizontal form-material" name="form" action="modif_admin_action.php" method="post">
                                 <div class="form-group">
@@ -310,10 +304,52 @@ $row = $result->fetch_assoc();
 							  
                                 
                             </form>
-                        </div>
+                        
+                      </div>
+					  </div>
+				  </div>
+                  
+					  </div>
+					  
+					
+                      
+					   <table class="table">
+    <thead>
+      <tr>
+        <th>Nom & Prenom </th>
+        <th>Login</th>
+        <th>Mot de passe</th>
+		 <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+	 <?php 
+	 if ($row['type_admin']==1) {
+						$sql="select * from administrateur";
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+						while($data=$result->fetch_assoc())
+						{  echo'
+	<tr>
+	<td> '.$data['nom'].' </td>
+	<td> '.$data['login'].'</td>
+	<td> '.$data['pwd'].' </td>
+	<td>
+	 <a href="Sup_admin.php?id_admin='. $data['id_admin'].'">  <button type="button" class="btn btn-warning btn-xs">
+                                <i class="fa fa-ban"> </i> Supprimer 
+                              </button>
+							  </a> 
+	</td>
+	</tr>
+	
+	
+	';}}} ?>
+	
+	</tbody>
+	</table>
 
                   
-                    </div>
+                    
                     </div>
 					</div>
                   </div>
