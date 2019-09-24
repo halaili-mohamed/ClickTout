@@ -35,6 +35,24 @@ $row = $result->fetch_assoc();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	
+	
+	<script>
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+<style id="__web-inspector-hide-shortcut-style__" type="text/css">
+.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
+{
+    visibility: hidden !important;
+}
+</style>
+
   </head>
 
   <body class="nav-md">
@@ -137,7 +155,7 @@ $row = $result->fetch_assoc();
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -156,99 +174,59 @@ $row = $result->fetch_assoc();
                 <h3>Commande <small></small></h3>
               </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-				
-                 
-                </div>
               </div>
             </div>
 
             <div class="clearfix"></div>
 
-            <div class="row">
-              
-
- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-left top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Recherche par numero commande...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-success " type="button" style="color:white;"> <strong>Filtrer</strong></button>
-                    </span>
-                  </div>
-				  </div>
-              <div class="col-md-12 col-sm-12 col-xs-12">
-			
+        
+   <div class="row">
+              <div class="col-md-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2> <small></small></h2>
-					
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
                   <div class="x_content">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                    <div id="example_wrapper" class="dataTables_wrapper">
 
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr class="headings">
-                            
-                            <th class="column-title">Numero de commande  </th>
-                           
-                            <th class="column-title">Adresse départ  </th>
-                            <th class="column-title">Adresse destination </th>
-							 <th class="column-title">Date commande </th>
-							<th class="column-title">heure </th>
-							 <th class="column-title">Type de voiture</th>
-							 <th class="column-title">Nombre  d'ouvrier </th>
-							
-							 <th class="column-title">Nom livrer </th>
-							 
-							 
-                            <th class="column-title">Etat </th>
-                            <th class="column-title"> Prix</th>
-                           
-                       
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                           <?php 
-						$sql="select * from commende";
+ 
+ <table id="example" class="display dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                <thead>
+                    <tr role="row">
+<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">N° transporteur </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Nom & prenom </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Email</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Adresse</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Matricule</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Type de voiture </th>
+<th> ACTION </th></tr>
+                </thead>
+			
+  <tbody>
+  <?php 
+						$sql="select * from transporteur";
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
 						while($data=$result->fetch_assoc())
 						{echo'
-						<tr>
-                            <td class=" "> '.$data['id_commende'].'</td>
-                            <td class=" "> '.$data['Adresse_depart'].' </td>
-                            <td class=" "> '.$data['Adresse_arrive'].' </td>
-                            <td class=" "> '.$data['Date'].' </td>
-                            <td class=" "> '.$data['Heure'].'</td>
-                            <td class=""> '.$data['type_voiture'].' </td>
-							 <td class=""> '.$data['prix'].' </td>
-                           
-                          </tr>
-                       ';}}?>
-                            
-                         
-                        </tbody>
-                      </table>
-                    </div>
+<tr role="row">
+		<td >'.$data['Id_Transporteur'].'</td>
+      <td>'.$data['nom'].' '.$data['Prenom'].' </td>
+      <td>  '.$data['Email'].'</td>
+      <td>  '.$data['Adresse'].'</td>
+      <td>  '.$data['Matricule'].'</td>
+      <td>  '.$data['Type_Voiture'].'</td>
+	  <td> <div class="btn-group">
+      <a href="Details.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].'&Cin= '.$data['Cin'].'&psudo= '.$data['psudo'].'"><button type="button" class="btn btn-info btn-xs"> Details <i class="fa fa-">
+                                </i> </button>
+				
+							  </a> 
+							
+
+						
+					 ';}} ?>
+		 </tbody>
+		</table>			  
+			  
+			        </div>
 
                   </div>
                 </div>
@@ -256,12 +234,7 @@ $row = $result->fetch_assoc();
 
               <div class="clearfix"></div>
 
-              
-
-
-              
-
-              <div class="clearfix"></div>
+   
 
               
             </div>
@@ -281,7 +254,7 @@ $row = $result->fetch_assoc();
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+   
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
