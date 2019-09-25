@@ -10,7 +10,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Autoroad - Free Bootstrap 4 Template by Colorlib</title>
+	<link rel="icon" href="images/icon.png" type="image/ico" />
+    
+	<title>ClickTOUT| Je tranporte pour vous </title>
 
     
 
@@ -55,69 +57,69 @@
 		
 	<script> 
 	$(document).ready(function(){
-  $("#panel").show();
- 
-  $("#b1").click(function(){
-    $("#panel1").slideDown("slow");
-    $("#panel").slideUp("slow");
- 
-      $('#li1').html( "Adresse Départ: "+$('#Adresse_depart').val()); 
-            $('#li2').html( "Adresse Destination: "+$('#Adresse_arrive').val());
-            $('#li3').html("Date: "+ $('#Date').val());
-            $('#li4').html("Heure: "+ $('#Heure').val()); 
-            $('#in_kilo').html("Distance is Kilo: "+ $('#in_kilo').val());
-  });
+		  $("#panel").show();
+		 
+		  $("#b1").click(function(){
+			$("#panel1").slideDown("slow");
+			$("#panel").slideUp("slow");
+		 
+			  $('#li1').html( "Adresse Départ: "+$('#Adresse_depart').val()); 
+					$('#li2').html( "Adresse Destination: "+$('#Adresse_arrive').val());
+					$('#li3').html("Date: "+ $('#Date').val());
+					$('#li4').html("Heure: "+ $('#Heure').val()); 
+					$('#in_kilo').html("Distance is Kilo: "+ $('#in_kilo').val());
+		  });
 
-  $("#b2").click(function(){
-    $("#panel2").slideDown("slow");
-    $("#panel1").slideUp("slow");
-  });
-  $("#b3").click(function(){
-    $("#panel3").slideDown("slow");
-    $("#panel2").slideUp("slow");
-  });
+		  $("#b2").click(function(){
+			$("#panel2").slideDown("slow");
+			$("#panel1").slideUp("slow");
+		  });
+		  $("#b3").click(function(){
+			$("#panel3").slideDown("slow");
+			$("#panel2").slideUp("slow");
+		  });
 
+		  
+			$("#b5").click(function(){
+			$("#panel").slideDown("slow");
+			$("#panel1").slideUp("slow");
+		  });
+		  $("#b6").click(function(){
+			$("#panel1").slideDown("slow");
+			$("#panel2").slideUp("slow");
+		  });
+		   $("#b7").click(function(){
+			$("#panel2").slideDown("slow");
+			 $("#panel3").slideUp("slow");
+		  });
   
-    $("#b5").click(function(){
-    $("#panel").slideDown("slow");
-    $("#panel1").slideUp("slow");
-  });
-  $("#b6").click(function(){
-    $("#panel1").slideDown("slow");
-    $("#panel2").slideUp("slow");
-  });
-   $("#b7").click(function(){
-    $("#panel2").slideDown("slow");
-	 $("#panel3").slideUp("slow");
-  });
-  
-});
+	});
 	</script>
 	<style> 
-	#panel, #flip,#panel1, #flip1,#panel2, #flip2,#panel3, #flip3,#flip4 {
+		#panel, #flip,#panel1, #flip1,#panel2, #flip2,#panel3, #flip3,#flip4 {
+		  padding: 5px;
+		  text-align: center;
+		  background-color: #e5eecc;
+		  border: solid 1px #c3c3c3;
+		}
+
+		#flip4 {
 	  padding: 5px;
 	  text-align: center;
-	  background-color: #e5eecc;
+	  font-size: larger;
+	  background-color: #fc983c ;
 	  border: solid 1px #c3c3c3;
-	}
+		}
 
-	#flip4 {
-  padding: 5px;
-  text-align: center;
-  font-size: larger;
-  background-color: #fc983c ;
-  border: solid 1px #c3c3c3;
-}
+		#panel,#panel1,#panel2,#panel3{
+		  background-color: white;
+		  display: none;
+		}
 
-	#panel,#panel1,#panel2,#panel3{
-	  background-color: white;
-	  display: none;
-	}
-
-	.sizeimage{
-		width: 200px;
-		height: 200px;
-	}
+		.sizeimage{
+			width: 200px;
+			height: 200px;
+		}
 	</style>
 
 <style type="text/css"></style>
@@ -133,10 +135,10 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.php" class="nav-link">HOME</a></li>
-	          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
-	          <li class="nav-item"><a href="#part" class="nav-link">NOS PARTENAIRES</a></li>
-	          <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+	          <li class="nav-item active"><a href="index.php" class="nav-link">Accueil</a></li>
+	          <li class="nav-item"><a href="#about" class="nav-link">Nos services</a></li>
+	          <li class="nav-item"><a href="#part" class="nav-link">Nos partenaires</a></li>
+	          <li class="nav-item"><a href="#contact" class="nav-link">Contactez-nous</a></li>
 		
 	        </ul>
 	      </div>
@@ -150,8 +152,8 @@
         <div class="row no-gutters slider-text justify-content-start align-items-center">
           <div class="col-lg-6 col-md-6 ftco-animate d-flex align-items-end">
           	<div class="text">
-	            <h1 class="mb-4"><span>ClickTOUT</span> <span>Je transport pour vous</span></h1>
-	            <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p>
+	            <h1 class="mb-4"> <span>Je transport pour vous</span></h1>
+	            <p style="font-size: 18px;"></p>
 	            <a href="#reserver" >
 	            	<CENTER>
 					<div class="col-lg-6"><button  id="res" value="following" class="btn btn-primary btn-lg btn-block"><B style="font-size: 20px;">RESERVER</B></button></div>
@@ -287,19 +289,19 @@
 			 <form id="f" method="GET" id="distance_form">
 			 
 			 
-				<div id="flip">1er étape</div>
+				<div id="flip">1. La destination et la date de votre commande</div>
 				<div id="panel">
 
 					<div class="form-row ">
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
-					  <label for="Adresse_depart">Adresse Départ</label>
-					  <input type="text" class="form-control"  name="Adresse_depart" id="Adresse_depart" placeholder="Enter votre Adresse Départ" >
+					  <label for="Adresse_depart">Départ</label>
+					  <input type="text" class="form-control"  name="Adresse_depart" id="Adresse_depart" placeholder="Votre Adresse Départ" >
    					 <input id="origin" name="origin" required="" type="hidden" />
 					</div>
 					<div class="form-group col-md-4">
-					  <label for="Adresse_arrive">Adresse Destination</label>
-					  <input type="text" class="form-control" name="Adresse_arrive" id="Adresse_arrive" placeholder="Enter votre Adresse Destination">
+					  <label for="Adresse_arrive">Destination</label>
+					  <input type="text" class="form-control" name="Adresse_arrive" id="Adresse_arrive" placeholder="Votre Adresse Destination">
 					  <input id="destination" name="destination" required="" type="hidden" />
 					</div>
 				  </div>
@@ -312,13 +314,13 @@
 					  <input type="date" class="form-control" id="Date" >
 					</div>
 					<div class="form-group col-md-4">
-					  <label for="Heure">Time</label>
+					  <label for="Heure">Horaire</label>
 					  <input type="time" class="form-control" id="Heure" >
 					</div>
 					<div class="col-md-1"></div>
 					<div>
 					
-					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Calculate</button>
+					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Suivant</button>
 					</div>
 				  </div>
 					
@@ -326,18 +328,18 @@
 							</div>
 				</form>			
 						
-				<div id="flip1">2éme Etape</div>
+				<div id="flip1">2. Vos coordonnées</div>
 				<div id="panel1">
 
 				<div class="form-row ">
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
-					  <label for="Nom">First Name</label>
-					  <input type="text" class="form-control" id="Nom" placeholder="Your First Name">
+					  <label for="Nom">Nom</label>
+					  <input type="text" class="form-control" id="Nom" placeholder="Votre nom">
 					</div>
 					<div class="form-group col-md-4">
-					  <label for="Prenom">Last Name</label>
-					  <input type="text" class="form-control" id="Prenom" placeholder="Your Last Name">
+					  <label for="Prenom">Prénom</label>
+					  <input type="text" class="form-control" id="Prenom" placeholder="Votre prénom">
 					</div>
 				  </div>
 				  
@@ -345,25 +347,25 @@
 				  <div class="form-row ">
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
-					  <label for="example-date-input">Phone</label>
-					  <input type="tel" class="form-control" id="Phone" placeholder="Your Phone" >
+					  <label for="example-date-input">Téléphone</label>
+					  <input type="tel" class="form-control" id="Phone" placeholder="Votre numéro téléphone" >
 					</div>
 					<div class="form-group col-md-4">
-					  <label for="Email">Email</label>
-					  <input type="email" class="form-control" id="Email" placeholder="name@example.com">
+					  <label for="Email">Adresse e-mail</label>
+					  <input type="email" class="form-control" id="Email" placeholder="Votre adresse e-mail">
 					</div>
 					</div>
 					 <div class="form-row ">
 					 <div class="col-md-5"></div>
 					 <button  id="b5"  class="btn btn-primary custom-next">retour</button> <div class="col-md-1"></div>
-					 <button  id="b2"  class="btn btn-primary custom-next">Next</button>
+					 <button  id="b2"  class="btn btn-primary custom-next">suivant</button>
 					
 				  </div>
 				  
 							</div>
 							
 									
-				<div id="flip2">3eme etape</div>
+				<div id="flip2">3. Des informations supplémentaires</div>
 				<div id="panel2">
 						
 											<div><label>De quelle taille de véhicule aurez-vous besoin ?</label></div>
@@ -440,7 +442,7 @@
 							</div>
 							<div>
 										<button  id="b6"  class="btn btn-primary custom-next">retour</button>
-										 <button  id="b3"  class="btn btn-primary custom-next">next</button>
+										 <button  id="b3"  class="btn btn-primary custom-next">suivant</button>
 					</div>
 				</div>
 					
@@ -448,7 +450,7 @@
 					
 					
 					
-					<div id="flip3">4eme etape</div>
+					<div id="flip3">4. Paiement</div>
 				<div id="panel3">
 					
 					  <div  id="paypal-button-container">
@@ -491,15 +493,15 @@
 			<div id="flip4">
 				 <div class="col-md-3" ><h1>Prix : 100$</h1> </div>
 			 
-             <dv id="result" class="col-md-7" style="text-align: left;">
-                  <ul id="list" class="list-group">
-                 <li id="li1">Adresse Départ</li>
+             <div id="result" class="col-md-7" style="text-align: left;">
+                  <ul id="list" class="list-group" >
+                 <li id="li1" >Adresse Départ</li>
                  <li id="li2">Adresse Destination</li>
                  <li id="li3">Date</li>
-                 <li id="li4">Time</li>
-                 <li id="in_kilo">Distance is Kilo</li>
+                 <li id="li4">Horaire</li>
+                 
                   </ul> 
-             </dv>  
+             </div>  
 				
 
 			</div>
