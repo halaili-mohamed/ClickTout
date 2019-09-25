@@ -140,7 +140,7 @@ $row = $result->fetch_assoc();
                             
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 							 
-							<input type="text" class="form-control has-feedback-left" id="Adresse_depart" name="Adresse_depart" placeholder="Départ" >
+							<input type="text" class="form-control has-feedback-left" id='Adresse_depart' name="Adresse_depart" placeholder="Départ" >
 							<span class="fa fa-map-marker form-control-feedback left" aria-hidden="true"></span>
 							</div>
 
@@ -163,7 +163,7 @@ $row = $result->fetch_assoc();
 						</div>
 						  
 						 <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-							<input type="text" class="form-control has-feedback-left" name="Adresse_arrive" id="Adresse_arrive" placeholder="Destination">
+							<input type="text" class="form-control has-feedback-left" name="Adresse_arrive" id='Adresse_arrive' placeholder="Destination">
 							<span class="fa fa-flag form-control-feedback left" aria-hidden="true"></span>
 						</div>
 						  
@@ -180,11 +180,22 @@ $row = $result->fetch_assoc();
 						</div>
 						 </br> 
 						   <h2 class="StepTitle">Des informations supplémentaires</h2>
+						   
                           <div class="form-row">
                            <div class="col"> 
-								<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-									<input type="text" class="form-control has-feedback-left" name="type_voiture" placeholder="Type de voiture">
+								<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
 									<span class="fa fa-car form-control-feedback left" aria-hidden="true"></span>
+										  <select name="type_voiture" id="type_voiture" class="form-control"  >
+											<option hidden> 	' 					'									'																																													                           		Type de véhicule</option>
+											<option value="1">9m³</option>
+											<option value="2">16m³</option>
+											<option value="3">24m³</option>
+											<option value="4">m³</option>
+										  </select>
+										</div>
+									  </div>
 								</div>
 							</div>
 							<div class="col">
@@ -194,6 +205,7 @@ $row = $result->fetch_assoc();
 								</div>
 							</div>
                           </div>
+						  
 						   <div class="form-row">
                            <div class="col"> 
 								<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -241,7 +253,7 @@ $row = $result->fetch_assoc();
 								<input type="hidden" name="id_partenaire" value="<?php echo $id_partenaire ?>" />
 								</div>
 							
-						 <div class="form-group">
+						 <div class="form-group" align="center">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="formCmdPart.php"><button class="btn btn-danger" type="button">Annuler</button>
 						  <button class="btn btn-warning" type="reset">Rénitialiser</button>
@@ -310,10 +322,13 @@ $row = $result->fetch_assoc();
 
 <script>
 		function activatePlacesSearch(){
+			var input1 = document.getElementById('Adresse_depart');
 			
-						var input2 = document.getElementById('Adresse_arrive');
+			var autocomplete1 = new google.maps.places.Autocomplete(input1);
 			
+			var input2 = document.getElementById('Adresse_arrive');
 			var autocomplete2 = new google.maps.places.Autocomplete(input2);
+			
 		}
 	 </script>
 	 

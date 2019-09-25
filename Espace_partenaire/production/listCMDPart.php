@@ -31,7 +31,7 @@ $row = $result->fetch_assoc();
     <link href="../build/css/custom.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 	<script >
@@ -220,10 +220,9 @@ $row = $result->fetch_assoc();
 							  <td> ' ;
 						  if ($data['etatCmd']==1) { echo '
 						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-						  echo '<span class="label label-success">Déchargée</span> ';}elseif($data['etatCmd']== -1 ) {
-						  echo '<span class="label label-success">Acceptée </span> ';} else {
-						  echo '<span class="label label-danger">Annulée</span>' ;}
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==0) {
+						  echo '<span class="label label-success">Commandée</span> ';}elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-primary">Acceptée </span> ';} 
 						   echo '</td>
 							  <td> <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
 								<i class="fa fa-folder"></i> Détails
@@ -252,11 +251,10 @@ $row = $result->fetch_assoc();
 														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</li>
 														<i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
 														if ($data['etatCmd']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==3) {
-												  echo '<span class="label label-success">Déchargée</span> ';} elseif($data['etatCmd']== -1 ) {
-						  echo '<span class="label label-success">Acceptée </span> ';}else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
+						  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCmd']==2) {
+						  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCmd']==0) {
+						  echo '<span class="label label-success">Commandée</span> ';}elseif($data['etatCmd']== -1 ) {
+						  echo '<span class="label label-primary">Acceptée </span> ';} 
 														echo'
 													  
 													  <br />

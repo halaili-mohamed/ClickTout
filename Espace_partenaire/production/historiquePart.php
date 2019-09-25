@@ -28,7 +28,7 @@ require_once 'sessionPart.php';
     <link href="../build/css/custom.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+	<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 	<script >
