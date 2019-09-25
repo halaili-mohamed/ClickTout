@@ -1,9 +1,10 @@
 <?php require_once 'db_connect.php'; 
-$id_Transporteur=1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -23,6 +24,7 @@ $id_Transporteur=1;
     
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
   </head>
 
   <body class="nav-md">
@@ -31,7 +33,7 @@ $id_Transporteur=1;
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_dispo2.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -42,7 +44,7 @@ $id_Transporteur=1;
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
@@ -125,8 +127,6 @@ $id_Transporteur=1;
                   <div class="x_content">
                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
 					<?php 
-					// pour photo de profil :                       
-					//<img class="img-responsive avatar-view" src="images/'.$row['photo'].'.jpg" alt="Avatar" title="Change the avatar">
                       echo'<div class="profile_img">
                         <div id="crop-avatar">
                           <!-- Current avatar -->
@@ -150,62 +150,26 @@ $id_Transporteur=1;
 
                         <li><i class="fa fa-car user-profile-icon"></i>'.'  '.$row['Type_Voiture'].'
                         </li>
-                       	<div class="row top_tiles" style="margin: 10px 0 ;border:1px grey ">
-						<div class="col-md-12 tile " align="center" style="margin-top: 25px">
-						<i class="fa fa-money"></i> Revenue total du mois 
-                        <h2>$ 1,231,809</h2>
+						<li><i class="fa fa-tags user-profile-icon"></i>'.'  '.$row['Matricule'].'
+                        </li>
+						
+                       <li><i class="fa fa-money"></i> Revenue total du mois 
+						</li> 
+						';
+						//a verfier avec mouhamed
+						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur 
+ and t.id_Transporteur=$_SESSION['id_Transporteur'] 
+AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d") AND DATE_FORMAT( SYSDATE(), "%Y-%m-%d") ";		
+						$res=$connect->query($sql2);
+						$data = $res->fetch_assoc();
+					    echo'  <h2>  '.$data['revenue'].'</h2>
                         <span class="sparkline_two" style="height: 160px;">
                                       <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                  </span>
-                       </div>
-					   </div>
-                      </ul>
-
-                      
-                      <br />';
-
-                      
+                        </span>
+                         </ul>
+                         <br/>';
 							?>
-                   <!--   <div class="profile_img">
-                        <div id="crop-avatar">
-                         
-                          <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
-                        </div>
-                      </div>
-                      <h3>Nom et prenom</h3>
-
-                      <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-birthday-cake user-profile-icon"></i> 12/02/1995
-                        </li>
-						<li><i class="fa fa-envelope-o user-profile-icon"></i> lmkd@jak
-                        </li>
-						<li><i class="fa fa-phone user-profile-icon"></i> 72569584
-                        </li>
-						<li><i class="fa fa-map-marker user-profile-icon"></i> 8042 birbouregba 
-                        </li>
-						<li><i class="fa fa-car user-profile-icon"></i> citroen 4 cheveaux
-                        </li>
-						<li>
-						<div class="row top_tiles" style="margin: 10px 0 ;border:1px grey ">
-						<div class="col-md-12 tile " align="center" style="margin-top: 25px">
-						<i class="fa fa-money"></i> Revenue total du mois 
-                        <h2>$ 1,231,809</h2>
-                        <span class="sparkline_two" style="height: 160px;">
-                                      <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                  </span>
-                       </div>
-					   </div>
-						</li>
-                     
-
-                    
-                      </ul>
-
-             
-                      <br />
-
-                      
--->
+                 
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
 
@@ -245,13 +209,13 @@ $id_Transporteur=1;
                                         <input type="text" name="Adresse" class="form-control form-control-line" value="<?php echo $row['Adresse'] ?>">
                                     </div>
                                 </div>
-								
 								<div class="form-group">
-									<label class="col-md-12">Voiture</label>
+									<label class="col-md-12"> Voiture </label>
 									<div class="col-md-12">
-										<input type="text" placeholder=""  class="form-control form-control-line" value="<?php echo $row['Type_Voiture'] ?>"/>
+										<input type="text" name="Type_Voiture" class="form-control form-control-line" value="<?php echo $row['Type_Voiture'] ?>"/>
 									</div>
 								</div>
+							
 								<div class="form-group">
 									<label class="col-md-12"> Matricule </label>
 									<div class="col-md-12">
@@ -266,14 +230,21 @@ $id_Transporteur=1;
 								<div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="Password"  class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> </div>
+                                        <input type="password" name="Password"  class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> 
+										</div>
                                 </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Vérfier mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" name="Password2"  class="form-control form-control-line" value="Password2"> 
+								</div>
+								</div>	
 								<div class="form-group">
 								<input type="hidden" name="id_Transporteur" value="<?php echo $row['id_Transporteur']?>" />
 								</div>
 								<div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+                                        <button class="btn btn-success">Modifier</button>
                                     </div>
                                 </div>
                                 
@@ -302,7 +273,7 @@ $id_Transporteur=1;
         <!-- /footer content -->
       </div>
     </div>
-
+   
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -324,4 +295,5 @@ $id_Transporteur=1;
     <script src="../build/js/custom.min.js"></script>
 
   </body>
+
 </html>

@@ -23,6 +23,16 @@ $next=$page + 1;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" href="images/favicon.png" type="image/ico" />
+	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -39,12 +49,13 @@ $next=$page + 1;
   </head>
 
   <body class="nav-md">
+  
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="formCmdPart.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -63,7 +74,7 @@ $next=$page + 1;
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
@@ -116,14 +127,7 @@ $next=$page + 1;
               </div>
 
               <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-                    </span>
-                  </div>
-                </div>
+               
               </div>
             </div>
             
@@ -134,18 +138,7 @@ $next=$page + 1;
                 <div class="x_panel">
                   <div class="x_title">
 				  <h2>Liste des offres disponibles</h2> 		
-                    <ul class="nav navbar-right panel_toolbox">
-
-                <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"><i class="fa fa-sort-amount-desc"></i> La plus récente </a>
-                          </li>
-                          <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
-                          </li>
-                        </ul>
-                      </li>      
-                    </ul>
+                   
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">    
@@ -155,64 +148,93 @@ $next=$page + 1;
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <nav aria-label="Page navigation">
-							  <ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="listCMDPart.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								  </a>
-								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="listCMDPart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="listCMDPart.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								  </a>
-								</li>
-							  </ul>
-							</nav>
-                      </div>
-                      <div class="clearfix"></div>
-					  <?php 
-						$sql1="select * from commende c , transporteur t where transporteur_id_Transporteur={$id_Transporteur} and c.etatCMD= 0 and c.type_voiture=t.Type_Voiture LIMIT $start, $limit";
+				  <div class="row">			
+					  <table id="example" class="display" style="width:100%">
+
+				    <thead>
+    <tr>
+      <th>N° Commande</th>
+      <th>Nom client</th>
+      <th>Date</th>
+      <th>Détails</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+				  <?php 
+						$sql1="select * from commende c , transporteur t where transporteur_id_Transporteur={$id_Transporteur} and c.etatCMD= 0 and c.type_voiture=t.Type_Voiture order by c.Date DESC LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
-						while($data = $result1->fetch_assoc()) { 
+						while($data = $result1->fetch_assoc()) {
 							$sql2="select * from client where id_client={$data['client_id_client']}";
 							$res=$connect->query($sql2);
 							$r=$res->fetch_assoc();
-                      echo '<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                        <div class="well profile_view">
-                          <div class="col-sm-12">
-                            <h4 class="brief"><i>N° commande: '.$data['n_cmd'].'</i></h4>
-                            <div class="left col-xs-7">
-                              <ul class="list-unstyled">
-                                <li>
-							    <i class="fa fa-calendar "></i>  Date:  '.$data['Date'].'  </li> 
-							    <li><i class="fa fa-clock-o "></i>  Horraire:  '.$data['Heure'].'  </li>	
-								<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </li>	
-								<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</li>
-								<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-								<li><i class="fa fa-mobile-phone "></i> Téléphone: '.$r['TelClient'].' </li>
-                              </ul>
-                            </div>
-                          </div>
-						  <div class="col-xs-12 bottom text-center">
-                            <div class="col-xs-12 col-sm-6 emphasis"></div>
-							<div class="col-xs-12 col-sm-6 emphasis">
-							    <a href="accepterCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-success btn-xs" >
-								<i class="fa fa-check"></i> Accépter</a>
-                            </div>
-                          </div> 
-                        </div>
-						</div>   ';}} ?>
-                    </div>
-                  </div>
+							
+							echo '
+    <tr>
+      <td>'.$data['n_cmd'].'</td>
+      <td> '.$r['Nom'].'</td>
+      <td>'.$data['Date'].'</td>
+      <td> <!-- Small modal -->
+							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
+								<i class="fa fa-folder"></i> Détails
+							</button>
+														  
+							 <div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						  										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
+												</div>
+												<div class="modal-body">
+													<ul class="messages">
+													<li>
+													<div class="message_wrapper">
+													<li><i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> </li>
+													<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </br> </li>
+													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+													<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</br> </li>
+													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
+													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+													if ($data['etatCMD']==0) {
+													echo '<span class="label label-default">En attente</span> ';} 
+												  echo'</li>						  
+												   </div>
+												   </li>
+												   </ul>
+												   <div class="modal-footer">
+													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+												   </div>
+											</div>
+													
+												  </div>
+												</div>
+</div>
+									
+											  <!-- /modals --></td>
+      <td> 
+	  <a href="accepterCMD.php?id_commende='.$data['id_commende'].'"><button type="button" class="btn btn-success btn-xs" >
+	  <i class="fa fa-check"></i> Accépter</a>
+	  </td>
+    </tr>
+  
+  '; }}?>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>N° Commande</th>
+      <th>Nom client</th>
+      <th>Date</th>
+      <th>Détails</th>
+      <th>Action</th>
+    </tr>
+  </tfoot>
+</table>
+						</div>
+                 
                 </div>
               </div>
             </div>
@@ -230,9 +252,8 @@ $next=$page + 1;
         <!-- /footer content -->
       </div>
     </div>
-
+    
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

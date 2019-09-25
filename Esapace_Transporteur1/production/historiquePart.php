@@ -27,6 +27,15 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="icon" href="images/favicon.png" type="image/ico" />
+	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+	  
     <title>Espace transporteur</title>
 
     <!-- Bootstrap -->
@@ -48,7 +57,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_dispo2.html" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -58,7 +67,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
@@ -147,45 +156,10 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
             <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    
-                    <ul class="nav navbar-right panel_toolbox">
-                       <li class="dropdown">
-                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Trier par  <i class="fa fa-sort"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"><i class="fa fa-sort-amount-desc"></i> La plus récente </a>
-                          </li>
-                          <li><a href="#"> <i class="fa fa-sort-amount-asc"></i> La plus ancienne </a>
-                          </li>
-                        </ul>
-                      </li> 
-                    </ul>
                     <div class="clearfix"></div>
                   </div>
 				  <div class="x_content">
-				  <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <nav aria-label="Page navigation">
-							  <ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="historiquePart.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>
-								  </a>
-								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="historiquePart.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="historiquePart.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>
-								  </a>
-								</li>
-							  </ul>
-							</nav>
-                   </div>
-
-				  <div class="row">
-              
+				  <div class="row"> 
 			<div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                   <div class="x_title">
@@ -193,20 +167,18 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                  
                   <div class="clearfix"></div>
                 </div>
-                 
                   <div class="x_content">
                     <!-- start project list -->
-                    <table class="table table-striped projects">
+                    <table id="example" class="display" style="width:100%">
                       <thead>
                         <tr>
                           <th>N° commande</th>
                           <th>Nom client</th>  
-						  <th>Etat</th>
 						  <th>Date</th>
-                          <th style="width: 20%">Action</th>
+						  <th>Etat</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
-					  
                       <tbody>
 						<?php 
 						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD in (3,4)LIMIT $start, $limit";
@@ -215,11 +187,8 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 						while($data = $result1->fetch_assoc()) {
 							$sql2="select * from client where id_client={$data['client_id_client']}";
 							$res=$connect->query($sql2);
-							$r=$res->fetch_assoc();
-							
+							$r=$res->fetch_assoc();					
 							echo '
-                     
-					  
                         <tr>
                           <td>'.$data['n_cmd'].'</td>
                           <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
@@ -251,33 +220,27 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 													<ul class="messages">
 													<li>
 													<div class="message_wrapper">
-													<li>
-														<i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> 
-														<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </li>
-														
-														<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
-														
-														<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].' </li>
-														<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-														<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</li>
-														<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-														if ($data['etatCMD']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
+													<li><i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> </li>
+													<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </br> </li>
+													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+													<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</br> </li>
+													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
+													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+													if ($data['etatCMD']==1) {
+												  echo '<span class="label label-Primary">Chargée</span> '; } elseif ($data['etatCMD']==2) {
 												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
 												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
 												  echo '<span class="label label-warning">Déchargée</span> ';} else {
 												  echo '<span class="label label-danger">Annulée</span>' ;}
-							echo '</li>
-													  <br />
-													  
-													</div>
-												  </li>
-													</ul>
-													<div class="modal-footer">
+							                      echo '</li>						  
+												   </div>
+												   </li>
+												   </ul>
+												   <div class="modal-footer">
 													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-													  
-													</div>
-													</div>
+												   </div>
+											</div>
 													
 												  </div>
 												</div>
@@ -290,9 +253,17 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 													</tr> '; 
 						}}
 					  ?>
-					   </tbody>
-
-                    </table>
+					 </tbody>
+  <tfoot>
+    <tr>
+      <th>N° commande</th>
+      <th>Nom client</th>  
+	  <th>Date</th>
+	  <th>Etat</th>
+      <th>Action</th>
+    </tr>
+  </tfoot>
+</table>
                     <!-- end project list -->
 
                   </div>
@@ -311,8 +282,6 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
