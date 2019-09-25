@@ -1,7 +1,6 @@
 <?php 
  
 require_once 'session.php'; 
-
 $sql = "SELECT * FROM administrateur where id_admin='$id_admin'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
@@ -49,6 +48,7 @@ $next=$page + 1;
 <link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 
 
 <script>
@@ -188,7 +188,7 @@ $(document).ready(function() {
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                         <nav aria-label="Page navigation">
-							  <ul class="pagination justify-content-center">
+							  <!--<ul class="pagination justify-content-center">
 								<li class="page-item">
 								  <a class="page-link" href="gestion_transporteur.php?page=<?= $previous; ?>" aria-label="Previous">
 									<span aria-hidden="true">&laquo;</span>
@@ -200,7 +200,7 @@ $(document).ready(function() {
 								  <a class="page-link" href="gestion_transporteur.php?page=<?= $next; ?>" aria-label="Next">
 									<span aria-hidden="true">&raquo;</span>
 									<span class="sr-only">Next</span>								  </a>								</li>
-							  </ul>
+							  </ul>-->
 						</nav>
                       </div>
 
@@ -211,11 +211,11 @@ $(document).ready(function() {
  <table id="example" class="display dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
                 <thead>
                     <tr role="row">
-<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">Name</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Position</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Office</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Age</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Start date</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Salary</th>
+<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">N° transporteur </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Nom & prenom </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Email</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Adresse</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Matricule</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Type de voiture </th>
 <th> ACTION </th></tr>
                 </thead>
 			
@@ -234,20 +234,35 @@ $(document).ready(function() {
       <td>  '.$data['Matricule'].'</td>
       <td>  '.$data['Type_Voiture'].'</td>
 	  <td> <div class="btn-group">
-      <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].' "><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
+      <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].'&Cin= '.$data['Cin'].'&psudo= '.$data['psudo'].'"><button type="button" class="btn btn-info btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
       <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &nom='.$data['nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
-	 <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-danger btn-xs">
-                                <i class="fa fa-"> </i> Supprimer
+	 <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-warning btn-xs">
+                                <i class="fa fa-envelope-o"> </i> Email
+                              </button>
+							  </a> ';
+							  
+							 if ($data['Etat_compte']==0)
+							  { echo '
+							  <a href="desactif_transp.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-danger btn-xs">
+                                <i class="fa fa-"> </i> Desactiver
+                              </button>
+							  </a> '
+							  ;}
+							  else 
+							  {echo '
+							  	  <a href="actif_transp.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-success btn-xs">
+                                <i class="fa fa-"> </i> Activer
                               </button>
 							  </a>
+							  
 							  </div>
 </td>
 						
-					  ';}}?>
+					 ';}}} ?>
 		 </tbody>
 		</table>			  
 			  
