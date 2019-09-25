@@ -152,7 +152,7 @@
         <div class="row no-gutters slider-text justify-content-start align-items-center">
           <div class="col-lg-6 col-md-6 ftco-animate d-flex align-items-end">
           	<div class="text">
-	            <h1 class="mb-4"> <span>Je transport pour vous</span></h1>
+	            <h1 class="mb-4"> <span>Je transporte pour vous</span></h1>
 	            <p style="font-size: 18px;"></p>
 	            <a href="#reserver" >
 	            	<CENTER>
@@ -173,8 +173,8 @@
       <div class="container">
       	<div class="row justify-content-center">
           <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">Our Services</span>
-            <h2 class="mb-2">Our Services</h2>
+          	<span class="subheading">Nos Services</span>
+            <h2 class="mb-2">Nos Services sont..</h2>
           </div>
         </div>
         <div class="row d-flex">
@@ -183,9 +183,9 @@
               <div class="media-body py-md-4">
               	<div class="d-flex mb-3 align-items-center">
 	              	<div class="icon"><span class="flaticon-customer-support"></span></div>
-	                <h3 class="heading mb-0 pl-3">24/7 Car Support</h3>
+	                <h3 class="heading mb-0 pl-3">sécurisés</h3>
                 </div>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <p></p>
               </div>
             </div>      
           </div>
@@ -194,9 +194,9 @@
               <div class="media-body py-md-4">
               	<div class="d-flex mb-3 align-items-center">
 	              	<div class="icon"><span class="flaticon-route"></span></div>
-	                <h3 class="heading mb-0 pl-3">Lots of location</h3>
+	                <h3 class="heading mb-0 pl-3">rapides</h3>
                 </div>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <p></p>
               </div>
             </div>      
           </div>
@@ -205,9 +205,9 @@
               <div class="media-body py-md-4">
               	<div class="d-flex mb-3 align-items-center">
 	              	<div class="icon"><span class="flaticon-online-booking"></span></div>
-	                <h3 class="heading mb-0 pl-3">Reservation</h3>
+	                <h3 class="heading mb-0 pl-3">ponctuels</h3>
                 </div>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <p></p>
               </div>
             </div>      
           </div>
@@ -216,9 +216,9 @@
               <div class="media-body py-md-4">
               	<div class="d-flex mb-3 align-items-center">
 	              	<div class="icon"><span class="flaticon-rent"></span></div>
-	                <h3 class="heading mb-0 pl-3">Rental Cars</h3>
+	                <h3 class="heading mb-0 pl-3">disponibles 24/7</h3>
                 </div>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <p></p>
               </div>
             </div>      
           </div>
@@ -232,39 +232,40 @@
     	<div class="container">
     		<div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-          	<span class="subheading">Work flow</span>
-            <h2 class="mb-3">How it works</h2>
+          	<span class="subheading"></span>
+            <h2 class="mb-3">Comment ça marche?</h2>
           </div>
         </div>
     		<div class="row">
-    			<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+    			<div class="col-md-4 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services services-2">
               <div class="media-body py-md-4 text-center">
               	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-                <h3>Pick Destination</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <h3>Choisissez votre destination</h3>
+                <p>D'abord, vous allez choisir votre destination ainsi que la date et l'horaire de votre commande</p>
               </div>
             </div>      
           </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services services-2">
-              <div class="media-body py-md-4 text-center">
-              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-select"></span></div>
-                <h3>Select Term</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
-              </div>
-            </div>      
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+		   <div class="col-md-4 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services services-2">
               <div class="media-body py-md-4 text-center">
               	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
-                <h3>Choose A Car</h3>
-                <p>A small river named Duden flows by their place and supplies it with you</p>
+                <h3>Chosissez la véhicule</h3>
+                <p>Choisissez ensuite le type de véhicule selon vos besoins et indiquez</p>
               </div>
             </div>      
           </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
+          <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services services-2">
+              <div class="media-body py-md-4 text-center">
+              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-select"></span></div>
+                <h3>Confirmer votre commande</h3>
+                <p>Enfin, vérifiez les informations saisies et confirmez votre commande</p>
+              </div>
+            </div>      
+          </div>
+         
+          <!-- <div class="col-md-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services services-2">
               <div class="media-body py-md-4 text-center">
               	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-review"></span></div>
@@ -272,7 +273,7 @@
                 <p>A small river named Duden flows by their place and supplies it with you</p>
               </div>
             </div>      
-          </div>
+          </div> -->
     		</div>
     	</div>
     </section>
@@ -493,7 +494,7 @@
 			<div id="flip4">
 				 <div class="col-md-3" ><h1>Prix : 100$</h1> </div>
 			 
-             <div id="result" class="col-md-7" style="text-align: left;">
+             <div id="result" class="col-md-7" style="text-align: ;">
                   <ul id="list" class="list-group" >
                  <li id="li1" >Adresse Départ</li>
                  <li id="li2">Adresse Destination</li>
@@ -559,8 +560,8 @@
       <div class="container">
 	   <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-          <span class="subheading">Contact Us</span>
-            <h2 class="mb-3">Contact Us</h2>
+          <span class="subheading">Contactez-nous</span>
+            <h2 class="mb-3">Contactez-nous</h2>
           </div>
         </div>
         <div class="row d-flex mb-5 contact-info justify-content-center">
@@ -570,13 +571,13 @@
 		          	<div class="icon">
 		          		<span class="icon-map-o"></span>
 		          	</div>
-		            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+		            <p><span>Adresse:</span> ...</p>
 		          </div>
 		          <div class="col-md-4 text-center border-height py-4">
 		          	<div class="icon">
 		          		<span class="icon-mobile-phone"></span>
 		          	</div>
-		            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+		            <p><span>Téléphone:</span> <a href="tel://1234567920">..</a></p>
 		          </div>
 		          <div class="col-md-4 text-center py-4">
 		          	<div class="icon">
@@ -589,18 +590,18 @@
         </div>
         <div class="row block-9 justify-content-center mb-5">
           <div class="col-md-8 mb-md-5">
-          	<h2 class="text-center">If you got any problems <br>please do not hesitate to send us a reclamation</h2>
+          	<h2 class="text-center">Si vous avez des problèmes <br> n'hésitez pas à nous envoyer une réclamation</h2>
             <form action="ajouterReclamation.php" method="POST" class="bg-light p-5 contact-form">
               
               <div class="form-group">
-                <input type="text" class="form-control" id="commende_id_commende" name="idCommande" placeholder="NumeroCommande">
+                <input type="text" class="form-control" id="commende_id_commende" name="idCommande" placeholder="Numéro de Commande">
               </div>
               <div class="form-group">
-                <textarea  id="Message" cols="30" rows="7" name="msg" class="form-control" placeholder="Your Reclamation"></textarea>
+                <textarea  id="Message" cols="30" rows="7" name="msg" class="form-control" placeholder="votre Réclamation"></textarea>
               </div>
 			
               <div class="form-group ">
-                <input type="submit" value="Send Reclamation" class="btn btn-primary py-3 px-5" id="bRec">
+                <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5" id="bRec">
               </div>
             </form>
           
@@ -633,20 +634,20 @@
        
 	   
 		<div class="form-group">
-            <label for="psudo" class="col-form-label">Login:</label>
+            <label for="psudo" class="col-form-label">Email:</label>
             <input type="text" class="form-control" id="psudo1" name="psudo1">
         </div>
 
 
 		<div class="form-group">
-            <label for="PWD" class="col-form-label">Password:</label>
+            <label for="PWD" class="col-form-label">Mot de passe:</label>
             <input type="Password" class="form-control" id="PWD1" name="PWD1">
         </div>
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Log In</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+        
       </div>
       </form>
     </div>
@@ -672,13 +673,13 @@
 	 		
 
 		<div class="form-group">
-            <label for="psudo" class="col-form-label">Login:</label>
+            <label for="psudo" class="col-form-label">Email:</label>
             <input type="text" class="form-control" id="psudo" name="psudo">
         </div>
 
 
 		<div class="form-group">
-            <label for="PWD" class="col-form-label">Password:</label>
+            <label for="PWD" class="col-form-label">Mot de passe:</label>
             <input type="Password" class="form-control" id="PWD" name="PWD">
         </div>
        
@@ -688,8 +689,8 @@
 		
       </div>
       <div class="modal-footer">
-        <button type="submit" name="submit" class="btn btn-primary">Log In</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-primary">Se connecter</button>
+        
       </div>
       </form>
     </div>
@@ -707,8 +708,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About ClickTOUT</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <h2 class="ftco-heading-2">A propos de nous..</h2>
+              <p>[Présentation...]</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -716,30 +717,22 @@
               </ul>
             </div>
           </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">ESPACES</h2>
-              <ul class="list-unstyled">
-                <li><a href="#espacePar" data-target="#espacePar"  data-toggle="modal" class="py-2 d-block">ESPACE PARTENAIRE</a></li>
-                <li><a href="#espaceTras" data-target="#espaceTras"  data-toggle="modal" class="py-2 d-block">ESPACE TRANSPORTEUR</a></li>
-                
-              </ul>
-            </div>
-          </div>
+          
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Customer </h2>
+              <h2 class="ftco-heading-2">Menu </h2>
               <ul class="list-unstyled">
           
-                <li><a href="#about" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">How it works</a></li>
-                <li><a href="#contact" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="#about" class="py-2 d-block">Nos services</a></li>
+                <li><a href="#" class="py-2 d-block">Comment ça marche?</a></li>
+				<li><a href="#espacePar" data-target="#espacePar"  data-toggle="modal" class="py-2 d-block">Accès PARTENAIRE</a></li>
+                <li><a href="#espaceTras" data-target="#espaceTras"  data-toggle="modal" class="py-2 d-block">Accès TRANSPORTEUR</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	
             	<div class="block-23 mb-3">
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
