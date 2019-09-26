@@ -27,19 +27,7 @@ if($_POST) {
 	$id_client=$lig['id_client'];
 	
 	
-	$sql2= "select max(n_cmd) as nCMD from commende";
-	$res=$connect->query($sql2);
-	if($connect->query($sql2) === TRUE) {
-		echo  '<script language="javascript"> 
-	
-	alert("selected");
-	</script>';
-	} else {
-		echo "Error " . $sql2 . ' ' . $connect->connect_error;
-	}
-	$r=$res->fetch_assoc();
-	$n_cmd=$r['nCMD']+1;
-	
+	$n_cmd="c".$id_client;
 	
 	$sql3 = "INSERT INTO commende (Adresse_depart,Adresse_arrive,Date,Heure,type_voiture,nb_place_dispo,nb_ouvruer,typeClient,n_cmd,prix,n_facture,client_id_client,partenaire_id_partenaire,etatCmd)
 	VALUES ('$Adresse_depart', '$Adresse_arrive', '$Date', '$Heure','$type_voiture','$nb_place_dispo','$nb_ouvruer','partenaire','$n_cmd',12,'$n_facture','$id_client','$id_partenaire',0)";
