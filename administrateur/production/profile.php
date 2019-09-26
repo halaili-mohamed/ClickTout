@@ -42,7 +42,7 @@ $row = $result->fetch_assoc();
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -137,7 +137,7 @@ $row = $result->fetch_assoc();
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -237,35 +237,22 @@ $row = $result->fetch_assoc();
             
             <div class="clearfix"></div>
 
-            <div class="row">
-             <div class="col-md-6 col-sm-12 col-xs-12 form-group">
-                  
-                 
-                <div class="x_panel">
+       
+             
+                    <div class="row">
+             <div class="col-md-6 col-sm-6 col-xs-12">
+			 
+           <div class="x_panel">
                   <div class="x_title">
-                    <h2>Administrateur <small></small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>Super Administrateur <small></small></h2>
+                    
                     <div class="clearfix"></div>
                 
 				 
 				 </div>
 				  <div class="x_content">			                     
-                      <div class="profile_img">
-                        <div id="crop-avatar">
+                      
+                    
                           <!-- Current avatar -->
 						  
 						  <div class="white-box">
@@ -304,10 +291,7 @@ $row = $result->fetch_assoc();
                                     </div>
                                 </div>
                                  <div class="form-group">
-                               
-                                    <div class="col-md-12">
-									
-									
+                            		<div class="col-md-12">		
                                         <button type="submit" class="btn btn-primary"  >Modifier </button>
                                     </div>
                                 </div>
@@ -315,15 +299,36 @@ $row = $result->fetch_assoc();
                                 
                             </form>
                         
-                      </div>
-					  </div>
-				  </div>
-                  
-					  </div>
-					  
-					
                       
-					   <table class="table">
+					  </div>
+					  </div>
+					</div>
+					</div>
+					</div>
+					
+                 <!--<div class="col-md-6 col-sm-12 col-xs-12 form-group">  -->  
+				 <?php
+				 if ($row['type_admin']==1) {
+	 echo' 
+				 <div class="col-md-6 col-sm-6 col-xs-12 form-group pull-right">
+				  <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Administrateur <small></small></h2>
+                    
+                    <div class="clearfix"></div>
+                
+				 
+				 </div>
+				  <div class="x_content">			                     
+                      
+                    
+                          <!-- Current avatar -->
+						  
+						  <div class="white-box">
+                            
+					  
+		  
+                  <table class="table">
     <thead>
       <tr>
         <th>Nom & Prenom </th>
@@ -332,9 +337,8 @@ $row = $result->fetch_assoc();
 		 <th>Action</th>
       </tr>
     </thead>
-    <tbody>
-	 <?php 
-	 if ($row['type_admin']==1) {
+    <tbody>';
+	
 						$sql="select * from administrateur";
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
@@ -357,23 +361,29 @@ $row = $result->fetch_assoc();
 	
 	</tbody>
 	</table>
-
-                  
-                    
+</div>
+</div>
+                  </div>
+                    </div>
                     </div>
 					</div>
                   </div>
                 </div>
+				</div>
               </div>
             </div>
           </div>
         </div>
+		</div>
+	
+	
+		
         <!-- /page content -->
 
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            
           </div>
           <div class="clearfix"></div>
         </footer>

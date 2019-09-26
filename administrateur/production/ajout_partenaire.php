@@ -31,6 +31,7 @@ $row = $result->fetch_assoc();
     <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -195,7 +196,7 @@ $row = $result->fetch_assoc();
                   </div>
                   <div class="x_content">
 
-                    <form class="form-horizontal form-label-left" action="ajout_partenaire_action.php" method="post" novalidate>
+                    <form class="form-horizontal form-label-left" action="ajout_partenaire_action.php" method="post" name="form" enctype="multipart/form-data">
 
                     
                       <span class="section">Information </span>
@@ -239,41 +240,21 @@ $row = $result->fetch_assoc();
                         </div>
                       </div>
                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> ajouter Logo  <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">  Logo  <span class="required">*</span>
                         </label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
-						<form action="upload_logo.php" method="post" enctype="multipart/form-data">
-					  <input type="file" name="fileToUpload" id="fileToUpload">  
-					  <input type="submit" value="Upload Image" name="submit">
-					</form>
+						<input type="file" name="fileToUpload" id="fileToUpload">
+					    
+					 <!-- <input type="submit" value="Upload Image" name="submit">-->
+					
 					</div>
 					</div>
-					  
-                    <!--  <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Login in  <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="name" name="psudo" required="required"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      
-                      <div class="item form-group">
-                        <label for="password" class="control-label col-md-3">Mot de passe</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="PWD"  class="form-control col-md-7 col-xs-12" required="required">
-                        </div>
-                      </div>-->
-                  
-                     
-					  
-					  
-						
-                    
-                      <div class="ln_solid"></div>
+                 <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                 
-                          <button id="send" type="submit" class="btn btn-success">Ajouter</button>
+						
+                 <input type="submit" value="Upload Image" name="submit">
+                          <!--<button id="send" type="submit" name="submit"  class="btn btn-success">Ajouter</button>-->
                         </div>
                       </div>
                     </form>
@@ -297,7 +278,7 @@ $row = $result->fetch_assoc();
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!--<script src="../vendors/jquery/dist/jquery.min.js"></script>-->
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->

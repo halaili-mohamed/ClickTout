@@ -192,18 +192,19 @@ $row = $result->fetch_assoc();
                               <p class="month"></p>
                             </div>
                             <div class="message_wrapper">
+							<input type="hidden" value='. $data['id_Reclamation'].' name="id_Reclamation" />
                               <h4 class="heading">N° Commande : '. $data['commende_id_commende'].' </h4> 
                               <blockquote class="message"> '. $data['Message'].'</blockquote>
                               <br />
-							  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
+							  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#sahar"><i class="fa fa-folder"></i> Détails </a>
 	
 	</ul>
-							  ';}}?>
+							  ';
 							  
 							  
-						<?php 
-						$sql1="select c.Date ,t.nom , cl.nom ,cl.prenom ,cl.telephone , cl.email ,r.id_reclamation
-						from reclamation r, commende c , transporteur t,client cl where c.id_commende=r.commende_id_commende and c.transporteur_Id_Transporteur and t.Id_transporteur and cl.id_client=c.client_id_client and r.id_Reclamation=".$data['id_Reclamation']." ";
+						
+						$sql1="select c.Date ,t.nom ,t.Prenom,t.Email, cl.Nom_cl ,cl.Prenom_cl ,cl.telephone , cl.email ,r.id_reclamation, c.n_cmd ,t.Id_Transporteur, c.Date,c.heure ,c.Adresse_depart,c.Adresse_arrive
+						from reclamation r, commende c , transporteur t,client cl where c.id_commende=r.commende_id_commende and c.transporteur_Id_Transporteur=t.Id_transporteur and cl.id_client=c.client_id_client and r.id_Reclamation=".$data['id_Reclamation']." ";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($tab=$result1->fetch_assoc())
@@ -212,29 +213,31 @@ $row = $result->fetch_assoc();
                              <!-- Small modal -->
 	
                  
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal fade bs-example-modal-sm" id="sahar" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
 
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel2">Numéro commande :  '. $tab['n_commende'].' </h4>
+                          <h4 class="modal-title" id="myModalLabel2">Numéro commande :  '. $tab['n_cmd'].' </h4>
 						  
                         </div>
                         <div class="modal-body">
 						<ul class="list-unstyled">
-						        
-                               <li><i class="fa fa-check-square-o"></i> Transporteur : '. $tab['t.nom'].' </li>
-								<li><i class="fa fa-check-square-o"></i> N° Transporteur : '. $tab['Id_Transporteur'].' </li>
-								<li><i class="fa fa-calendar"></i> Adresse depart: '. $tab['Adresse_depart'].' </li>
+						        <li><i class="fa fa-map-marker"></i> Adresse depart : '. $tab['Adresse_depart'].' </li>
 								<li><i class="fa fa-flag"></i> Adresse arrivé : '. $tab['Adresse_arrive'].' </li> 
-								<li><i class="fa fa-clock-o"></i> Date: '. $tab['Date'].' </li>
-								<li><i class="fa fa-clock-o"></i> Heure: '. $tab['heure'].' </li>
-								 
-								<li><i class="fa fa-user"></i> Nom Client: '. $tab['nom'].' '. $tab['prenom'].' </li>
+								<li><i class="fa fa-calendar"></i> Date : '. $tab['Date'].' </li>
+								<li><i class="fa fa-clock-o"></i> Heure : '. $tab['heure'].' </li>
+								<h4> Information du transporteur </h4>
+								<li><i class="fa fa-car"></i> N° Transporteur : '. $tab['Id_Transporteur'].' </li>
+                               <li><i class="fa fa-user"></i> Nom & Prenom :'. $tab['nom'].' '. $tab['Prenom'].' </li>
+								<li><i class="fa fa-at"></i> Email : '. $tab['Email'].' </li>
+								
+								<h4> Information du Client </h4> 
+							<li><i class="fa fa-male"></i> Nom Client : '. $tab['Nom_cl'].' '. $tab['Prenom_cl'].' </li>				
 								<li><i class="fa fa-phone"></i> Telephone : '. $tab['telephone'].' </li>
-								<li><i class="fa fa-phone"></i> Email : '. $tab['Email'].' </li>
+								<li><i class="fa fa-at"></i> Email : '. $tab['email'].' </li>
                               
 								
 								
@@ -247,7 +250,7 @@ $row = $result->fetch_assoc();
                       </div>
                     </div>
                   </div>
-				   ';}}?>
+				   ';}}}}?>
                   <!-- /modals -->
               
                          
