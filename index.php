@@ -47,10 +47,10 @@
 	   <script src="js/jquery.min.js"></script>
 	 
 	 <style type="text/css">
-	 	.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
+	.input-group.md-form.form-sm.form-2 input.amber-border {
+border: 1px solid #ffca28;
 }
-	 </style>
+ </style>
 
 		
 	<script> 
@@ -93,6 +93,14 @@
   
 });
 	</script>
+
+			<script>
+		$(document).ready(function(){
+		  $("#bs").click(function(){
+		    $("#s").load("search.php?num="+$("#num").val()+"");
+		  });
+		});
+		</script>
 	<style> 
 	#panel, #flip,#panel1, #flip1,#panel2, #flip2,#panel3, #flip3,#flip4 {
 	  padding: 5px;
@@ -137,11 +145,45 @@
 	          <li class="nav-item"><a href="#about" class="nav-link">ABOUT</a></li>
 	          <li class="nav-item"><a href="#part" class="nav-link">NOS PARTENAIRES</a></li>
 	          <li class="nav-item"><a href="#contact" class="nav-link">CONTACT</a></li>
+	          <li class="nav-item"><a href="#rech" data-target="#rech"  data-toggle="modal" class="nav-link">Votre Commande</a></li>
 		
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
+
+
+
+	  <div class="modal" tabindex="-1" role="dialog" id="rech">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Votre commande</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+	
+     
+      <div class="modal-body">
+       
+		  
+		  	<div id="s">
+			  <input class="form-control mr-sm-5" type="text" placeholder="Search" id="num" aria-label="Search">
+			  <button id="bs" class="btn btn-outline-warning btn-rounded btn-sm my-0" type="button">Search</button>
+		    </div>
+		  
+
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+   
+    </div>
+  </div>
+</div>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/camions-parking.jpg');" data-stellar-background-ratio="0.5">
@@ -317,8 +359,8 @@
 					</div>
 					<div class="col-md-1"></div>
 					<div>
-					
-					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Calculate</button>
+					<div class="form-group">
+					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Calculate</button></div>
 					</div>
 				  </div>
 					
@@ -631,7 +673,7 @@
        
 	   
 		<div class="form-group">
-            <label for="psudo" class="col-form-label">Login:</label>
+            <label for="psudo" class="col-form-label">Email:</label>
             <input type="text" class="form-control" id="psudo1" name="psudo1">
         </div>
 
@@ -670,7 +712,7 @@
 	 		
 
 		<div class="form-group">
-            <label for="psudo" class="col-form-label">Login:</label>
+            <label for="psudo" class="col-form-label">Email:</label>
             <input type="text" class="form-control" id="psudo" name="psudo">
         </div>
 
