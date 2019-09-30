@@ -4,15 +4,7 @@ require_once 'session.php';
 $sql = "SELECT * FROM administrateur where id_admin='$id_admin'";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
-$limit=2;
-$page=isset($_GET['page']) ? $_GET['page'] : 1;
-$start=($page -1 ) * $limit;
-$res1 = $connect->query("select count(id_transporteur) AS id from transporteur ");
-$transCount=$res1->fetch_assoc();
-$total=$transCount ['id'];
-$pages=ceil($total/$limit);
-$previous=$page - 1;
-$next=$page + 1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +46,33 @@ $next=$page + 1;
 <script>
 
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#example').DataTable({
+			"order": [[ 3, "asc" ]],
+			columnDefs: [{
+			orderable: false,
+			targets: 5
+			}],
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+		});;
 } );
 </script>
 <style id="__web-inspector-hide-shortcut-style__" type="text/css">
@@ -188,19 +206,7 @@ $(document).ready(function() {
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                         <nav aria-label="Page navigation">
-							  <!--<ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="gestion_transporteur.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>								  </a>								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="gestion_transporteur.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="gestion_transporteur.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>								  </a>								</li>
-							  </ul>-->
+						
 						</nav>
                       </div>
 
@@ -240,7 +246,7 @@ $(document).ready(function() {
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
-	 <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-warning btn-xs">
+	 <a href="Email_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-warning btn-xs">
                                 <i class="fa fa-envelope-o"> </i> Email
                               </button>
 							  </a> ';

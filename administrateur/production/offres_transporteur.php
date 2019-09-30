@@ -1,5 +1,5 @@
-<?php require_once 'db_connect.php'; 
-$id_admin=2;
+<?php
+require_once 'session.php'; 
  
 $sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
 $result = $connect->query($sql);
@@ -138,15 +138,9 @@ $Prenom = $_GET['Prenom'];
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
+               
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Deconnexion</a></li>
                   </ul>
                 </li>
 
@@ -189,21 +183,7 @@ $Prenom = $_GET['Prenom'];
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>les offres  <small> transporteur <?php echo $nom ?>  </small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
 
@@ -216,17 +196,17 @@ $Prenom = $_GET['Prenom'];
                         <thead>
                           <tr class="headings">
                             
-                       <th class="column-title">Numero de commande  </th>
+                       <th class="column-title">N° commande  </th>
                            
                             <th class="column-title">Adresse départ  </th>
                             <th class="column-title">Adresse destination </th>
 							 <th class="column-title">Date commande </th>
-							<th class="column-title">heure </th>
-							 <th class="column-title">Type de voiture</th>
-							 <th class="column-title">Nombre  d'ouvrier </th>		 
+							<th class="column-title">Heure </th>
 							 
+							 <th class="column-title">Nombre  d'ouvrier </th>		 
+							    <th class="column-title"> Prix</th>
                             <th class="column-title">Etat </th>
-                            <th class="column-title"> Prix</th>
+                         
                            
                            
                        
@@ -237,22 +217,41 @@ $Prenom = $_GET['Prenom'];
                          
                                <?php 
 							   
-						$sql="select * from commende where transporteur_Id_transporteur=$Id_Transporteur";
+						$sql="select * from commende where (transporteur_Id_transporteur=$Id_Transporteur )and (etat_cmd IN (-1,1,2,3,4)) ORDER BY Date ASC "   ;
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
 						while($data=$result->fetch_assoc())
 						{echo'
 						<tr>
-                            <td class=" "> '.$data['id_commende'].'</td>
+                            <td class=" "> '.$data['n_cmd'].'</td>
                             <td class=" "> '.$data['Adresse_depart'].' </td>
                             <td class=" "> '.$data['Adresse_arrive'].' </td>
                             <td class=" "> '.$data['Date'].' </td>
                             <td class=" "> '.$data['Heure'].'</td>
-                            <td class=""> '.$data['type_voiture'].' </td>
+                            <td class=""> '.$data['nb_ouvruer'].' </td>
 							 <td class=""> '.$data['prix'].' </td>
-                           
-                          </tr>
-                       ';}}?>
+							 ';
+							
+							 
+						if ($data['etat_cmd']==-1)
+						 { echo'
+							<td class=""> <span class="label label-primary">Acceptée</span>
+							 </td> </tr>';}
+						elseif ($data['etat_cmd']== 1){
+								echo'  <td class=""><span class="label label-info">
+								chargée</span> </td></tr>';}
+						elseif($data['etat_cmd']== 2)
+							{
+							 echo'<td class=""><span class="label label-warning">Montée a bord</span>
+								</td> </tr>';}
+						elseif($data['etat_cmd']== 3)
+							{
+							 echo'<td class=""><span class="label label-success">
+								Décharger </span> </td> </tr>';}
+						else  {
+						echo'<td class=""><span class="label label-danger">
+								Annuler </span></td> </tr>'
+						 ;}}}?>
                            
                          
                         </tbody>

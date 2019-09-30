@@ -339,7 +339,7 @@ $row = $result->fetch_assoc();
     </thead>
     <tbody>';
 	
-						$sql="select * from administrateur";
+						$sql="select * from administrateur where type_admin=0 ";
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
 						while($data=$result->fetch_assoc())
@@ -348,7 +348,7 @@ $row = $result->fetch_assoc();
 	<td> '.$data['nom'].' </td>
 	<td> '.$data['login'].'</td>
 	<td> '.$data['pwd'].' </td>
-	<td>
+	<td> 
 	 <a href="Sup_admin.php?id_admin='. $data['id_admin'].'">  <button type="button" class="btn btn-warning btn-xs">
                                 <i class="fa fa-ban"> </i> Supprimer 
                               </button>

@@ -1,3 +1,17 @@
+<?php require_once 'session.php'; 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+
+	$id_partenaire=$_GET['id_partenaire'];
+	$nom_ste = $_GET['nom_ste'];
+	$email = $_GET['email'];
+	$adresse = $_GET['adresse'];	
+	$psudo = $_GET['psudo'];
+	$pwd = $_GET['pwd'];
+	$tel=$_GET['tel'];
+	$responsable=$_GET['responsable'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,19 +50,17 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
+              
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -124,19 +136,14 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <i class="fa fa-user"></i> <?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    
+                    
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> deconnexion</a></li>
                   </ul>
                 </li>
 
@@ -157,7 +164,7 @@
 
                <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <a href="gestion_partenaire.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_partenaire.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
                 </div>
               </div>
@@ -169,56 +176,67 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Profile partenaire <small></small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
 
-<form class="form-horizontal form-material">
+<form class="form-horizontal form-material" method="post" action="modif_partenaire_action.php" >
                                 <div class="form-group">
-                                    <label class="col-md-12">Nom</label>
+								<input type="hidden" name="id_partenaire"  value="<?=$id_partenaire?>" />
+                                    <label class="col-md-12">Nom société </label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom_ste" placeholder="<?=$nom_ste?>" class="form-control form-control-line"> </div>
                                 </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Adresse</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="adresse" placeholder="<?=$adresse?>" class="form-control form-control-line"> </div>
+                                </div>
+								
+									  <div class="form-group">
+                                    <label class="col-md-12"> telephonne</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="tel" placeholder="<?=$tel?>" class="form-control form-control-line">
+                                    </div>
+                                </div>
+								
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="email" placeholder="<?=$email?>" class="form-control form-control-line"> </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
+                              
+                                 <div class="form-group">
+                                    <label class="col-md-12"> Nom responsable</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Téléphone</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Adresse</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
+                                        <input type="text" name="responsable" placeholder="<?=$responsable?>" class="form-control form-control-line">
                                     </div>
                                 </div>
+                            
+                         
+                                <div class="form-group">
+                                    <label class="col-md-12">Log in</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="psudo" placeholder="<?=$psudo?>" class="form-control form-control-line">
+                                    </div>
+                                </div>
+							  <div class="form-group">
+                                    <label class="col-md-12">Mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password"  class="form-control form-control-line"> </div>
+                                </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Confirm mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" name="pwd" class="form-control form-control-line"> </div>
+                                </div>
+                               
+                               
                                
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+                                        <button class="btn btn-success" type="submit" >Modifer</button>
                                     </div>
                                 </div>
                             </form>
