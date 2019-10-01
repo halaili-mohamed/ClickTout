@@ -208,8 +208,8 @@ $row = $result->fetch_assoc();
                             <div class="col-xs-12 col-sm-6 emphasis">
                               <a href="profile_partenaire.php?id_partenaire='.$data['id_partenaire'].'&nom_ste='.$data['nom_ste'].'  &adresse='.$data['adresse'].' &email='.$data['email'].' &psudo='.$data['psudo'].'&tel='.$data['tel'].'&pwd= '.$data['pwd'].'&responsable= '.$data['responsable'].'"><button type="button" class="btn btn-success btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-                             <a href="offres_partenaire.php">  <button type="button" class="btn btn-primary btn-xs">
-                                <i class="fa fa-table"> </i> Offres
+                             <a href="offres_partenaire.php?id_partenaire='. $data['id_partenaire'].' &nom_ste='.$data['nom_ste'].'">  <button type="button" class="btn btn-primary btn-xs">
+                                <i class="fa fa-table"> </i> Commandes
                               </button>
 							  </a>
                             </div>

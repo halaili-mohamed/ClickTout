@@ -1,25 +1,3 @@
-<?php require_once 'session.php'; 
-$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
-$result = $connect->query($sql);
-$row = $result->fetch_assoc(); 
-
-	$Id_Transporteur=$_GET['Id_Transporteur'];
-	$nom = $_GET['nom'];
-	$Prenom = $_GET['Prenom'];
-	$Date_naiss = $_GET['Date_naiss'];
-	$Email = $_GET['Email'];
-	$Adresse = $_GET['Adresse'];
-	$Matricule = $_GET['Matricule'];
-	$Type_Voiture = $_GET['Type_Voiture'];
-	$psudo = $_GET['psudo'];
-	$PWD = $_GET['PWD'];
-	$Cin=$_GET['Cin'];
-	
-?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,24 +28,59 @@ $row = $result->fetch_assoc();
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	<script type="text/javascript">
+	
+	function verification()
+{
+var mess ='';
+ 
+	if(document.form.pass.value != document.form.PWD.value) {
+	  mess += "Le mot de passe et la confirmation ne sont pas identiques !";
+	   
+	  
+	   }
+	   if(mess!="")
+	   {
+ alert (mess)
+  document.getElementById("PWD").focus();
+    }
+	
+   }
+   </script>
   </head>
+   
+<?php require_once 'session.php'; 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
 
+	$Id_Transporteur=$_GET['Id_Transporteur'];
+	$nom = $_GET['nom'];
+	$Prenom = $_GET['Prenom'];
+	$Date_naiss = $_GET['Date_naiss'];
+	$Email = $_GET['Email'];
+	$Adresse = $_GET['Adresse'];
+	$Matricule = $_GET['Matricule'];
+	$Type_Voiture = $_GET['Type_Voiture'];
+	$psudo = $_GET['psudo'];
+	$PWD = $_GET['PWD'];
+	$Cin=$_GET['Cin'];
+	
+?>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
+            
               <div class="profile_info">
                 <span>Welcome,</span>
                 <h2><?php echo $row['nom'] ?></h2>
@@ -190,7 +203,7 @@ $row = $result->fetch_assoc();
                   </div>
                   <div class="x_content">
 
-<form class="form-horizontal form-material" method="post" action="modif_trasporteur_action.php" >
+<form class="form-horizontal form-material" method="post" name="form" action="modif_trasporteur_action.php" >
                                 <div class="form-group">
 								<input type="hidden" name="Id_Transporteur"  value="<?=$Id_Transporteur?>" />
                                     <label class="col-md-12">Nom</label>
@@ -201,6 +214,22 @@ $row = $result->fetch_assoc();
                                     <label class="col-md-12">Prenom</label>
                                     <div class="col-md-12">
                                         <input type="text" name="Prenom" placeholder="<?=$Prenom?>" class="form-control form-control-line"> </div>
+                                </div>
+								             <div class="form-group">
+                                    <label class="col-md-12">Log in</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="psudo" placeholder="<?=$psudo?>" class="form-control form-control-line">
+                                    </div>
+                                </div>
+							  <div class="form-group">
+                                    <label class="col-md-12">Mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password" name="pass" class="form-control form-control-line"> </div>
+                                </div>
+								 <div class="form-group">
+                                    <label class="col-md-12">Confirm mot de passe</label>
+                                    <div class="col-md-12">
+                                        <input type="password"  onblur="verification()" id="PWD" name="PWD" class="form-control form-control-line" /> </div>
                                 </div>
 								  <div class="form-group">
                                     <label class="col-md-12">N° Cin</label>
@@ -239,28 +268,13 @@ $row = $result->fetch_assoc();
                                         <input type="text" name="Type_Voiture" placeholder="<?=$Type_Voiture?>" class="form-control form-control-line">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Log in</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="psudo" placeholder="<?=$psudo?>" class="form-control form-control-line">
-                                    </div>
-                                </div>
-							  <div class="form-group">
-                                    <label class="col-md-12">Mot de passe</label>
-                                    <div class="col-md-12">
-                                        <input type="password"  class="form-control form-control-line"> </div>
-                                </div>
-								 <div class="form-group">
-                                    <label class="col-md-12">Confirm mot de passe</label>
-                                    <div class="col-md-12">
-                                        <input type="password" name="PWD" class="form-control form-control-line"> </div>
-                                </div>
+                   
                                
                                
                                
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success" type="submit" >Modifer</button>
+                                        <button class="btn btn-success"  type="submit" >Modifer</button>
                                     </div>
                                 </div>
                             </form>

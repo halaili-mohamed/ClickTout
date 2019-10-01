@@ -98,8 +98,7 @@ $(document).ready(function() {
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">              </div>
+              
               <div class="profile_info">
                 <span>Bienvenue,</span>
                 <h2><?php echo $row['nom'] ?></h2>
@@ -170,7 +169,7 @@ $(document).ready(function() {
                     <span class=" fa fa-angle-down"></span>                  </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li> 
-                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Deconnexion</a></li>
                   </ul>
                 </li>
               </ul>
@@ -184,16 +183,14 @@ $(document).ready(function() {
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>TRANSPORTEUR</h3>
+                <h3>Les Commandes </h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right ">
                   
                     
-                    <span class="input-group-btn"> <a href="ajout_transporteur.php">
-                      <button type="button" class="btn btn-primary btn-ms" >
-                                <i class="fa fa-plus-square"> </i> Ajouter transporteur                              </button></a>                    </span>                </div>
+                                  </div>
               </div>
             </div>
 
@@ -218,9 +215,11 @@ $(document).ready(function() {
                 <thead>
                     <tr role="row">
 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">N° Commande </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Date de commande </th>
 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Etat de commande </th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Date de commande </th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">N° transporteur</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Type de voiture </th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">N° transporteur</th>
+<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Nom transporteur</th>
+
 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Type de client </th>
 <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Nom client </th>
 <th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">N° Facture </th>
@@ -230,13 +229,15 @@ $(document).ready(function() {
 			
   <tbody>
   <?php 
-						$sql="select c.n_cmd ,c.transporteur_Id_Transporteur, c.etat_cmd,c.Date,c.type_voiture,c.typeClient,c.n_facture, p.nom_ste from commende c , partenaire p where partenaire_id_partenaire=id_partenaire";
+						$sql="select c.n_cmd ,t.Id_transporteur,t.nom ,t.Prenom ,c.etat_cmd,c.Date,c.type_voiture,c.typeClient,c.n_facture, cl.Nom_cl ,cl.Prenom_cl ,p.nom_ste from commende c , partenaire p , transporteur t , client cl  where c.partenaire_id_partenaire=p.id_partenaire and c.transporteur_Id_Transporteur=t.Id_transporteur and cl.id_client=c.client_id_client";
 						$result = $connect->query($sql);
 						if($result->num_rows > 0) {
 						while($data=$result->fetch_assoc())
 						{echo'
 		<tr role="row">
-		<td >'.$data['n_cmd'].'</td>';
+		<td >'.$data['n_cmd'].'</td>
+		 <td>  '.$data['Date'].'</td>';
+		
       					if ($data['etat_cmd']==-1)
 						 { echo'
 							<td><span class="label label-primary">Acceptée</span>
@@ -246,7 +247,7 @@ $(document).ready(function() {
 								chargée </td>';}
 						elseif($data['etat_cmd']== 2)
 							{
-							 echo'<td><span class="label label-danger">Montée a bord</span>
+							 echo'<td><span class="label label-warning">Montée a bord</span>
 								</td>';}
 						elseif($data['etat_cmd']== 3)
 							{
@@ -258,13 +259,13 @@ $(document).ready(function() {
 								Annuler </span></td>'
 						 ;}
 						echo'
-      <td>  '.$data['Date'].'</td>
-      <td>  '.$data['transporteur_Id_Transporteur'].'</td>
-      <td>  '.$data['type_voiture'].'</td>';
+     
+      <td>  '.$data['Id_transporteur'].'</td>
+	  <td> '.$data['nom'].''.$data['Prenom'].' </td>';
+     
 	  if ($data['typeClient']==0)
 						 { echo'
-							<td>Client
-							 </td> <td> </td>';}
+							<td>Client </td> <td> '.$data['Nom_cl'].' '.$data['Prenom_cl'].'  </td>';}
 						else{
 								echo'  <td class="">
 								Partenaire  </td>
@@ -293,7 +294,7 @@ $(document).ready(function() {
           <div class="pull-right">
            
           </div>
-          <div class="clearfix"></div>
+        
         </footer>
         <!-- /footer content -->
       </div>

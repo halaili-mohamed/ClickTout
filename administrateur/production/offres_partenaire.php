@@ -1,3 +1,12 @@
+<?php
+require_once 'session.php'; 
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+$id_partenaire=$_GET['id_partenaire'];
+$nom_ste = $_GET['nom_ste'];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,19 +45,17 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
+            
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenue,</span>
+                <h2><?php echo $row['nom'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -124,19 +131,13 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <i class="fa fa-user"> </i><?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
+               
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Deconnexion</a></li>
                   </ul>
                 </li>
 
@@ -160,7 +161,7 @@
                   <div class="input-group">
                   
 					
-                <a href="gestion_transporteur.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_partenaire.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
              
                   </div>
@@ -178,22 +179,8 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>les offres  <small> transporteur 1 </small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>Partenaire  <small> <?php echo $nom_ste ?>  </small></h2>
+                    
                     <div class="clearfix"></div>
                   </div>
 
@@ -202,161 +189,73 @@
                   <!--  <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>-->
 
                     <div class="table-responsive">
-                      <table class="table table-striped jambo_table bulk_action">
+                      <table class="table table-striped">
                         <thead>
                           <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
-                            <th class="column-title">Id Commande   </th>
-                            <th class="column-title">Date depart </th>
-                            <th class="column-title">Date arrivé  </th>
-                            <th class="column-title">Adresse </th>
-                            <th class="column-title">Etat </th>
-                            <th class="column-title"></th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
-                            <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
+                            
+                       <th class="column-title">N° commande  </th>
+                           
+                            <th class="column-title">Adresse départ  </th>
+                            <th class="column-title">Adresse destination </th>
+							 <th class="column-title">Date commande </th>
+							<th class="column-title">Heure </th>
+							 
+							 <th class="column-title">Nombre  d'ouvrier </th>		 
+							    <th class="column-title"> Prix</th>
+                            	
+								 <th class="column-title"> N° transporteur</th>
+                            	<th class="column-title">Nom transporteur </th>
+								<th class="column-title">Etat </th>
+                         
+                           
+                           
+                       
                           </tr>
                         </thead>
 
                         <tbody>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 23, 2014 11:47:56 PM </td>
-                            <td class=" ">May 23, 2014 11:47:56 PM <i class="success fa fa-long-arrow-up"></i></td>
-                            <td class=" ">rue 1235, paris </td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">en cours </td>
-                            <td class=" last"><a href="#"></a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 23, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 24, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 24, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 24, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 26, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 26, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 26, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 27, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 28, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
+                         
+                               <?php 
+							   
+						$sql="select c.n_cmd,c.Adresse_depart,c.Adresse_arrive,c.Date,c.Heure,c.nb_ouvruer,c.prix,c.etat_cmd, t.nom , t.Prenom, t.Id_Transporteur  from commende c , transporteur t  where partenaire_id_partenaire=$id_partenaire and Transporteur_Id_Transporteur=Id_Transporteur ORDER BY Date DESC "   ;
+						$result = $connect->query($sql);
+						if($result->num_rows > 0) {
+						while($data=$result->fetch_assoc())
+						{echo'
+						<tr>
+                            <td class=" "> '.$data['n_cmd'].'</td>
+                            <td class=" "> '.$data['Adresse_depart'].' </td>
+                            <td class=" "> '.$data['Adresse_arrive'].' </td>
+                            <td class=" "> '.$data['Date'].' </td>
+                            <td class=" "> '.$data['Heure'].'</td>
+                            <td class=""> '.$data['nb_ouvruer'].' </td>
+							 <td class=""> '.$data['prix'].' </td>
+							  <td class=""> '.$data['Id_Transporteur'].' </td>
+							 <td class=""> '.$data['nom'].' '.$data['Prenom'].' </td>
+							 ';
+							
+							 
+						if ($data['etat_cmd']==-1)
+						 { echo'
+							<td class=""> <span class="label label-primary">Acceptée</span>
+							 </td> </tr>';}
+						elseif ($data['etat_cmd']== 1){
+								echo'  <td class=""><span class="label label-info">
+								chargée</span> </td></tr>';}
+						elseif($data['etat_cmd']== 2)
+							{
+							 echo'<td class=""><span class="label label-warning">Montée a bord</span>
+								</td> </tr>';}
+						elseif($data['etat_cmd']== 3)
+							{
+							 echo'<td class=""><span class="label label-success">
+								Décharger </span> </td> </tr>';}
+						else  {
+						echo'<td class=""><span class="label label-danger">
+								Annuler </span></td> </tr>'
+						 ;}}}?>
+                           
+                         
                         </tbody>
                       </table>
                     </div>
