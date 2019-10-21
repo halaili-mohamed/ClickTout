@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_Transporteur=1;
+require_once 'SessionPart.php';
  
 $sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
 $result = $connect->query($sql);

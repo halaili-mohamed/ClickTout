@@ -1,5 +1,6 @@
 <?php require_once 'db_connect.php';
-$id_Transporteur=1; ?>
+require_once 'SessionPart.php';
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">

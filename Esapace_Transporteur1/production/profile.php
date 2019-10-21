@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-
+require_once 'SessionPart.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,11 +157,10 @@
 						</li> 
 						';
 						//a verfier avec mouhamed
-						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur 
- and t.id_Transporteur=$_SESSION['id_Transporteur'] 
-AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d") AND DATE_FORMAT( SYSDATE(), "%Y-%m-%d") ";		
-						$res=$connect->query($sql2);
-						$data = $res->fetch_assoc();
+						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur and t.id_Transporteur=$id_Transporteur ";
+						//and c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), %Y-%m-%d) AND DATE_FORMAT( SYSDATE(), %Y-%m-%d) ";		
+						$res2=$connect->query($sql2);
+						$data = $res2->fetch_assoc();
 					    echo'  <h2>  '.$data['revenue'].'</h2>
                         <span class="sparkline_two" style="height: 160px;">
                                       <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
@@ -230,25 +229,40 @@ AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d
 								<div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="Password"  class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> 
+                                        <input type="password" name="Password" id="pass1" class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> 
 										</div>
                                 </div>
 								<div class="form-group">
                                     <label class="col-md-12">Vérfier mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="Password2"  class="form-control form-control-line" value="Password2"> 
+                                        <input type="password" name="Password2" id="pass2" class="form-control form-control-line" > 
 								</div>
 								</div>	
+								
+								<p id="validate" style="color: red" ></p>
 								<div class="form-group">
-								<input type="hidden" name="id_Transporteur" value="<?php echo $row['id_Transporteur']?>" />
+					
 								</div>
 								<div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifier</button>
+                                        <button class="btn btn-success"id="modif" name="modif" >Modifier</button>
                                     </div>
                                 </div>
                                 
                             </form>
+		
+   <script>
+  document.getElementById("modif").onclick=function(){
+    var pass1 = document.getElementById("pass1").value;
+    var pass2 = document.getElementById("pass2").value;
+    if (pass1 != pass2) {
+      document.getElementById("validate").innerHTML="Mots de passes non Identiques !!";
+      document.getElementById("pass2").style.color="RED";
+      return false;
+     }
+     return true;    
+};</script>
+								
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
 					  
                         
@@ -273,7 +287,7 @@ AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d
         <!-- /footer content -->
       </div>
     </div>
-   
+  
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
