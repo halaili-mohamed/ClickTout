@@ -326,12 +326,12 @@ border: 1px solid #ffca28;
 					<h2 class="mb-2">Reservation</h2>
 				</div>
 			</div>
-			 <form id="f" method="GET" id="distance_form">
+			 <form method="POST" id="distance_form">
 			 
 			 
-				<div id="flip">1er étape</div>
+				<div id="flip">Choisissez la destination et la date de votre commande</div>
 				<div id="panel">
-
+					<center>
 					<div class="form-row ">
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
@@ -345,7 +345,7 @@ border: 1px solid #ffca28;
 					  <input id="destination" name="destination" required="" type="hidden" />
 					</div>
 				  </div>
-				  
+				  </center>
 				  
 				  <div class="form-row ">
 					<div class="col-md-2"></div>
@@ -357,18 +357,24 @@ border: 1px solid #ffca28;
 					  <label for="Heure">Time</label>
 					  <input type="time" class="form-control" id="Heure" >
 					</div>
-					<div class="col-md-1"></div>
-					<div>
-					<div class="form-group">
-					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Calculate</button></div>
 					</div>
-				  </div>
+
+					<center>
+
+					<div class="form-row ">
+						<div class="col-md-5"></div>
+						<div class="col-md-2">
+					 <button type="submit" id="b1" class="btn btn-primary custom-next">Suivant</button></div>
 					
+					</div>
 					
-							</div>
-				</form>			
+				 </center>
+					
+					</div>
+							
 						
-				<div id="flip1">2éme Etape</div>
+						
+				<div id="flip1">Information du client</div>
 				<div id="panel1">
 
 				<div class="form-row ">
@@ -392,97 +398,97 @@ border: 1px solid #ffca28;
 					</div>
 					<div class="form-group col-md-4">
 					  <label for="Email">Email</label>
-					  <input type="email" class="form-control" id="Email" placeholder="name@example.com">
+					  <input type="email" class="form-control" id="Email" name="Email" placeholder="name@example.com">
 					</div>
 					</div>
 					 <div class="form-row ">
 					 <div class="col-md-5"></div>
-					 <button  id="b5"  class="btn btn-primary custom-next">retour</button> <div class="col-md-1"></div>
-					 <button  id="b2"  class="btn btn-primary custom-next">Next</button>
+					 <div class="col-md-1"><button  id="b5"  class="btn btn-primary custom-next">retour</button></div>
+					
+					 <button  id="b2"  class="btn btn-primary custom-next">Suivant</button>
+					 <div class="col-md-4"></div>
 					
 				  </div>
 				  
 							</div>
 							
 									
-				<div id="flip2">3eme etape</div>
+				<div id="flip2">Des informations supplémentaires</div>
 				<div id="panel2">
 						
-											<div><label>De quelle taille de véhicule aurez-vous besoin ?</label></div>
-										<div class="form-row ">
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/13.png">
-													<div class="custom-control custom-radio">
-														  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="defaultExampleRadios" checked>
-														  <label class="custom-control-label" for="defaultGroupExample1"></label>
-													</div>
-													
-													
-												</div>
-									</div>
+											<div><label>De quelle Type de véhicule aurez-vous besoin ?</label></div>
+									<center>	
 									
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/11.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="defaultExampleRadios">
-													  <label class="custom-control-label" for="defaultGroupExample2"></label>
-													</div>
-												</div>
-									</div>
-									
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/12.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="defaultExampleRadios" >
-													  <label class="custom-control-label" for="defaultGroupExample3"></label>
-													</div>
-
-												</div>
-									</div>
-
-						</div>	
-
-							<div><label>Avez-vous un besoin supplémentaire ?     <label></div>
-							
-							
-							
-						<div class="form-row ">
-								<div class="col-lg align-items-end">
-												<div class="form-group">
-											<img src="images/1.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="choix"  name="defaultExampleRadios">
-													 <label class="custom-control-label" for="choix"></label>
-													</div>
-													
-
-									</div></div>
-
-							</div>	
-
-										
-					
-					
-										<div>	<label>Voudrez-vous un coup de main pour monter votre chargement chez vous ?   <label></div>
-								<div class="form-row ">
-					
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-											<img src="images/2.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="choix1"  name="defaultExampleRadios">
-													 <label class="custom-control-label" for="choix1"></label>
-													</div>
-													
-									</div></div>
-
+									 <div class="form-row">
+                           <div class="col"> 
+								<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+										  <select name="type_voiture" id="type_voiture" class="form-control"  >
+											<option hidden> 	Type de véhicule</option>
+											<option value="1">6m³</option>
+											<option value="2">9m³</option>
+											<option value="3">12m³</option>
+											<option value="4">20m³</option>
+										  </select>
+										</div>
+									  </div>
+								</div>
 							</div>
+									</center>
+									
+
+						
+
+							<div ><label >Voudrez-vous un coup de main pour monter votre chargement chez vous?   <label></div>
+							
+							
+							<center>
+					
+									 <div class="form-row">
+                           <div class="col"> 
+								<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+									  <select name="nb_ouvruer" id="nb_ouvruer" class="form-control"  >
+											<option hidden>Nombre de main d'oeuvre</option>
+											<option value="1">un</option>
+											<option value="2">deux</option>
+											
+										  </select>
+										</div>
+									  </div>
+								</div>
+							</div>
+							</center>		
+					
+					
+										<div><label>Choisisez le temps de chargement et de déchargement<label></div>
+								<center>
+ 							<div class="form-row">
+                           		<div class="col"> 
+									<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+										  <select name="T_chargement" id="T_chargement" class="form-control"  >
+											<option hidden>Temps de chargement et de déchargement</option>
+											<option value="1">20min</option>
+											<option value="2">+1h</option>
+											<option value="2">+2h</option>
+										  </select>
+									</div>
+									</div>
+								</div>
+							</div>
+								</center>
+
+
+			<p><B><u style="color:red;">REMARQUE:</u> le transport est trottoir à trottoir uniquement</p></B>
+
+
 							<div>
 										<button  id="b6"  class="btn btn-primary custom-next">retour</button>
-										 <button  id="b3"  class="btn btn-primary custom-next">next</button>
+										 <button  id="b3"  class="btn btn-primary custom-next">Suivant</button>
 					</div>
 				</div>
 					
@@ -539,7 +545,8 @@ border: 1px solid #ffca28;
                  <li id="li2">Adresse Destination</li>
                  <li id="li3">Date</li>
                  <li id="li4">Time</li>
-                 <li id="in_kilo">Distance is Kilo</li>
+                 <input id="in_kilo" name="Distance" required="" type="hidden" />
+
                   </ul> 
              </dv>  
 				
@@ -547,7 +554,7 @@ border: 1px solid #ffca28;
 			</div>
 					
 				
-
+</form>	
 						</div>
     </section>
 
