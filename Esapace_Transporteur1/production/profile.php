@@ -13,22 +13,25 @@ require_once 'SessionPart.php';
 	<link rel="icon" href="images/favicon.png" type="image/ico" />
     <title>Espace transporteur</title>
 
-   <!-- Bootstrap -->
+    <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-	
-	
+
   </head>
-
-
+<style>
+p
+{
+    box-shadow: 10px 10px 10px black;
+}
+</style>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -50,26 +53,14 @@ require_once 'SessionPart.php';
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+				  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
                 </ul>   
               </div>
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+            
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -87,16 +78,7 @@ require_once 'SessionPart.php';
 					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
 					$result = $connect->query($sql);
 					$row = $result->fetch_assoc();
-					echo'
-                <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>'
+					
 				?>
 
                
@@ -155,15 +137,20 @@ require_once 'SessionPart.php';
 						<li><i class="fa fa-tags user-profile-icon"></i>'.'  '.$row['Matricule'].'
                         </li>
 						
-                       <li><i class="fa fa-money"></i> Revenue total du mois 
-						</li> 
+                      
 						';
 						//a verfier avec mouhamed
 						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur and t.id_Transporteur=$id_Transporteur ";
 						//and c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), %Y-%m-%d) AND DATE_FORMAT( SYSDATE(), %Y-%m-%d) ";		
 						$res2=$connect->query($sql2);
 						$data = $res2->fetch_assoc();
-					    echo'  <h2>  '.$data['revenue'].'</h2>
+						
+					    echo'  
+						 <li><p><i class="fa fa-money"></i> Revenue total du mois :  <br> '.$data['revenue'].'
+						
+						</p>
+						</li> 
+						
                         <span class="sparkline_two" style="height: 160px;">
                                       <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                         </span>

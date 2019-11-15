@@ -68,6 +68,7 @@ require_once 'SessionPart.php';
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+				  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
                 </ul>   
               </div>
             </div>
@@ -79,38 +80,17 @@ require_once 'SessionPart.php';
           </div>
         </div>
 
-        <!-- top navigation -->
+      <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <?php 
-					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
-					echo'
-                <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>'
-				?>
-
-               
-              </ul>
             </nav>
           </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">

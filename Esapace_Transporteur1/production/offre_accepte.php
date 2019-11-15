@@ -22,16 +22,14 @@ $next=$page + 1;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="icon" href="images/favicon.png" type="image/ico" />
-	   <link rel="icon" href="images/favicon.png" type="image/ico" />
-	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+      <link rel="icon" href="images/favicon.png" type="image/ico" />
+	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-
-    <title>Espace transporteur </title>
-
-   <!-- Bootstrap -->
+	  
+    <title>Espace transporteur</title>
+<!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -115,6 +113,8 @@ $next=$page + 1;
 				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
 				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
+				  
                 </ul>   
               </div>
             </div>
@@ -131,25 +131,10 @@ $next=$page + 1;
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-              <ul class="nav navbar-nav navbar-right">
-             <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profilePart.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>
-			
-
-               
-              </ul>
             </nav>
           </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -170,17 +155,16 @@ $next=$page + 1;
                   <div class="x_title">
 				   <h2>Liste des offres Acceptées</h2> 
                   
-                    <div class="clearfix"></div>
+                      <div class="clearfix"></div>
                   </div>
-            <div class="x_content">    
+                  <div class="x_content">    
                       <br />
                      <!-- here -->
-                <div class="row">
+                      <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <div class="row">
-									  <div class="row">			
+				  <div class="row">			
 					  <table id="example" class="display" style="width:100%">
 
 				    <thead>
@@ -217,48 +201,31 @@ $next=$page + 1;
 	 if($data['etatCMD']== -1)
 
 							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=-1"><button type="button" disabled class="btn btn-success btn-xs" >
-								Accéptée</a>
-								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-secondary btn-xs" >
+							 echo'   
+								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-default btn-xs" >
 								Chargée</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-warning btn-xs" >
-								Montée à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button" disabled class="btn btn-info btn-xs" >
-								Déchargée</a>';
+								';
 							}
 							elseif($data['etatCMD']== 1)
 							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=-1"><button type="button" disabled class="btn btn-success btn-xs" >
-								Accéptée</a>
-								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-secondary btn-xs" >
-								Chargée</a>
+							 echo' 
+								
 								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  class="btn btn-warning btn-xs" >
 								Montée à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-info btn-xs" >
-								Déchargée</a>';
+								 ';
 							}
 							elseif($data['etatCMD']== 2)
 							{
-							 echo'  <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=-1"><button type="button" disabled class="btn btn-success btn-xs" >
-								Accéptée</a>
-								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-secondary btn-xs" >
-								Chargée</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-warning btn-xs" >
-								Montée à bord</a>
+							 echo'  
+								
 								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"    class="btn btn-info btn-xs" >
 								Déchargée</a>';
 							}
 							
 							else
 							{
-							 echo'  <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=-1"><button type="button" disabled class="btn btn-success btn-xs" >
-								Accéptée</a>
-								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-secondary btn-xs" >
-								Chargée</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button" disabled class="btn btn-warning btn-xs" >
-								Montée à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-info btn-xs" >
-								Déchargée</a>';
+							 echo' 
+								';
 							}
 							;
 	echo'  </td>
@@ -330,25 +297,19 @@ $next=$page + 1;
     </tr>
   </tfoot>
 </table>
-						</div>
-                    <!-- aure -->
-          
- </div>
+                    <!-- end project list -->
+
                   </div>
-                </div>
               </div>
+			</div>
             </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        
+				</div>
+				</div>
+				</div>
+			</div>
         <!-- /page content -->
 
         <!-- footer content -->
-
 
         <!-- /footer content -->
       </div>
