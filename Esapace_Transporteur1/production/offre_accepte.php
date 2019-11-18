@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_Transporteur=1;
+require_once 'SessionPart.php';
  
 $sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
 $result = $connect->query($sql);
@@ -22,20 +22,14 @@ $next=$page + 1;
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="icon" href="images/favicon.png" type="image/ico" />
-	   <link rel="icon" href="images/favicon.png" type="image/ico" />
-	  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+      <link rel="icon" href="images/favicon.png" type="image/ico" />
+	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
 
-    <title>Espace partenaire </title>
-
-    <!-- Bootstrap -->
+	  
+    <title>Espace transporteur</title>
+<!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -46,7 +40,49 @@ $(document).ready(function() {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script >
+		$(document).ready(function() {
+		$('#example').DataTable({
+			
+			"order": [[ 3, "desc" ]],
+			columnDefs: [{
+			orderable: false,
+            targets: 5
+			}] ,
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+				
+				
+});
+		
+		} );
+	
+	</script>
   </head>
+
 
   <body class="nav-md">
     <div class="container body">
@@ -54,7 +90,7 @@ $(document).ready(function() {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -73,10 +109,12 @@ $(document).ready(function() {
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offres diponibles</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+                  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
+				  
                 </ul>   
               </div>
             </div>
@@ -93,31 +131,16 @@ $(document).ready(function() {
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-              <ul class="nav navbar-nav navbar-right">
-             <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profilePart.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>
-			
-
-               
-              </ul>
             </nav>
           </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-				<h3>Offres Acceptés</h3>
+				<h3>Offres Acceptées</h3>
                 
               </div>
               <div class="title_right">
@@ -130,29 +153,30 @@ $(document).ready(function() {
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-				   <h2>Liste des offres Acceptés</h2> 
+				   <h2>Liste des offres Acceptées</h2> 
                   
-                    <div class="clearfix"></div>
+                      <div class="clearfix"></div>
                   </div>
-            <div class="x_content">    
+                  <div class="x_content">    
                       <br />
                      <!-- here -->
-                <div class="row">
+                      <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <div class="row">
-									  <div class="row">			
+				  <div class="row">			
 					  <table id="example" class="display" style="width:100%">
 
 				    <thead>
     <tr>
       <th>N° Commande</th>
-      <th>Nom client</th>
       <th>Date</th>
-	  <td>Etat</td>
-      <th>Détails</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
       <th>Action</th>
+	  <th>Etat</th>
+	  <th>Détails</th>
     </tr>
   </thead>
   <tbody>
@@ -168,17 +192,53 @@ $(document).ready(function() {
 							echo '
     <tr>
       <td>'.$data['n_cmd'].'</td>
-      <td> '.$r['Nom'].'</td>
       <td>'.$data['Date'].'</td>
-	  <td>	';
-	  if ($data['etatCMD']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
+	  <td> '. $data['Heure'].'</td>
+	  <td> '.$data['Adresse_depart'].'</td>
+	  <td> '.$data['Adresse_arrive'].'</td>
+    
+      <td> ';
+	 if($data['etatCMD']== -1)
+
+							{
+							 echo'   
+								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-default btn-xs" >
+								Chargée</a>
+								';
+							}
+							elseif($data['etatCMD']== 1)
+							{
+							 echo' 
+								
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  class="btn btn-warning btn-xs" >
+								Montée à bord</a>
+								 ';
+							}
+							elseif($data['etatCMD']== 2)
+							{
+							 echo'  
+								
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"    class="btn btn-info btn-xs" >
+								Déchargée</a>';
+							}
+							
+							else
+							{
+							 echo' 
+								';
+							}
+							;
+	echo'  </td>
+	
+		  <td>	';
+	  if ($data['etatCMD']== -1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCMD']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCMD']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCMD']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';} 
 	  echo'</td>
-      <td> <!-- Small modal -->
+	  
+	   <td> <!-- Small modal -->
 							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
 								<i class="fa fa-folder"></i> Détails
 							</button>
@@ -198,16 +258,15 @@ $(document).ready(function() {
 													<li><i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> </li>
 													<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </br> </li>
 													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
-													<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</br> </li>
+													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-													if ($data['etatCMD']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}						  
+													if ($data['etatCMD']==-1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCMD']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCMD']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCMD']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}			  
 												  echo' </div>
 												   </li>
 												   </ul>
@@ -221,46 +280,6 @@ $(document).ready(function() {
 </div>
 									
 											  <!-- /modals --></td>
-      <td> ';
-	 if($data['etatCMD']== -1)
-							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-default btn-xs" >
-								Charger</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
-								Monter à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
-								Décharger</a>';
-							}
-							elseif($data['etatCMD']== 1)
-							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
-								Charger</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  class="btn btn-info btn-xs" >
-								Monter à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
-								Décharger</a>';
-							}
-							elseif($data['etatCMD']== 2)
-							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
-								Charger</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
-								Monter à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"   class="btn btn-success btn-xs" >
-								Décharger</a>';
-							}
-							
-							else
-							{
-							 echo'   <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" disabled class="btn btn-default btn-xs" >
-								Charger</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  disabled class="btn btn-info btn-xs" >
-								Monter à bord</a>
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"  disabled class="btn btn-success btn-xs" >
-								Décharger</a>';
-							}
-							;
-	echo'  </td>
     </tr>
   
   '; }}?>
@@ -268,33 +287,29 @@ $(document).ready(function() {
   <tfoot>
     <tr>
       <th>N° Commande</th>
-      <th>Nom client</th>
       <th>Date</th>
-      <td>Etat</td>
-      <th>Détails</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
       <th>Action</th>
+	  <td>Etat</td>
+	  <th>Détails</th>
     </tr>
   </tfoot>
 </table>
-						</div>
-                    <!-- aure -->
-          
- </div>
+                    <!-- end project list -->
+
                   </div>
-                </div>
               </div>
+			</div>
             </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        
+				</div>
+				</div>
+				</div>
+			</div>
         <!-- /page content -->
 
         <!-- footer content -->
-
 
         <!-- /footer content -->
       </div>
@@ -310,6 +325,7 @@ $(document).ready(function() {
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+	
 
   </body>
 </html>

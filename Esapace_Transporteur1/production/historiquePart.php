@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-$id_Transporteur=1;
+require_once 'SessionPart.php';
 $limit=15;
 $page=isset($_GET['page']) ? $_GET['page'] : 1;
 $start=($page -1 ) * $limit;
@@ -30,15 +30,10 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 	    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
 	  
     <title>Espace transporteur</title>
-
-    <!-- Bootstrap -->
+<!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -49,7 +44,49 @@ $(document).ready(function() {
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script >
+		$(document).ready(function() {
+		$('#example').DataTable({
+			
+			"order": [[ 3, "desc" ]],
+			columnDefs: [{
+			orderable: false,
+            targets: 5
+			}] ,
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+				
+				
+});
+		
+		} );
+	
+	</script>
   </head>
+
 
   <body class="nav-md">
     <div class="container body">
@@ -57,7 +94,7 @@ $(document).ready(function() {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -67,116 +104,77 @@ $(document).ready(function() {
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offres diponibles</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+				  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
                 </ul>   
               </div>
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+            
             <!-- /menu footer buttons -->
           </div>
         </div>
 
         <!-- top navigation -->
-          <div class="top_nav">
+        <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <?php 
-					$sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
-					echo'
-                <li class="">
-                
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-     
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>'
-				?>
-
-               
-              </ul>
             </nav>
           </div>
         </div>
         <!-- /top navigation -->
 
         <!-- page content -->
-          <div class="right_col" role="main">
+      <div class="right_col" role="main">
           <div class="">
-			  <div class="page-title">
+            <div class="page-title">
               <div class="title_left">
-                <h3>Historique</h3>
+				<h3>Mon historique</h3>
+                
               </div>
 
               <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <form method="GET" action="HistorRechPart.php">
-				  <div class="input-group">
-				  
-                    <input type="search" class="form-control" name="recherche" placeholder="Rechercher...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                    </span>
-					</div>
-				   </form>
-                  
-                </div>
+               
               </div>
             </div>
- 
+            
             <div class="clearfix"></div>
-            <div class="clearfix"></div>
+
             <div class="row">
-            <div class="col-md-12">
+              <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
+				  <h2>Historique des offres</h2> 		
+                   
                     <div class="clearfix"></div>
                   </div>
-				  <div class="x_content">
-				  <div class="row"> 
-			<div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                  <div class="x_title">
-                  <h2>Consulter historique</h2>
-                 
-                  <div class="clearfix"></div>
-                </div>
+                  <div class="x_content">    
+                      <br />
+                     <!-- here -->
+                      <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
                   <div class="x_content">
-                    <!-- start project list -->
-                    <table id="example" class="display" style="width:100%">
-                      <thead>
+				  <div class="row">			
+					  <table id="example" class="display" style="width:100%">
+
+				    <thead>
                         <tr>
-                          <th>N° commande</th>
-                          <th>Nom client</th>  
-						  <th>Date</th>
-						  <th>Etat</th>
-                          <th>Action</th>
+       <th>N° Commande</th>
+      <th>Date</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
+	  <th>Etat</th>
+	  <th>Détails</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -191,16 +189,16 @@ $(document).ready(function() {
 							echo '
                         <tr>
                           <td>'.$data['n_cmd'].'</td>
-                          <td>'.$r['Nom'].' '.$r['Prenom'].'</td>
-						  <td>'.$data['Date'].' </td>
+                          <td>'. $data['Date'].'</td>
+						  <td>'.$data['Heure'].' </td>
+						  <td>'.$data['Adresse_depart'].' </td>
+						  <td>'.$data['Adresse_arrive'].' </td>
+						  
                           
                           <td>' ;
-						 														if ($data['etatCMD']==1) { echo '
-												  <span class="label label-default">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
+						 						 if($data['etatCMD']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCMD']==4) {
+												  echo '<span class="label label-danger">Refusée</span> ';}
 							echo '</td> 
                           <td>
                              <!-- Small modal -->
@@ -223,16 +221,13 @@ $(document).ready(function() {
 													<li><i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> </li>
 													<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </br> </li>
 													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
-													<li><i class="fa fa-flag"></i> Destination: '.$data['Adresse_arrive'].'</br> </li>
+													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
 													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-													if ($data['etatCMD']==1) {
-												  echo '<span class="label label-Primary">Chargée</span> '; } elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-info">Montée à bord</span>';} elseif($data['etatCMD']==-1) {
-												  echo '<span class="label label-success">Accépté</span>';} elseif($data['etatCMD']==3) {
-												  echo '<span class="label label-warning">Déchargée</span> ';} else {
-												  echo '<span class="label label-danger">Annulée</span>' ;}
+												  if($data['etatCMD']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCMD']==4) {
+												  echo '<span class="label label-danger">Refusée</span> ';}
 							                      echo '</li>						  
 												   </div>
 												   </li>
@@ -256,11 +251,13 @@ $(document).ready(function() {
 					 </tbody>
   <tfoot>
     <tr>
-      <th>N° commande</th>
-      <th>Nom client</th>  
-	  <th>Date</th>
+      <th>N° Commande</th>
+      <th>Date</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
 	  <th>Etat</th>
-      <th>Action</th>
+	  <th>Détails</th>
     </tr>
   </tfoot>
 </table>

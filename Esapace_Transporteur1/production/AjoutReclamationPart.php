@@ -1,5 +1,7 @@
 <?php 
 require_once 'db_connect.php';
+require_once 'SessionPart.php';
+
 if($_POST) {
 	$n_cmd = $_POST['n_cmd'];
 	$Message = $_POST['Message'];

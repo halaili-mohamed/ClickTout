@@ -1,5 +1,6 @@
 <?php require_once 'db_connect.php';
-$id_Transporteur=1; ?>
+require_once 'SessionPart.php';
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,7 @@ $id_Transporteur=1; ?>
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a  class="site_title" href="offre_disponible2.php"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a  class="site_title" href="offre_disponible2.php"><span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -63,10 +64,11 @@ $id_Transporteur=1; ?>
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offres diponibles</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+				  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
                 </ul>   
               </div>
             </div>
@@ -78,38 +80,17 @@ $id_Transporteur=1; ?>
           </div>
         </div>
 
-        <!-- top navigation -->
+      <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <?php 
-					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
-					$result = $connect->query($sql);
-					$row = $result->fetch_assoc();
-					echo'
-                <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>'
-				?>
-
-               
-              </ul>
             </nav>
           </div>
         </div>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">

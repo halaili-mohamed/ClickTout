@@ -1,8 +1,13 @@
 <?php 
 require_once 'db_connect.php';
+require_once 'SessionPart.php';
 if($_GET) {
 	$id_commende = $_GET['id_commende'];
 	$etat=$_GET['etatCMD'];
+	if($etat==-1)
+	{
+	$sql  = "UPDATE commende SET etatCMD = -1  WHERE id_commende = {$id_commende}";
+	}
 	if($etat==1)
 	{
 	$sql  = "UPDATE commende SET etatCMD = 1  WHERE id_commende = {$id_commende}";
