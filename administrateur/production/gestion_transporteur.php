@@ -46,9 +46,40 @@ $next=$page + 1;
     <link href="../build/css/custom.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css">
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
+<script >
+		$(document).ready(function() {
+		$('#example').DataTable({
+			"order": [[ 3, "asc" ]],
+			columnDefs: [{
+			orderable: false,
+			targets: 5
+			}],
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+		});
+		} );
+	
+	</script>
 
 
 <script>
@@ -57,12 +88,7 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
-<style id="__web-inspector-hide-shortcut-style__" type="text/css">
-.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
-{
-    visibility: hidden !important;
-}
-</style>
+
   </head>
 
   
@@ -74,19 +100,12 @@ $(document).ready(function() {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>            </div>
+              <a href="profile.php" class="site_title"><span>Click Tout </span></a>            </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">              </div>
-              <div class="profile_info">
-                <span>Bienvenue,</span>
-                <h2><?php echo $row['nom'] ?></h2>
-              </div>
-            </div>
+           
             <!-- /menu profile quick info -->
 
             <br />
@@ -107,7 +126,7 @@ $(document).ready(function() {
                   <li><a href="gestion_partenaire.php"><i class="fa fa-users"></i> Gestion des partenaires </a>				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>				  </li>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
                   <li><a href="reclamation.php"><i class="fa fa-frown-o"></i> Reclamation </a>				  </li>
@@ -124,17 +143,7 @@ $(document).ready(function() {
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>              </a>            </div>
-            <!-- /menu footer buttons -->
+            
           </div>
         </div>
 
@@ -148,11 +157,11 @@ $(document).ready(function() {
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""> <?php echo $row['nom'] ?>
+                     <?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>                  </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li> 
-                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li> 
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
               </ul>
@@ -166,7 +175,7 @@ $(document).ready(function() {
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>TRANSPORTEUR</h3>
+                <h3>Liste des Trasnporteurs</h3>
               </div>
 
               <div class="title_right">
@@ -175,7 +184,7 @@ $(document).ready(function() {
                     
                     <span class="input-group-btn"> <a href="ajout_transporteur.php">
                       <button type="button" class="btn btn-primary btn-ms" >
-                                <i class="fa fa-plus-square"> </i> Ajouter transporteur                              </button></a>                    </span>                </div>
+                                <i class="fa fa-plus-square"> </i> Ajouter transporteur </button></a>                    </span>                </div>
               </div>
             </div>
 
@@ -187,21 +196,7 @@ $(document).ready(function() {
                   <div class="x_content">
                     <div class="row">
                       <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                        <nav aria-label="Page navigation">
-							  <!--<ul class="pagination justify-content-center">
-								<li class="page-item">
-								  <a class="page-link" href="gestion_transporteur.php?page=<?= $previous; ?>" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-									<span class="sr-only">Previous</span>								  </a>								</li>
-								<?php for  ($i = 1; $i<=$pages;$i++) : ?>
-									<li class="page-item"><a class="page-link" href="gestion_transporteur.php?page=<?= $i; ?>"><?= $i; ?></a></li>
-								<?php endfor ?>
-								<li class="page-item">
-								  <a class="page-link" href="gestion_transporteur.php?page=<?= $next; ?>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-									<span class="sr-only">Next</span>								  </a>								</li>
-							  </ul>-->
-						</nav>
+                       
                       </div>
 
                       <div class="clearfix"></div>
@@ -228,22 +223,19 @@ $(document).ready(function() {
 						{echo'
 <tr role="row">
 		<td >'.$data['Id_Transporteur'].'</td>
-      <td>'.$data['nom'].' '.$data['Prenom'].' </td>
+      <td>'.$data['Nom'].' '.$data['Prenom'].' </td>
       <td>  '.$data['Email'].'</td>
       <td>  '.$data['Adresse'].'</td>
       <td>  '.$data['Matricule'].'</td>
       <td>  '.$data['Type_Voiture'].'</td>
 	  <td> <div class="btn-group">
-      <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].'&Cin= '.$data['Cin'].'&psudo= '.$data['psudo'].'"><button type="button" class="btn btn-info btn-xs"> <i class="fa fa-user">
+      <a href="profile_transporteur.php?Id_Transporteur='.$data['Id_Transporteur'].'&Nom='.$data['Nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &Pseudo='.$data['Pseudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &Password= '.$data['Password'].'&Cin= '.$data['Cin'].'&Pseudo= '.$data['Pseudo'].'"><button type="button" class="btn btn-info btn-xs"> <i class="fa fa-user">
                                 </i> </button></a>
-      <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &nom='.$data['nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
+      <a href="offres_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].' &Nom='.$data['Nom'].' &Prenom='.$data['Prenom'].'">  <button type="button" class="btn btn-primary btn-xs">
                                 <i class="fa fa-table"> </i> Offres
                               </button>
 							  </a>
-	 <a href="Sup_transporteur.php?Id_Transporteur='. $data['Id_Transporteur'].'">  <button type="button" class="btn btn-warning btn-xs">
-                                <i class="fa fa-envelope-o"> </i> Email
-                              </button>
-							  </a> ';
+	 ';
 							  
 							 if ($data['Etat_compte']==0)
 							  { echo '

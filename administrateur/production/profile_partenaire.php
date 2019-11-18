@@ -1,3 +1,9 @@
+<?php require_once 'session.php'; 
+ 
+$sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,22 +42,12 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.html" class="site_title"> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+            
 
             <br />
 
@@ -74,7 +70,7 @@
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
@@ -94,22 +90,7 @@
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+           
           </div>
         </div>
 
@@ -121,27 +102,22 @@
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
-              <ul class="nav navbar-nav navbar-right">
+             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                     <?php echo $row['login'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li>
+                    
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
                 
               </ul>
+			  
             </nav>
           </div>
         </div>
@@ -157,7 +133,7 @@
 
                <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <a href="gestion_partenaire.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_partenaire.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
                 </div>
               </div>
@@ -172,15 +148,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
+                      
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
@@ -189,38 +157,63 @@
                   <div class="x_content">
 
 <form class="form-horizontal form-material">
+<?php 
+					$sql = "SELECT * FROM partenaire where id_partenaire=1";
+					$result = $connect->query($sql);
+					$data = $result->fetch_assoc();
+					?>
+                                <form action="updateProfile.php" method="post" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label class="col-md-12">Nom</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                        <input type="text" name="nom_ste" placeholder="Nom" class="form-control form-control-line" value="<?php echo $data['nom_ste'] ?>" > </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Responsable</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="responsable" placeholder="Responsable" class="form-control form-control-line" value="<?php echo $data['responsable'] ?>" > </div>
+                                </div>
+								<div class="form-group">
+                                    <label class="col-md-12">Adresse</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="adresse" placeholder="Adresse" class="form-control form-control-line" value="<?php echo $data['adresse'] ?>">
+                                    </div>
+                                </div>
+								  <div class="form-group">
+                                    <label class="col-md-12">Téléphone</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="tel" placeholder="Téléphone" class="form-control form-control-line" value="<?php echo $data['tel'] ?>"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" name="email" placeholder="Email" class="form-control form-control-line" value="<?php echo $data['email'] ?>" > </div>
                                 </div>
+                                
+                              
+                                
                                 <div class="form-group">
+                                    <label class="col-md-12">Site web </label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="siteweb" placeholder="" class="form-control form-control-line" value="<?php echo $data['siteweb'] ?>">
+                                    </div>
+                                </div>
+								<div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="pwd" value="<?php echo $data['pwd'] ?>" class="form-control form-control-line"> </div>
+										
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Téléphone</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Adresse</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                               
+								<div class="form-group">
+								<input type="hidden" name="id_partenaire" value="<?php echo $data['id_partenaire']?>" />
+								</div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifer</button>
+				
+                                        <button class="btn btn-success" type="submit">Modifer</button>
                                     </div>
                                 </div>
+                            </form>
                             </form>
   
                   </div>
