@@ -179,7 +179,7 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
                       </thead>
                       <tbody>
 						<?php 
-						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCMD in (3,4)LIMIT $start, $limit";
+						$sql1="select * from commende where transporteur_id_Transporteur={$id_Transporteur} and etatCmd in (3,4)LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) {
@@ -196,8 +196,8 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 						  
                           
                           <td>' ;
-						 						 if($data['etatCMD']==3) {
-												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCMD']==4) {
+						 						 if($data['etatCmd']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCmd']==4) {
 												  echo '<span class="label label-danger">Refusée</span> ';}
 							echo '</td> 
                           <td>
@@ -223,10 +223,10 @@ if (isset($_GET['recherche']) and !empty($_GET['recherche'])) {
 													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
 													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-												  if($data['etatCMD']==3) {
-												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCMD']==4) {
+												  if($data['etatCmd']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCmd']==4) {
 												  echo '<span class="label label-danger">Refusée</span> ';}
 							                      echo '</li>						  
 												   </div>

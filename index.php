@@ -49,10 +49,10 @@
 	   <script src="js/jquery.min.js"></script>
 	 
 	 <style type="text/css">
-	 	.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
+	.input-group.md-form.form-sm.form-2 input.amber-border {
+border: 1px solid #ffca28;
 }
-	 </style>
+ </style>
 
 		
 	<script> 
@@ -95,6 +95,14 @@
   
 	});
 	</script>
+
+			<script>
+		$(document).ready(function(){
+		  $("#bs").click(function(){
+		    $("#s").load("search.php?num="+$("#num").val()+"");
+		  });
+		});
+		</script>
 	<style> 
 		#panel, #flip,#panel1, #flip1,#panel2, #flip2,#panel3, #flip3,#flip4 {
 		  padding: 5px;
@@ -135,15 +143,51 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
+
 	          <li class="nav-item active"><a href="index.php" class="nav-link">Accueil</a></li>
 	          <li class="nav-item"><a href="#about" class="nav-link">Nos services</a></li>
 	          <li class="nav-item"><a href="#part" class="nav-link">Nos partenaires</a></li>
+			   <li class="nav-item"><a href="#rech" data-target="#rech"  data-toggle="modal" class="nav-link">Votre Commande</a></li>
 	          <li class="nav-item"><a href="#contact" class="nav-link">Contactez-nous</a></li>
+
 		
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
+
+
+
+	  <div class="modal" tabindex="-1" role="dialog" id="rech">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Votre commande</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+	
+     
+      <div class="modal-body">
+       
+		  
+		  	<div id="s">
+			  <input class="form-control mr-sm-5" type="text" placeholder="Search" id="num" aria-label="Search">
+			  <button id="bs" class="btn btn-outline-warning btn-rounded btn-sm my-0" type="button">Search</button>
+		    </div>
+		  
+
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+   
+    </div>
+  </div>
+</div>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/camions-parking.jpg');" data-stellar-background-ratio="0.5">
@@ -287,12 +331,13 @@
 					<h2 class="mb-2">Reservation</h2>
 				</div>
 			</div>
-			 <form id="f" method="GET" id="distance_form">
+			 <form method="POST" id="distance_form">
 			 
 			 
 				<div id="flip">1. La destination et la date de votre commande</div>
-				<div id="panel">
 
+				<div id="panel">
+					<center>
 					<div class="form-row ">
 					<div class="col-md-2"></div>
 					<div class="form-group col-md-4">
@@ -306,7 +351,7 @@
 					  <input id="destination" name="destination" required="" type="hidden" />
 					</div>
 				  </div>
-				  
+				  </center>
 				  
 				  <div class="form-row ">
 					<div class="col-md-2"></div>
@@ -318,18 +363,24 @@
 					  <label for="Heure">Horaire</label>
 					  <input type="time" class="form-control" id="Heure" >
 					</div>
-					<div class="col-md-1"></div>
-					<div>
-					
-					 <button type="submit" id="b1" value="following" class="btn btn-primary custom-next">Suivant</button>
 					</div>
-				  </div>
+
+					<center>
+
+					<div class="form-row ">
+						<div class="col-md-5"></div>
+						<div class="col-md-2">
+					 <button type="submit" id="b1" class="btn btn-primary custom-next">Suivant</button></div>
 					
+
+					</div>
 					
-							</div>
-				</form>			
-						
+				 </center>
+					
+					</div>
+
 				<div id="flip1">2. Vos coordonnées</div>
+
 				<div id="panel1">
 
 				<div class="form-row ">
@@ -352,98 +403,107 @@
 					  <input type="tel" class="form-control" id="Phone" placeholder="Votre numéro téléphone" >
 					</div>
 					<div class="form-group col-md-4">
+
 					  <label for="Email">Adresse e-mail</label>
 					  <input type="email" class="form-control" id="Email" placeholder="Votre adresse e-mail">
+
 					</div>
 					</div>
 					 <div class="form-row ">
 					 <div class="col-md-5"></div>
+
 					 <button  id="b5"  class="btn btn-primary custom-next">retour</button> <div class="col-md-1"></div>
 					 <button  id="b2"  class="btn btn-primary custom-next">suivant</button>
+
+					
+					 <div class="col-md-4"></div>
+
 					
 				  </div>
 				  
 							</div>
 							
 									
+
 				<div id="flip2">3. Des informations supplémentaires</div>
+
 				<div id="panel2">
 						
-											<div><label>De quelle taille de véhicule aurez-vous besoin ?</label></div>
-										<div class="form-row ">
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/13.png">
-													<div class="custom-control custom-radio">
-														  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="defaultExampleRadios" checked>
-														  <label class="custom-control-label" for="defaultGroupExample1"></label>
-													</div>
-													
-													
-												</div>
-									</div>
+											<div><label>De quelle Type de véhicule aurez-vous besoin ?</label></div>
+									<center>	
 									
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/11.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="defaultExampleRadios">
-													  <label class="custom-control-label" for="defaultGroupExample2"></label>
-													</div>
-												</div>
-									</div>
-									
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-													<img src="images/12.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="defaultExampleRadios" >
-													  <label class="custom-control-label" for="defaultGroupExample3"></label>
-													</div>
-
-												</div>
-									</div>
-
-						</div>	
-
-							<div><label>Avez-vous un besoin supplémentaire ?     <label></div>
-							
-							
-							
-						<div class="form-row ">
-								<div class="col-lg align-items-end">
-												<div class="form-group">
-											<img src="images/1.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="choix"  name="defaultExampleRadios">
-													 <label class="custom-control-label" for="choix"></label>
-													</div>
-													
-
-									</div></div>
-
-							</div>	
-
-										
-					
-					
-										<div>	<label>Voudrez-vous un coup de main pour monter votre chargement chez vous ?   <label></div>
-								<div class="form-row ">
-					
-									<div class="col-lg align-items-end">
-												<div class="form-group">
-											<img src="images/2.png">
-													<div class="custom-control custom-radio">
-													  <input type="radio" class="custom-control-input" id="choix1"  name="defaultExampleRadios">
-													 <label class="custom-control-label" for="choix1"></label>
-													</div>
-													
-									</div></div>
-
+									 <div class="form-row">
+                           <div class="col"> 
+								<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+										  <select name="type_voiture" id="type_voiture" class="form-control"  >
+											<option hidden> 	Type de véhicule</option>
+											<option value="1">6m³</option>
+											<option value="2">9m³</option>
+											<option value="3">12m³</option>
+											<option value="4">20m³</option>
+										  </select>
+										</div>
+									  </div>
+								</div>
 							</div>
+									</center>
+									
+
+						
+
+							<div ><label >Voudrez-vous un coup de main pour monter votre chargement chez vous?   <label></div>
+							
+							
+							<center>
+					
+									 <div class="form-row">
+                           <div class="col"> 
+								<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+									  <select name="nb_ouvruer" id="nb_ouvruer" class="form-control"  >
+											<option hidden>Nombre de main d'oeuvre</option>
+											<option value="1">un</option>
+											<option value="2">deux</option>
+											
+										  </select>
+										</div>
+									  </div>
+								</div>
+							</div>
+							</center>		
+					
+					
+										<div><label>Choisisez le temps de chargement et de déchargement<label></div>
+								<center>
+ 							<div class="form-row">
+                           		<div class="col"> 
+									<div class="form-group">
+                        
+									<div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+										  <select name="T_chargement" id="T_chargement" class="form-control"  >
+											<option hidden>Temps de chargement et de déchargement</option>
+											<option value="1">20min</option>
+											<option value="2">+1h</option>
+											<option value="2">+2h</option>
+										  </select>
+									</div>
+									</div>
+								</div>
+							</div>
+								</center>
+
+
+			<p><B><u style="color:red;">REMARQUE:</u> le transport est trottoir à trottoir uniquement</p></B>
+
+
 							<div>
 										<button  id="b6"  class="btn btn-primary custom-next">retour</button>
+
 										 <button  id="b3"  class="btn btn-primary custom-next">suivant</button>
+
 					</div>
 				</div>
 					
@@ -499,8 +559,13 @@
                  <li id="li1" >Adresse Départ</li>
                  <li id="li2">Adresse Destination</li>
                  <li id="li3">Date</li>
+
                  <li id="li4">Horaire</li>
                  
+                 
+                 <input id="in_kilo" name="Distance" required="" type="hidden" />
+
+
                   </ul> 
              </div>  
 				
@@ -508,7 +573,7 @@
 			</div>
 					
 				
-
+</form>	
 						</div>
     </section>
 
@@ -526,7 +591,7 @@
         <div class="owl-carousel nonloop-block-13 "> 
 
 	 <?php 
-	 $query= "select distinct image,nom_ste from partenaire   ";
+	 $query= "select distinct logo,nom_ste,siteweb from partenaire   ";
 	 $r= mysqli_query($connect,$query);
 	 if (mysqli_num_rows($r)>0 ) {
 	 	
@@ -537,12 +602,12 @@
 	    
               <div class="card " >
               	
-                <img  src="<?php echo $row["image"]; ?>" alt="Image" class="sizeimage" />
+                <img  src="<?php echo $row["logo"]; ?>" alt="Image" class="sizeimage" />
 
                 <div class="card-body">
                   <div class="card-title">
-                  <h3><a href="#"><?php echo $row["nom_ste"]; ?></a></h3>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <h3><a href="https://<?php echo $row["siteweb"]; ?>"><?php echo $row["nom_ste"]; ?></a></h3>
+                  
                   
                   </div>
                
@@ -594,10 +659,10 @@
             <form action="ajouterReclamation.php" method="POST" class="bg-light p-5 contact-form">
               
               <div class="form-group">
-                <input type="text" class="form-control" id="commende_id_commende" name="idCommande" placeholder="Numéro de Commande">
+                <input type="text" class="form-control" id="n_cmd" name="n_cmd" placeholder="Numéro de Commande">
               </div>
               <div class="form-group">
-                <textarea  id="Message" cols="30" rows="7" name="msg" class="form-control" placeholder="votre Réclamation"></textarea>
+                <textarea  id="Message" cols="30" rows="7" name="Message" class="form-control" placeholder="votre Réclamation"></textarea>
               </div>
 			
               <div class="form-group ">

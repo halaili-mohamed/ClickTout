@@ -181,7 +181,7 @@ $next=$page + 1;
   </thead>
   <tbody>
 				  <?php 
-					$sql1="select * from commende where transporteur_Id_Transporteur={$id_Transporteur} and etatCMD in (-1,1,2,3) LIMIT $start, $limit";
+					$sql1="select * from commende where transporteur_Id_Transporteur={$id_Transporteur} and etatCmd in (-1,1,2) LIMIT $start, $limit";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) { 
@@ -198,27 +198,27 @@ $next=$page + 1;
 	  <td> '.$data['Adresse_arrive'].'</td>
     
       <td> ';
-	 if($data['etatCMD']== -1)
+	 if($data['etatCmd']== -1)
 
 							{
 							 echo'   
-								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=1"><button type="button" class="btn btn-default btn-xs" >
+								<a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCmd=1"><button type="button" class="btn btn-default btn-xs" >
 								Chargée</a>
 								';
 							}
-							elseif($data['etatCMD']== 1)
+							elseif($data['etatCmd']== 1)
 							{
 							 echo' 
 								
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=2"><button type="button"  class="btn btn-warning btn-xs" >
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCmd=2"><button type="button"  class="btn btn-warning btn-xs" >
 								Montée à bord</a>
 								 ';
 							}
-							elseif($data['etatCMD']== 2)
+							elseif($data['etatCmd']== 2)
 							{
 							 echo'  
 								
-								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCMD=3"><button type="button"    class="btn btn-info btn-xs" >
+								 <a href="Modif_Etat_CMD.php?id_commende='.$data['id_commende'].'&etatCmd=3"><button type="button"    class="btn btn-info btn-xs" >
 								Déchargée</a>';
 							}
 							
@@ -231,10 +231,10 @@ $next=$page + 1;
 	echo'  </td>
 	
 		  <td>	';
-	  if ($data['etatCMD']== -1) { echo '
-												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCMD']==1) {
-												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCMD']==3) {
+	  if ($data['etatCmd']== -1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCmd']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCmd']==3) {
 												  echo '<span class="label label-info">Déchargée</span> ';} 
 	  echo'</td>
 	  
@@ -260,12 +260,12 @@ $next=$page + 1;
 													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
 													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-													if ($data['etatCMD']==-1) { echo '
-												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCMD']==2) {
-												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCMD']==1) {
-												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCMD']==3) {
+													if ($data['etatCmd']==-1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCmd']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCmd']==3) {
 												  echo '<span class="label label-info">Déchargée</span> ';}			  
 												  echo' </div>
 												   </li>

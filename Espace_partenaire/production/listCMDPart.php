@@ -123,7 +123,7 @@ $row = $result->fetch_assoc();
 					
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/<?php echo $row['logo'] ?>.jpg" alt=""><?php echo $row['nom_ste'] ?>
+                    <img src=<?php echo $row['logo'] ?> alt=""><?php echo $row['nom_ste'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

@@ -4,15 +4,15 @@ require_once 'SessionPart.php';
 if($_GET) {
 	$id_commende = $_GET['id_commende'];
 	$id_transporteur = $_SESSION['id_Transporteur'];
-	$etat=$_GET['etatCMD'];
+	$etat=$_GET['etatCmd'];
 	$a=-1;
 	if($etat== -1)
 	{
-	$sql  = "UPDATE commende SET etatCMD = -1  WHERE  id_commende = {$id_commende} and transporteur_Id_Transporteur={$id_transporteur}";
+	$sql  = "UPDATE commende SET etatCmd = -1 , transporteur_Id_Transporteur={$id_transporteur} WHERE  id_commende = {$id_commende}";
 	}
 	if($etat== 4)
 	{
-	$sql  = "UPDATE commende SET etatCMD = 4  WHERE  id_commende = {$id_commende} and transporteur_Id_Transporteur={$id_transporteur}";
+	$sql  = "UPDATE commende SET etatCmd = 4  WHERE  id_commende = {$id_commende} and transporteur_Id_Transporteur={$id_transporteur}";
 	}
 	
 	

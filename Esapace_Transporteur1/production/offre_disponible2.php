@@ -4,15 +4,7 @@ require_once 'SessionPart.php';
 $sql = "SELECT * FROM Transporteur where id_Transporteur={$id_Transporteur}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
-$limit=9;
-$page=isset($_GET['page']) ? $_GET['page'] : 1;
-$start=($page -1 ) * $limit;
-$res1 = $connect->query("select count(id_commende) AS id from commende where transporteur_id_Transporteur={$id_Transporteur} ");
-$CMDCount=$res1->fetch_assoc();
-$total=$CMDCount ['id'];
-$pages=ceil($total/$limit);
-$previous=$page - 1;
-$next=$page + 1;
+$Type_Voiture=$row['Type_Voiture'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,7 +174,7 @@ $next=$page + 1;
   </thead>
   <tbody>
 				  <?php 
-						$sql1="select * from commende c , transporteur t where transporteur_id_Transporteur={$id_Transporteur} and c.etatCMD= 0 and c.type_voiture=t.Type_Voiture and  c.Date>= Date(sysdate()) and c.Heure >= Hour(sysdate()) order by c.Date DESC LIMIT $start, $limit";
+						$sql1="select * from commende where type_voiture={$Type_Voiture} and etatCmd= 0  and Date>= Date(sysdate()) and Heure >= Hour(sysdate()) order by Date DESC ";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($data = $result1->fetch_assoc()) {
@@ -220,9 +212,9 @@ $next=$page + 1;
 													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
 													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
 													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
-													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['TelClient'].'</br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</br></li>
 													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
-													if ($data['etatCMD']==0) {
+													if ($data['etatCmd']==0) {
 													echo '<span class="label label-default">En attente</span> ';} 
 												  echo'</li>						  
 												   </div>
@@ -239,8 +231,8 @@ $next=$page + 1;
 									
 											  <!-- /modals --></td>
       <td> 
-	  <a href="accepter_refuserCMD.php?id_commende='.$data['id_commende'].'&etatCMD=-1"><button type="button" class="btn btn-success btn-xs" >Accépter</a>
-	  <a href="accepter_refuserCMD.php?id_commende='.$data['id_commende'].'&etatCMD=4"><button type="button" class="btn btn-danger btn-xs" >Refuser</a>
+	  <a href="accepter_refuserCMD.php?id_commende='.$data['id_commende'].'&etatCmd=-1"><button type="button" class="btn btn-success btn-xs" >Accépter</a>
+	  <a href="accepter_refuserCMD.php?id_commende='.$data['id_commende'].'&etatCmd=4"><button type="button" class="btn btn-danger btn-xs" >Refuser</a>
 	  </td>
 	  </td>
     </tr>

@@ -1,27 +1,27 @@
 <?php
     require_once 'connect.php';
 
-    if($_POST){
+    if($_POST) {
+	$n_cmd = $_POST['n_cmd'];
+	$Message = $_POST['Message'];
+	
+	$sql1="SELECT id_commende FROM commende where n_cmd={$n_cmd}";
+	$result = $connect->query($sql1);
+	$row = $result->fetch_assoc();
+	$commende_id_commende=$row['id_commende'];
 
-    $idCommande=$_POST['idCommande'];
-    $msg=$_POST['msg'];
-  
-
- 
-  $query= "INSERT INTO `reclamation` (`id_Reclamation`, `Message`, `type_compte`, `commende_id_commende`) VALUES (NULL,'$msg','','$idCommande')  ";
-        $result= mysqli_query($connect,$query);
-
-      
-      	if($connect->query($query) === TRUE) {
-		echo "<p>New Record Successfully Created</p>";
+	$sql = "INSERT INTO reclamation (Message, type_compte, commende_id_commende) VALUES ('$Message', 'Client', '$commende_id_commende')";
+	if($connect->query($sql) === TRUE) {
 		
+		echo'<script language="javascript"> 
+			
+			window.location="index.php";
+	        </script>';
 	} else {
-		echo "Error " . $query . ' ' . $connect->connect_error;
+		echo "Error " . $sql . ' ' . $connect->connect_error;
 	}
 
-      
-   $connect->close();
-
-   }
+	$connect->close();
+}
     
 ?>

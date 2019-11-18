@@ -84,7 +84,7 @@ require_once 'sessionPart.php';
 					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
+                    <img src='.$row['logo'].' alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -129,9 +129,9 @@ require_once 'sessionPart.php';
 					
                       echo'<div class="profile_img">
                         <div id="crop-avatar">
-                          <!-- Current avatar -->
+                          <!-- Current avatar --> 
 						  
-                          <img class="img-responsive avatar-view" src="images/'.$row['logo'].'.jpg" alt="Avatar" title="Change the avatar">
+                          <img class="img-responsive avatar-view" src='.$row['logo'].' alt="Avatar" title="Change the avatar">
                         </div>
                       </div>
                       <h3>'.$row['nom_ste'].'</h3>
@@ -149,7 +149,7 @@ require_once 'sessionPart.php';
 
                         <li class="m-top-xs">
                           <i class="fa fa-external-link user-profile-icon"></i>
-                          <a href="'.$row['siteweb'].'" target="_blank">'.'  '.$row['siteweb'].'</a>
+                          <a href="https://'.$row['siteweb'].'" target="_blank">'.'  '.$row['siteweb'].'</a>
                         </li>
                       </ul>
 
