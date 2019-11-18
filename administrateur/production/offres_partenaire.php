@@ -160,7 +160,7 @@
                   <div class="input-group">
                   
 					
-                <a href="gestion_transporteur.html"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
+                <a href="gestion_partenaire.php"> <button type="button"  class="btn btn-dark fa fa-arrow-left">   </button> </a>
 				 
              
                   </div>
