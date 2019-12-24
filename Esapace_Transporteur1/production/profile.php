@@ -1,5 +1,5 @@
 <?php require_once 'db_connect.php'; 
-
+require_once 'SessionPart.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +26,19 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
   </head>
-
+<style>
+p
+{
+    box-shadow: 10px 10px 10px black;
+}
+</style>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="offre_disponible2.php" class="site_title"><i class="fa fa-cube"></i> <span>Click TOUT</span></a>
+              <a href="offre_disponible2.php" class="site_title"><span>Click TOUT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -44,30 +49,18 @@
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li><a href="profile.php"><i class="fa fa-user"></i>Mon compte</a></li>
-				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offre diponible</a></li>
-				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offre accépté</a></li>
-				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamation</a></li>
+				  <li><a href="offre_disponible2.php"><i class="fa fa-bell-o"></i>Offres diponibles</a></li>
+				  <li><a href="offre_accepte.php"><i class="fa fa-thumbs-o-up"></i>Offres accéptées</a></li>
+				  <li><a href="ReclamationPart.php"><i class="fa fa-comments-o"></i> Réclamations</a></li>
                   <li><a href="historiquePart.php"><i class="fa fa-clock-o"></i>Historiques</a></li>
+				  <li><a href="deconnexion.php"><i class="fa fa-power-off"></i>Déconnexion</a></li>
                 </ul>   
               </div>
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+            
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -85,16 +78,7 @@
 					$sql = "SELECT * FROM transporteur where id_Transporteur={$id_Transporteur}";
 					$result = $connect->query($sql);
 					$row = $result->fetch_assoc();
-					echo'
-                <li class="">
-                  
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Mon compte</a></li>
-                    
-                    
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
-                  </ul>
-                </li>'
+					
 				?>
 
                
@@ -153,16 +137,20 @@
 						<li><i class="fa fa-tags user-profile-icon"></i>'.'  '.$row['Matricule'].'
                         </li>
 						
-                       <li><i class="fa fa-money"></i> Revenue total du mois 
-						</li> 
+                      
 						';
 						//a verfier avec mouhamed
-						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur 
- and t.id_Transporteur=$_SESSION['id_Transporteur'] 
-AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d") AND DATE_FORMAT( SYSDATE(), "%Y-%m-%d") ";		
-						$res=$connect->query($sql2);
-						$data = $res->fetch_assoc();
-					    echo'  <h2>  '.$data['revenue'].'</h2>
+						$sql2="SELECT SUM(prix) as revenue from commende c , transporteur t where c.transporteur_Id_Transporteur= t.id_Transporteur and t.id_Transporteur=$id_Transporteur ";
+						//and c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), %Y-%m-%d) AND DATE_FORMAT( SYSDATE(), %Y-%m-%d) ";		
+						$res2=$connect->query($sql2);
+						$data = $res2->fetch_assoc();
+						
+					    echo'  
+						 <li><p><i class="fa fa-money"></i> Revenue total du mois :  <br> '.$data['revenue'].'
+						
+						</p>
+						</li> 
+						
                         <span class="sparkline_two" style="height: 160px;">
                                       <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                         </span>
@@ -230,25 +218,40 @@ AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d
 								<div class="form-group">
                                     <label class="col-md-12">Mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="Password"  class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> 
+                                        <input type="password" name="Password" id="pass1" class="form-control form-control-line" value="<?php echo $row['Password'] ?>"> 
 										</div>
                                 </div>
 								<div class="form-group">
                                     <label class="col-md-12">Vérfier mot de passe</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="Password2"  class="form-control form-control-line" value="Password2"> 
+                                        <input type="password" name="Password2" id="pass2" class="form-control form-control-line" > 
 								</div>
 								</div>	
+								
+								<p id="validate" style="color: red" ></p>
 								<div class="form-group">
-								<input type="hidden" name="id_Transporteur" value="<?php echo $row['id_Transporteur']?>" />
+					
 								</div>
 								<div class="form-group">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success">Modifier</button>
+                                        <button class="btn btn-success"id="modif" name="modif" >Modifier</button>
                                     </div>
                                 </div>
                                 
                             </form>
+		
+   <script>
+  document.getElementById("modif").onclick=function(){
+    var pass1 = document.getElementById("pass1").value;
+    var pass2 = document.getElementById("pass2").value;
+    if (pass1 != pass2) {
+      document.getElementById("validate").innerHTML="Mots de passes non Identiques !!";
+      document.getElementById("pass2").style.color="RED";
+      return false;
+     }
+     return true;    
+};</script>
+								
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
 					  
                         
@@ -273,7 +276,7 @@ AND c.Date BETWEEN DATE_FORMAT( ADDDATE(SYSDATE(), INTERVAL -1 MONTH), "%Y-%m-%d
         <!-- /footer content -->
       </div>
     </div>
-   
+  
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

@@ -126,7 +126,7 @@ require_once 'sessionPart.php';
 					echo'
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/'.$row['logo'].'.jpg" alt="">'.$row['nom_ste'].'
+                    <img src='.$row['logo'].' alt="">'.$row['nom_ste'].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

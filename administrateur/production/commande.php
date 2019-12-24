@@ -36,9 +36,45 @@ $row = $result->fetch_assoc();
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.0.js" ></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script >
+		$(document).ready(function() {
+		$('#example').DataTable({
+			
+			"order": [[ 3, "desc" ]],
+			columnDefs: [{
+			orderable: false,
+            targets: 5
+			}] ,
+			"language": {
+			"search": "Rechercher:",
+			"emptyTable":     "Aucune commande disponible",
+			"info":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			"infoEmpty":      " ",
+			"lengthMenu":     "Montrer _MENU_ éléments",
+			"zeroRecords":    "Aucune commande correspondante trouvée",
+			 "loadingRecords": "Chargement...",
+			"processing":     "Traitement...",
+			 "paginate": {
+				"first":      "First",
+				"last":       "Last",
+				"next":       ">>",
+				"previous":   "<<"
+					},
+			"aria": {
+			"sortAscending":  ": Activer pour trier la colonne par ordre croissant",
+			"sortDescending": ": Activer pour trier la colonne par ordre décroissant"
+					}
+			}
+				
+				
+});
+		
+		} );
 	
+	</script>
 	
 	<script>
 
@@ -46,12 +82,7 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
-<style id="__web-inspector-hide-shortcut-style__" type="text/css">
-.__web-inspector-hide-shortcut__, .__web-inspector-hide-shortcut__ *, .__web-inspector-hidebefore-shortcut__::before, .__web-inspector-hideafter-shortcut__::after
-{
-    visibility: hidden !important;
-}
-</style>
+
 
   </head>
 
@@ -61,22 +92,12 @@ $(document).ready(function() {
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Bienvenue,</span>
-                <h2><?php echo $row['nom'] ?></h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+           
 
             <br />
 
@@ -99,7 +120,7 @@ $(document).ready(function() {
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
@@ -119,22 +140,6 @@ $(document).ready(function() {
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
           </div>
         </div>
 
@@ -149,13 +154,13 @@ $(document).ready(function() {
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
+                    <?php echo $row['login'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li>
                    
-                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
@@ -167,88 +172,152 @@ $(document).ready(function() {
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Commande <small></small></h3>
+				<h3>Offres Acceptées</h3>
+                
               </div>
-
+              <div class="title_right">
               </div>
             </div>
-
+            
             <div class="clearfix"></div>
 
-        
-   <div class="row">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+				   <h2>Liste des offres Acceptées</h2> 
+                  
+                      <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">    
+                      <br />
+                     <!-- here -->
+                      <div class="row">
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_content">
-                    <div class="row">
-                      <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    <div id="example_wrapper" class="dataTables_wrapper">
+				  <div class="row">			
+					  <table id="example" class="display" style="width:100%">
 
- 
- <table id="example" class="display dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
-                <thead>
-                    <tr role="row">
-<th class="sorting_asc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 130px;">N° transporteur </th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 212px;">Nom & prenom </th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Email</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 36px;">Adresse</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 84px;">Matricule</th>
-<th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 71px;">Type de voiture </th>
-<th> ACTION </th></tr>
-                </thead>
-			
+				    <thead>
+    <tr>
+      <th>N° Commande</th>
+      <th>Date</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
+     
+	  <th>Etat</th>
+	  <th>Détails</th>
+    </tr>
+  </thead>
   <tbody>
-  <?php 
-						$sql="select * from transporteur";
-						$result = $connect->query($sql);
-						if($result->num_rows > 0) {
-						while($data=$result->fetch_assoc())
-						{echo'
-<tr role="row">
-		<td >'.$data['Id_Transporteur'].'</td>
-      <td>'.$data['nom'].' '.$data['Prenom'].' </td>
-      <td>  '.$data['Email'].'</td>
-      <td>  '.$data['Adresse'].'</td>
-      <td>  '.$data['Matricule'].'</td>
-      <td>  '.$data['Type_Voiture'].'</td>
-	  <td> <div class="btn-group">
-      <a href="Details.php?Id_Transporteur='.$data['Id_Transporteur'].'&nom='.$data['nom'].' &Prenom='.$data['Prenom'].' &Adresse='.$data['Adresse'].' &Email='.$data['Email'].' &psudo='.$data['psudo'].'&Date_naiss='.$data['Date_naiss'].' &Matricule='.$data['Matricule'].' &Type_Voiture='.$data['Type_Voiture'].' &PWD= '.$data['PWD'].'&Cin= '.$data['Cin'].'&psudo= '.$data['psudo'].'"><button type="button" class="btn btn-info btn-xs"> Details <i class="fa fa-">
-                                </i> </button>
-				
-							  </a> 
+				  <?php 
+					$sql1="select * from commende ";
+						$result1 = $connect->query($sql1);
+						if($result1->num_rows > 0) {
+						while($data = $result1->fetch_assoc()) { 
+							$sql2="select * from client where id_client={$data['client_id_client']}";
+							$res=$connect->query($sql2);
+							$r=$res->fetch_assoc();
 							
-
-						
-					 ';}} ?>
-		 </tbody>
-		</table>			  
-			  
-			        </div>
+							echo '
+    <tr>
+      <td>'.$data['n_cmd'].'</td>
+      <td>'.$data['Date'].'</td>
+	  <td> '. $data['Heure'].'</td>
+	  <td> '.$data['Adresse_depart'].'</td>
+	  <td> '.$data['Adresse_arrive'].'</td>
+    
+      
+	
+		  <td>	';
+	  if ($data['etatCmd']== -1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCmd']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; }elseif($data['etatCmd']==4) {
+												  echo '<span class="label label-danger">Annulée</span> '; }elseif($data['etatCmd']==0) {
+												  echo 'Commandée '; } elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';} 
+	  echo'</td>
+	  
+	   <td> <!-- Small modal -->
+							 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['n_cmd'].'">
+								<i class="fa fa-folder"></i> Détails
+							</button>
+														  
+							 <div class="modal fade" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						  										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+												</button>
+												<h4 class="modal-title" id="myModalLabel2"><h4 class="heading"><b>Commande n° '.$data['n_cmd'].'</b></h4></h4>
+												</div>
+												<div class="modal-body">
+													<ul class="messages">
+													<li>
+													<div class="message_wrapper">
+													<li><i class="fa fa-calendar "></i> Date: '. $data['Date'].'  </br> </li>
+													<li><i class="fa fa-clock-o "></i> Horaire: '. $data['Heure'].' </br> </li>
+													<li><i class="fa fa-map-marker"></i> Départ: '.$data['Adresse_depart'].' </br></li>
+													<li><i class="fa fa-flag"></i> Arrivée: '.$data['Adresse_arrive'].'</br> </li>
+													<li><i class="fa fa-user"></i> Client: '.$r['Nom'].' '.$r['Prenom'].' </br></li>
+													<li><i class="fa fa-mobile-phone user-profile-icon"></i> Téléphone: '.$r['telClient'].'</br></li>
+													<li><i class="fa fa-check-square-o user-profile-icon"></i> Etat: ';
+													if ($data['etatCmd']==-1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCmd']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}			  
+												  echo' </div>
+												   </li>
+												   </ul>
+												   <div class="modal-footer">
+													  <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+												   </div>
+											</div>
+													
+												  </div>
+												</div>
+</div>
+									
+											  <!-- /modals --></td>
+    </tr>
+  
+  '; }}?>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>N° Commande</th>
+      <th>Date</th>
+	  <th>Heure</th>
+	  <th>Départ</th>
+	  <th>Arrivée</th>
+     
+	  <td>Etat</td>
+	  <th>Détails</th>
+    </tr>
+  </tfoot>
+</table>
+                    <!-- end project list -->
 
                   </div>
-                </div>
               </div>
-
-              <div class="clearfix"></div>
-
-   
-
-              
+			</div>
             </div>
-          </div>
-        </div>
+				</div>
+				</div>
+				</div>
+			</div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+        
         <!-- /footer content -->
       </div>
     </div>

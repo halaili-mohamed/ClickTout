@@ -1,22 +1,16 @@
 <?php 
 
-require_once 'db_connect.php';
+require_once 'connect.php';
 
 if($_POST) {
-	$Adresse_depart = $_POST['Adresse_depart'];
-	$Date = $_POST['Date'];
-	$Adresse_arrive = $_POST['Adresse_arrive'];
-	$Heure = $_POST['Heure'];
+	$Distance = $_POST['Distance'];
+	
 	$type_voiture = $_POST['type_voiture'];
 	$nb_ouvruer = $_POST['nb_ouvruer'];
-	$nb_place_dispo = $_POST['nb_place_dispo'];
-	$n_facture = $_POST['n_facture'];
-	$Nom = $_POST['Nom'];
-	$Prenom = $_POST['Prenom'];
-	$telClient= $_POST['telClient'];
-	$Email = $_POST['Email'];
-	$id_partenaire=$_POST['id_partenaire'];
+	$T_chargement = $_POST['T_chargement'];
 	
+	$Email = $_POST['Email'];
+		
 
 	$sql = "INSERT INTO client (Nom, Prenom, telClient, Email) VALUES ('$Nom', '$Prenom', '$telClient', '$Email')";
 	$result1=$connect->query($sql);

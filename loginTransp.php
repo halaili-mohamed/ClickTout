@@ -3,26 +3,51 @@
  require_once 'connect.php';
 
 
-if ($_POST) {
+$psudo1=$_POST["psudo1"];
+$pwd1=$_POST["PWD1"];
 
 
-		$psudo1=$_POST['psudo1'];
-		$PWD1=$_POST['PWD1'];
+$sql = "SELECT * FROM transporteur where Pseudo='$psudo1' AND Password='$pwd1'  ";
+$result = $connect->query($sql);
+$row = $result->fetch_assoc(); 
+if($result->num_rows ==0)
+{
 
+	
+
+
+	header("location:index.php");
+}
+else
+{
+	
+	session_start();
+	
+	$ligne=$row["Id_Transporteur"];
+	echo($ligne);
+		$_SESSION["id_Transporteur"]=$ligne;
 		
-		$query1= "select * from transporteur where psudo='$psudo1' AND PWD='$PWD1'  ";
-	    
-	    $result1= mysqli_query($connect,$query1);
+			header("location:Esapace_Transporteur1/production/offre_disponible2.php");
+	
+}
 
-	    if (mysqli_num_rows($result1) ==1) {
-	    	
-	    	header("location:conPar1.php");
-	    }else
-	    {
-	    	header("location:index.php");
 
-	    }
 
-  $connect->close();
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  ?>

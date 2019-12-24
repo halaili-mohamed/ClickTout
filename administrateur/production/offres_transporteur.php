@@ -5,7 +5,7 @@ $sql = "SELECT * FROM administrateur where id_admin={$id_admin}";
 $result = $connect->query($sql);
 $row = $result->fetch_assoc(); 
 $Id_Transporteur=$_GET['Id_Transporteur'];
-$nom = $_GET['nom'];
+$nom = $_GET['Nom'];
 $Prenom = $_GET['Prenom'];
 ?>
 <!DOCTYPE html>
@@ -46,22 +46,12 @@ $Prenom = $_GET['Prenom'];
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"></i> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Bienvenue,</span>
-                <h2><?php echo $row['nom'] ?></h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+            
 
             <br />
 
@@ -84,7 +74,7 @@ $Prenom = $_GET['Prenom'];
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
@@ -104,22 +94,7 @@ $Prenom = $_GET['Prenom'];
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+    
           </div>
         </div>
 
@@ -131,22 +106,16 @@ $Prenom = $_GET['Prenom'];
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
 
-              <ul class="nav navbar-nav navbar-right">
+               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
+                    <?php echo $row['nom'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li>
+                  
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
@@ -188,22 +157,8 @@ $Prenom = $_GET['Prenom'];
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>les offres  <small> transporteur <?php echo $nom ?>  </small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+                    <h2>Les offres du transporteur: <?php echo $nom  .' '. $Prenom ?>  </small></h2>
+                    
                     <div class="clearfix"></div>
                   </div>
 
@@ -225,11 +180,8 @@ $Prenom = $_GET['Prenom'];
 							 <th class="column-title">Type de voiture</th>
 							 <th class="column-title">Nombre  d'ouvrier </th>		 
 							 
-                            <th class="column-title">Etat </th>
-                            <th class="column-title"> Prix</th>
-                           
-                           
-                       
+                            <th class="column-title">Prix </th>
+                            <th class="column-title"> Etat</th>
                           </tr>
                         </thead>
 
@@ -243,13 +195,22 @@ $Prenom = $_GET['Prenom'];
 						while($data=$result->fetch_assoc())
 						{echo'
 						<tr>
-                            <td class=" "> '.$data['id_commende'].'</td>
+                            <td class=" "> '.$data['n_cmd'].'</td>
                             <td class=" "> '.$data['Adresse_depart'].' </td>
                             <td class=" "> '.$data['Adresse_arrive'].' </td>
                             <td class=" "> '.$data['Date'].' </td>
                             <td class=" "> '.$data['Heure'].'</td>
                             <td class=""> '.$data['type_voiture'].' </td>
-							 <td class=""> '.$data['prix'].' </td>
+                            <td class=""> '.$data['nb_ouvruer'].' </td>
+                            <td class=""> '.$data['prix'].' </td>
+							
+							 <td class=""> ';
+	  if ($data['etatCmd']== -1) { echo '
+												  <span class="label label-success">Accéptée</span>';} elseif ($data['etatCmd']==2) {
+												  echo '<span class="label label-warning">Montée à bord</span>';} elseif($data['etatCmd']==1) {
+												  echo '<span class="label label-default">Chargée</span> '; } elseif($data['etatCmd']==3) {
+												  echo '<span class="label label-info">Déchargée</span> ';}elseif($data['etatCmd']==4) {
+												  echo '<span class="label label-danger">Annulée</span> ';} echo' </td>
                            
                           </tr>
                        ';}}?>

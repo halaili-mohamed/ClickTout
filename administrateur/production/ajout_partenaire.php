@@ -42,22 +42,12 @@ $row = $result->fetch_assoc();
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.php" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.php" class="site_title"><span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Bienvenue,</span>
-                <h2><?php echo $row['nom'] ?></h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+           
 
             <br />
 
@@ -80,7 +70,7 @@ $row = $result->fetch_assoc();
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
@@ -100,22 +90,7 @@ $row = $result->fetch_assoc();
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+            
           </div>
         </div>
 
@@ -130,13 +105,13 @@ $row = $result->fetch_assoc();
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $row['nom'] ?>
+                   <?php echo $row['login'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li>
                 
-                    <li><a href="deconexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
@@ -152,7 +127,7 @@ $row = $result->fetch_assoc();
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Ajouter Partenaire</h3>
+                <h3>Ajouter un Partenaire</h3>
               </div>
 
               <div class="title_right">

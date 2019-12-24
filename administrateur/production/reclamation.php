@@ -47,22 +47,12 @@ $row = $result->fetch_assoc();
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="profile.html" class="site_title"><i class="fa fa-paw"></i> <span>Click Tout </span></a>
+              <a href="profile.html" class="site_title"> <span>Click Tout </span></a>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img1.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Bienvenue,</span>
-                <h2><?php echo $row['nom'] ?></h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
+            
 
             <br />
 
@@ -85,7 +75,7 @@ $row = $result->fetch_assoc();
 				  </li>
 				  </ul>
 				    <ul class="nav side-menu">
-                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Les commandes </a>
+                  <li><a href="commande.php"><i class="fa fa-list-alt"></i> Liste des commandes </a>
 				  </li>
 				  </ul>
 				   <ul class="nav side-menu">
@@ -104,22 +94,7 @@ $row = $result->fetch_assoc();
               </div>
             </div>
 
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
+          
           </div>
         </div>
 
@@ -134,13 +109,13 @@ $row = $result->fetch_assoc();
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""> <?php echo $row['nom'] ?>
+                    <?php echo $row['login'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="javascript:;"> Mon compte</a></li>
                     
-                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="deconnexion.php"><i class="fa fa-sign-out pull-right"></i> Déconnexion</a></li>
                   </ul>
                 </li>
 
@@ -156,7 +131,7 @@ $row = $result->fetch_assoc();
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Reclamation <small> </small></h3>
+                <h3>Liste des Réclamations <small> </small></h3>
               </div>
 
              
@@ -188,31 +163,36 @@ $row = $result->fetch_assoc();
                           <li> 
                             <img src="images/img.jpg" class="avatar" alt="Avatar">
                             <div class="message_date">
-                              <h3 class="date text-info"> '. $data['date_reclamation'].'</h3>
+                              
                               <p class="month"></p>
                             </div>
                             <div class="message_wrapper">
                               <h4 class="heading">N° Commande : '. $data['commende_id_commende'].' </h4> 
+							  
+                              <blockquote < class="fa fa-clock-o "> '. $data['date_reclamation'].'</blockquote>
                               <blockquote class="message"> '. $data['Message'].'</blockquote>
+                              <blockquote class="message"> Déclarée par le: '. $data['type_compte'].'</blockquote>
                               <br />
-							  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-folder"></i> Détails </a>
+							  <a type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#exampleModalLong'.$data['id_Reclamation'].'"><i class="fa fa-folder"></i> Détails </a>
 	
 	</ul>
 							  ';}}?>
 							  
 							  
-						<?php 
-						$sql1="select c.Date ,t.nom , cl.nom ,cl.prenom ,cl.telephone , cl.email ,r.id_reclamation
-						from reclamation r, commende c , transporteur t,client cl where c.id_commende=r.commende_id_commende and c.transporteur_Id_Transporteur and t.Id_transporteur and cl.id_client=c.client_id_client and r.id_Reclamation=".$data['id_Reclamation']." ";
+						 <?php ?>
+					<!--	$sql1="select c.Date ,t.Nom , cl.Nom ,cl.Prenom ,cl.telClient , cl.Email ,r.id_Reclamation
+						from reclamation r, commende c , transporteur t,client cl where c.id_commende=r.commende_id_commende 
+						and c.transporteur_Id_Transporteur=t.Id_Transporteur and cl.id_client=c.client_id_client and r.id_Reclamation=".$data['id_Reclamation']." ";
 						$result1 = $connect->query($sql1);
 						if($result1->num_rows > 0) {
 						while($tab=$result1->fetch_assoc())
 						{ echo ' 
 						
-                             <!-- Small modal -->
+                             <!-- Small modal 
 	
                  
-                  <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal fade bs-example-modal-sm" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-hidden="true">
+                  <div class="modal fade bs-example-modal-sm" id="exampleModalLong'.$data['n_cmd'].'" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
 
@@ -247,7 +227,7 @@ $row = $result->fetch_assoc();
                       </div>
                     </div>
                   </div>
-				   ';}}?>
+				   ';}}?> 
                   <!-- /modals -->
               
                          
